@@ -1,0 +1,80 @@
+\hypertarget{ServerUtil_8cpp}{\section{\-Riferimenti per il file \-Input/\-Socket/\-Server\-Util.cpp}
+\label{ServerUtil_8cpp}\index{\-Input/\-Socket/\-Server\-Util.\-cpp@{\-Input/\-Socket/\-Server\-Util.\-cpp}}
+}
+{\ttfamily \#include $<$iostream$>$}\*
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\*
+{\ttfamily \#include $<$sys/socket.\-h$>$}\*
+{\ttfamily \#include $<$netinet/in.\-h$>$}\*
+{\ttfamily \#include $<$netdb.\-h$>$}\*
+{\ttfamily \#include $<$string.\-h$>$}\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\*
+{\ttfamily \#include $<$unistd.\-h$>$}\*
+{\ttfamily \#include $<$errno.\-h$>$}\*
+\subsection*{\-Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}{manda\-Data} (char $\ast$data, int len)
+\item 
+char $\ast$ \hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{ottieni\-Data} ()
+\begin{DoxyCompactList}\small\item\em \-Funzione \-Statica \-Ottieni\-Data() \end{DoxyCompactList}\item 
+\hypertarget{ServerUtil_8cpp_ab341d0ab9967a6f0a9ac1df24d603a1e}{void {\bfseries accept\-Client} ()}\label{ServerUtil_8cpp_ab341d0ab9967a6f0a9ac1df24d603a1e}
+
+\item 
+\hypertarget{ServerUtil_8cpp_aefd6bc58b38afde3e2d9e65e59f1887d}{void {\bfseries close\-Server} ()}\label{ServerUtil_8cpp_aefd6bc58b38afde3e2d9e65e59f1887d}
+
+\item 
+\hypertarget{ServerUtil_8cpp_a60f4b08cd874f054de14042ef799a240}{void {\bfseries kill\-Server} ()}\label{ServerUtil_8cpp_a60f4b08cd874f054de14042ef799a240}
+
+\item 
+\hypertarget{ServerUtil_8cpp_a49a9ef2e07475e1adb3f8dee3399ec98}{std\-::string {\bfseries \-J\-S\-O\-N\-Encode} (std\-::string message, std\-::string type)}\label{ServerUtil_8cpp_a49a9ef2e07475e1adb3f8dee3399ec98}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+(\-E\-N) \-A simple server in the internet domain using \-T\-C\-P. \par
+ (\-I\-T) \-Un semplice server nel dominio internet che usa il \-T\-C\-P (\-Protocollo orientato alla connessione) 
+
+\-Definizione nel file \hyperlink{ServerUtil_8cpp_source}{\-Server\-Util.\-cpp}.
+
+
+
+\subsection{\-Documentazione delle funzioni}
+\hypertarget{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}{\index{\-Server\-Util.\-cpp@{\-Server\-Util.\-cpp}!manda\-Data@{manda\-Data}}
+\index{manda\-Data@{manda\-Data}!ServerUtil.cpp@{\-Server\-Util.\-cpp}}
+\subsubsection[{manda\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf manda\-Data} (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}}\label{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}
+\-Restituisce al \-Client una risposta 
+\begin{DoxyParams}{\-Parametri}
+{\em data} & \-Puntatore a variabile char che contiene i dati \\
+\hline
+{\em len} & \-Intero, lunghezza dei dati da trasmettere \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{ServerUtil_8cpp_source_l00055}{55} del file \hyperlink{ServerUtil_8cpp_source}{\-Server\-Util.\-cpp}.
+
+\hypertarget{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{\index{\-Server\-Util.\-cpp@{\-Server\-Util.\-cpp}!ottieni\-Data@{ottieni\-Data}}
+\index{ottieni\-Data@{ottieni\-Data}!ServerUtil.cpp@{\-Server\-Util.\-cpp}}
+\subsubsection[{ottieni\-Data}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ {\bf ottieni\-Data} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}
+
+
+\-Funzione \-Statica \-Ottieni\-Data() 
+
+\begin{DoxyReturn}{\-Restituisce}
+\-Puntatore a un indirizzo contenente \-Char. (\-Char$\ast$). 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{ServerUtil_8cpp_source_l00069}{69} del file \hyperlink{ServerUtil_8cpp_source}{\-Server\-Util.\-cpp}.
+

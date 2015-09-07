@@ -1,0 +1,52 @@
+\hypertarget{worker_8php_source}{\section{\-Web\-Manager/worker.php}
+}
+
+\begin{DoxyCode}
+00001 <?php
+00002 header(\textcolor{stringliteral}{'Content-Type: application/javascript'});
+00003 \textcolor{comment}{/*}
+00004 \textcolor{comment}{ * PHP Sockets - How to create a sockets server/client}
+00005 \textcolor{comment}{ */}
+00006 
+00007 \textcolor{comment}{//include the server.php script to start the server}
+00008 \textcolor{comment}{//include\_once('server.php');}
+00009 
+00010 $host    = \textcolor{stringliteral}{"127.0.0.1"};
+00011 $port    = $\_GET[\textcolor{stringliteral}{'port'}];
+00012 $app = $\_GET[\textcolor{stringliteral}{'application'}];
+00013 \textcolor{comment}{//$priority = $\_GET['priority'];}
+00014 $message = $app.$\_GET[\textcolor{stringliteral}{'message'}];
+00015 
+00016 \textcolor{comment}{// create socket}
+00017 $socket = socket\_create(AF\_INET, SOCK\_STREAM, 0) or die("Could not create 
+      socket\(\backslash\)n");
+00018 \textcolor{comment}{// connect to server}
+00019 $result = socket\_connect($socket, $host, $port) or die("Could not connect to 
+      server\(\backslash\)n");
+00020 \textcolor{comment}{// send string to server}
+00021 socket\_write($socket, $message, strlen($message)) or die("Could not send data 
+      to server\(\backslash\)n");
+00022 \textcolor{comment}{// get server response}
+00023 $result = socket\_read ($socket, 1024) or die("Could not read server response\(\backslash\)n"
+      );
+00024 \textcolor{comment}{//$jsonp = $\_GET['callback'];}
+00025 
+00026 if(array\_key\_exists('callback', $\_GET))\{
+00027 
+00028     header(\textcolor{stringliteral}{'Content-Type: text/javascript; charset=utf8'});
+00029     header(\textcolor{stringliteral}{'Access-Control-Allow-Origin: *'});
+00030     header(\textcolor{stringliteral}{'Access-Control-Allow-Methods: GET, POST, PUT, DELETE'});
+00031 
+00032     $callback = $\_GET[\textcolor{stringliteral}{'callback'}];
+00033     echo $callback.\textcolor{charliteral}{'('}.$result.\textcolor{stringliteral}{');'};
+00034 \}\textcolor{keywordflow}{else}\{
+00035     \textcolor{comment}{// normal JSON string}
+00036     header(\textcolor{stringliteral}{'Content-Type: application/json; charset=utf8'});
+00037 
+00038     echo $result;
+00039 \}
+00040 \textcolor{comment}{//echo $result;}
+00041 \textcolor{comment}{// close socket}
+00042 socket\_close($socket);
+00043 ?>
+\end{DoxyCode}

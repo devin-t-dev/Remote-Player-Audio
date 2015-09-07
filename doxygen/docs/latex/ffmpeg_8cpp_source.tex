@@ -1,0 +1,119 @@
+\hypertarget{ffmpeg_8cpp_source}{\section{\-Process/ffmpeg.cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{comment}{// Devin Taietta - (C) GarageAudioLabs - Riproduzione audio diverso da MP3}
+00003 
+00004 \textcolor{comment}{//Static Linked}
+00005 \textcolor{preprocessor}{#include "\hyperlink{ffmpeg_8h}{ffmpeg.h}"}
+00006 \textcolor{comment}{//#include "../Process/EditAudio.cpp"}
+00007 \textcolor{comment}{//Dynamic Linked}
+00008 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00009 \textcolor{preprocessor}{    #include <libavutil/mathematics.h>}
+00010 \textcolor{preprocessor}{    #include <libavformat/avformat.h>}
+00011 \textcolor{preprocessor}{    #include <libswscale/swscale.h>}
+00012 \textcolor{preprocessor}{    #include <libavcodec/avcodec.h>}
+00013 \textcolor{preprocessor}{    #include "../Output/aosender.h"}
+00014 \}
+00015 \textcolor{comment}{//Constants and Global Var}
+00016 \textcolor{preprocessor}{#define AUDIO\_INBUF\_SIZE 20480}
+00017 \textcolor{preprocessor}{}
+00018 \textcolor{keywordtype}{int} FFMPEG\_isPaused;
+00019 \textcolor{keyword}{static} AVFormatContext*         container;
+00020 \textcolor{keyword}{static} \textcolor{keywordtype}{int}              stream\_id;
+00021 \textcolor{keyword}{static} AVCodecContext           *ctx;
+00022 \textcolor{keyword}{static} AVCodec              *codec;
+00023 \textcolor{keyword}{static} \textcolor{keywordtype}{int}              driver;
+00024 \textcolor{keyword}{static} AVPacket             packet;
+00025 \textcolor{keyword}{static} AVSampleFormat           sfmt;
+00026 
+00027 \textcolor{keyword}{const} \textcolor{keywordtype}{int}   buffer\_size=AUDIO\_INBUF\_SIZE + FF\_INPUT\_BUFFER\_PADDING\_SIZE;
+00028 \textcolor{keyword}{static} uint8\_t buffer[buffer\_size];
+00029 \textcolor{keyword}{static} AVFrame *frame;
+00030 \textcolor{keywordtype}{void} die(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *msg)
+00031 \{
+00032 \textcolor{preprocessor}{    #include <stdlib.h>}
+00033 \textcolor{preprocessor}{    #include <stdio.h>}
+00034 \textcolor{preprocessor}{    #include <string.h>}
+00035 \textcolor{preprocessor}{    #include <math.h>}
+00036     fprintf(stderr,\textcolor{stringliteral}{"%s\(\backslash\)n"},msg);
+00037     exit(1);
+00038 \}
+00039 
+00040 \textcolor{keywordtype}{void} resetAudio(\textcolor{keywordtype}{char} * song)
+00041 \{
+00042     \textcolor{comment}{//Record basic information file}
+00043     \textcolor{keywordtype}{int} bits;
+00044     av\_register\_all();
+00045     AVFormatContext* container=avformat\_alloc\_context();
+00046     \textcolor{keywordflow}{if} (avformat\_open\_input(&container,song,NULL,NULL)<0) die(\textcolor{stringliteral}{"Impossible to
+       open file"});
+00047     \textcolor{keywordflow}{if} (avformat\_find\_stream\_info(container,NULL)<0) die(\textcolor{stringliteral}{"Impossible to find
+       any stream"});
+00048     av\_dump\_format(container,0,song,\textcolor{keyword}{false});
+00049     \textcolor{comment}{//Try to find any audio stream in audio file}
+00050     stream\_id=-1;
+00051     \textcolor{keywordtype}{int} i;
+00052     \textcolor{keywordflow}{for} (i=0;i<container->nb\_streams;i++)\{
+00053         \textcolor{keywordflow}{if} (container->streams[i]->codec->codec\_type==AVMEDIA\_TYPE\_AUDIO)
+00054         \{
+00055             stream\_id=i;
+00056             \textcolor{keywordflow}{break};
+00057         \}
+00058     \}
+00059     \textcolor{keywordflow}{if}(stream\_id==-1) die(\textcolor{stringliteral}{""});
+00060     \textcolor{comment}{//Try to open audio stream with appropriate codec}
+00061     ctx=container->streams[stream\_id]->codec;
+00062     codec=avcodec\_find\_decoder(ctx->codec\_id);
+00063     \textcolor{keywordflow}{if} (codec==NULL) die(\textcolor{stringliteral}{"There aren't any valid codec for this audio"});
+00064     \textcolor{keywordflow}{if} (avcodec\_open2(ctx,codec,NULL)<0) die(\textcolor{stringliteral}{"Codec can't open this file"});
+00065     \textcolor{comment}{//Find information for AO}
+00066     sfmt=ctx->sample\_fmt;
+00067     \textcolor{comment}{//asign device sample rate depend on the input stream}
+00068     \textcolor{keywordflow}{if} (sfmt==AV\_SAMPLE\_FMT\_U8)\{
+00069         bits=8;
+00070     \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(sfmt==AV\_SAMPLE\_FMT\_S16)\{
+00071         bits=16;
+00072     \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sfmt==AV\_SAMPLE\_FMT\_S32)\{
+00073         bits=32;
+00074     \}
+00075     initAudioDev(bits, (ctx->sample\_rate), (ctx->channels));
+00076     \textcolor{comment}{//data packet read from the stream}
+00077     av\_init\_packet(&packet);
+00078     packet.data=buffer;
+00079     packet.size=buffer\_size;
+00080     \textcolor{comment}{//allocating memory for frame, where the decoded data will be writen}
+00081     frame=avcodec\_alloc\_frame();
+00082 \}
+00083 \textcolor{keywordtype}{int} playAudio()
+00084 \{
+00085     \textcolor{keywordtype}{int} frameFinished=0;
+00086     \textcolor{keywordflow}{if} (av\_read\_frame(container,&packet)>0&&FFMPEG\_isPaused==0)
+00087     \{
+00088         \textcolor{keywordflow}{if}(packet.stream\_index==stream\_id)\{
+00089             \textcolor{keywordtype}{int} len=avcodec\_decode\_audio4(ctx,frame,&frameFinished,&packet);
+00090             \textcolor{keywordflow}{if}(frameFinished)\{
+00091                 writeAudio((\textcolor{keywordtype}{char}*)frame->extended\_data[0],frame->linesize[0]);              
+00092             \}
+00093         \}
+00094     \}\textcolor{keywordflow}{else}\{
+00095         \textcolor{keywordflow}{if}(FFMPEG\_isPaused==0) \textcolor{keywordflow}{return} 2;
+00096     \}
+00097     \textcolor{keywordflow}{return} 0;
+00098 \}
+00099 \textcolor{keywordtype}{void} freeAudio()
+00100 \{
+00101     freeAudioDev();
+00102 \}
+00103 
+00104 \textcolor{keywordtype}{void} setAudioStatus(\textcolor{keywordtype}{int} value)
+00105 \{
+00106     \textcolor{keywordflow}{if}(value==0||value==1)
+00107     \{
+00108         FFMPEG\_isPaused=value;
+00109     \} \textcolor{keywordflow}{else} \{
+00110         FFMPEG\_isPaused=!FFMPEG\_isPaused;
+00111     \}
+00112 \}
+\end{DoxyCode}

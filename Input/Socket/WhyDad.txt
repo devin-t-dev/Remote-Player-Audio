@@ -1,0 +1,3 @@
+Questa parte è riservata alla connettività di dispositivi mobili tramite Socket in C++ o in Python
+
+!Deve essere linkata alla directory Apache

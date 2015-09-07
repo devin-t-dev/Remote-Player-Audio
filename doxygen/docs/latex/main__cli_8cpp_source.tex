@@ -1,0 +1,27 @@
+\hypertarget{main__cli_8cpp_source}{\section{main\-\_\-cli.\-cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00008 \textcolor{comment}{/*
+       --------------------------------------------------------------------------------}
+00009 \textcolor{comment}{*   \(\backslash\)b main\_cli.cpp - Main of console program <br>}
+00010 \textcolor{comment}{*     Richiede il nuovo C++ v.11}
+00011 \textcolor{comment}{*/}
+00091 \textcolor{comment}{//Dynamic Linked}
+00092 \textcolor{preprocessor}{#include <iostream>}                             \textcolor{comment}{//Libreria Input / Output}
+00093 \textcolor{preprocessor}{#include <string>}                                   \textcolor{comment}{//Libreria per gestire le
+       stringhe}
+00094 \textcolor{comment}{//Static Linked}
+00095 \textcolor{preprocessor}{#include "main\_cli.h"}
+00096 \textcolor{preprocessor}{#include "\hyperlink{dataManagerHub_8h}{Process/dataManagerHub.h}"} \textcolor{comment}{//Gestisce tutte le entrate}
+00101 \textcolor{comment}{}\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+00102 \{
+00103     \textcolor{comment}{/*if (argv[1]==NULL) \{ std::cout<<"Percorso standard "<<std::endl;
+       argv[1]="/mnt/";\}*/}
+00104     \hyperlink{classdataManager}{dataManager} Gestore(argv[1]); \textcolor{comment}{//= new dataManager();}
+00105     Gestore.setMenu(\textcolor{keyword}{true}); \textcolor{comment}{//Not a pointer because not need a huge RAM}
+00106     \textcolor{keywordflow}{while}(!Gestore.killSignal())\{\}
+00107 \}
+\end{DoxyCode}

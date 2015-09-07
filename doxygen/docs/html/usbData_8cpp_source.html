@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza:  File sorgente Input/usbData.cpp</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Input/usbData.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="usbData_8cpp.html">Vai alla documentazione di questo file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="comment">// Devin Taietta</span>
+<a name="l00003"></a>00003 <span class="comment">// usbData.cpp -- Gestione dell&#39;archivio delle canzoni e ottenimento informazioni sui file</span>
+<a name="l00004"></a>00004 <span class="comment">//Dynamic Linked</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;errno.h&gt;</span>  <span class="comment">//Managing Error</span>
+<a name="l00009"></a>00009 <span class="comment">//Static Linked</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="usbData_8h.html">usbData.h</a>&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;/usr/include/taglib/fileref.h&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;/usr/include/taglib/tag.h&quot;</span> <span class="comment">//Per trovare i tag ID3 delle canzoni</span>
+<a name="l00013"></a>00013 <span class="comment">//Only Linux - Browse directories</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;dirent.h&gt;</span> <span class="comment">//Access to Linux Directory</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;sys/stat.h&gt;</span> <span class="comment">//Information about attribs of files</span>
+<a name="l00016"></a>00016 <span class="keyword">using namespace </span>std;
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="classusbData.html#afd7ef352616d15a05bca0e56f46e52a0">00018</a> <a class="code" href="classusbData.html#afd7ef352616d15a05bca0e56f46e52a0" title="Costruttore. Analizza la cartella e setta il puntatore.">usbData::usbData</a>(std::string baseDir,<span class="keywordtype">bool</span> recursive)
+<a name="l00019"></a>00019 {
+<a name="l00020"></a>00020     <a class="code" href="classusbData.html#ad2e65d4a17a15b8885ae7d78e12aa2db" title="Funzione interna per riempire l&#39;archivio(in realtà il vettore) delle canzoni.">usbData::riempiArchivio</a>(baseDir,recursive,*<span class="keyword">this</span>);
+<a name="l00021"></a>00021     <span class="keywordflow">if</span> (elementi.size()&lt;=0) {
+<a name="l00022"></a>00022         <span class="keywordflow">try</span> {
+<a name="l00023"></a>00023             std::cout&lt;&lt;<span class="stringliteral">&quot;Nessuna canzone trovata al percorso indicato!&quot;</span>;
+<a name="l00024"></a>00024             <span class="keywordflow">throw</span> 20;
+<a name="l00025"></a>00025         }
+<a name="l00026"></a>00026         <span class="keywordflow">catch</span> (<span class="keywordtype">int</span> e)
+<a name="l00027"></a>00027         {
+<a name="l00028"></a>00028             std::cout&lt;&lt;<span class="stringliteral">&quot;Nessuna canzone trovata al percorso indicato!&quot;</span>;
+<a name="l00029"></a>00029             <a class="code" href="classusbData.html#ad2e65d4a17a15b8885ae7d78e12aa2db" title="Funzione interna per riempire l&#39;archivio(in realtà il vettore) delle canzoni.">usbData::riempiArchivio</a>(baseDir,recursive,*<span class="keyword">this</span>); <span class="comment">//Media</span>
+<a name="l00030"></a>00030         }
+<a name="l00031"></a>00031     }
+<a name="l00032"></a>00032     puntatore=0;
+<a name="l00033"></a>00033 }
+<a name="l00034"></a><a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9">00034</a> <span class="keywordtype">void</span> <a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">usbData::setPuntatore</a>(<span class="keywordtype">int</span> posizione){puntatore=posizione;}
+<a name="l00035"></a><a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb">00035</a> <span class="keywordtype">int</span> <a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">usbData::getPuntatore</a>() {<span class="keywordflow">return</span> puntatore;}
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="comment">//void usbData::analyzeID(usbDataPlus &amp;arcplus)</span>
+<a name="l00038"></a>00038 <span class="comment">//{</span>
+<a name="l00039"></a>00039 <span class="comment">/*  for (int i=0;i&lt;arcplus.elementi.size();i++)</span>
+<a name="l00040"></a>00040 <span class="comment">    {</span>
+<a name="l00041"></a>00041 <span class="comment">        TagLib::FileRef f(arcplus.elementi[i]);</span>
+<a name="l00042"></a>00042 <span class="comment">        arcplus.titolo = f.tag()-&gt;title();</span>
+<a name="l00043"></a>00043 <span class="comment">        arcplus.autore = f.tag()-&gt;author();</span>
+<a name="l00044"></a>00044 <span class="comment">        TagLib::AudioProperties *properties = f.audioProperties();</span>
+<a name="l00045"></a>00045 <span class="comment">        //int seconds = properties-&gt;length() % 60;</span>
+<a name="l00046"></a>00046 <span class="comment">        //int minutes = (properties-&gt;length() - seconds) / 60;</span>
+<a name="l00047"></a>00047 <span class="comment">        arcplus.durata=properties-&gt;length();</span>
+<a name="l00048"></a>00048 <span class="comment">    }*/</span>
+<a name="l00049"></a>00049 <span class="comment">//}</span>
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec">00051</a> <span class="keywordtype">bool</span> <a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">usbData::isAudio</a> (std::string percorso,<span class="keywordtype">bool</span> onlymp3) {
+<a name="l00052"></a>00052     std::string validformat[6] = {<span class="stringliteral">&quot;MP3&quot;</span>,<span class="stringliteral">&quot;mp3&quot;</span>,<span class="stringliteral">&quot;WAW&quot;</span>,<span class="stringliteral">&quot;waw&quot;</span>,<span class="stringliteral">&quot;FLAC&quot;</span>,<span class="stringliteral">&quot;flac&quot;</span>};
+<a name="l00053"></a>00053     <span class="keywordtype">int</span> imax;
+<a name="l00054"></a>00054     <span class="keywordflow">if</span> (onlymp3) {
+<a name="l00055"></a>00055         imax=2;
+<a name="l00056"></a>00056     } <span class="keywordflow">else</span> {
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         imax=6;
+<a name="l00059"></a>00059     }
+<a name="l00060"></a>00060     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0;i&lt;imax;i++)
+<a name="l00061"></a>00061         {
+<a name="l00062"></a>00062             <span class="keywordflow">if</span> (percorso[percorso.length()-3]==validformat[i][0]&amp;&amp;
+<a name="l00063"></a>00063                     percorso[percorso.length()-2]==validformat[i][1]&amp;&amp;
+<a name="l00064"></a>00064                     percorso[percorso.length()-1]==validformat[i][2])
+<a name="l00065"></a>00065                     {
+<a name="l00066"></a>00066                         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00067"></a>00067                     }
+<a name="l00068"></a>00068         }
+<a name="l00069"></a>00069     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00070"></a>00070 }
+<a name="l00071"></a>00071 
+<a name="l00072"></a><a class="code" href="classusbData.html#a2b695019bdabc6eed11dafaa7c959029">00072</a> <span class="keywordtype">bool</span> <a class="code" href="classusbData.html#a2b695019bdabc6eed11dafaa7c959029" title="Controlla se è una cartella.">usbData::isDir</a>(<span class="keywordtype">string</span> dir)
+<a name="l00073"></a>00073 {
+<a name="l00074"></a>00074     <span class="keyword">struct </span>stat fileInfo;
+<a name="l00075"></a>00075     stat(dir.c_str(), &amp;fileInfo);
+<a name="l00076"></a>00076     <span class="keywordflow">if</span> (S_ISDIR(fileInfo.st_mode))
+<a name="l00077"></a>00077     {
+<a name="l00078"></a>00078         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00079"></a>00079     }<span class="keywordflow">else</span>{
+<a name="l00080"></a>00080         <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00081"></a>00081     }
+<a name="l00082"></a>00082 }
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="classusbData.html#ad2e65d4a17a15b8885ae7d78e12aa2db">00084</a> <span class="keywordtype">void</span> <a class="code" href="classusbData.html#ad2e65d4a17a15b8885ae7d78e12aa2db" title="Funzione interna per riempire l&#39;archivio(in realtà il vettore) delle canzoni.">usbData::riempiArchivio</a>(<span class="keywordtype">string</span> baseDir, <span class="keywordtype">bool</span> recursive, <a class="code" href="classusbData.html" title="usbData Class: Analizza cartelle in cerca di file e li carica in un vettore. Mantiene inoltre il punt...">usbData</a> &amp;arc)
+<a name="l00085"></a>00085 {
+<a name="l00086"></a>00086     DIR *dp;
+<a name="l00087"></a>00087     <span class="keyword">struct </span>dirent *dirp;
+<a name="l00088"></a>00088     <span class="keywordflow">if</span> ((dp = opendir(baseDir.c_str())) == NULL) {
+<a name="l00089"></a>00089         <span class="comment">//Genera errore apertura cartella!</span>
+<a name="l00090"></a>00090         <span class="keywordflow">return</span>;
+<a name="l00091"></a>00091     } <span class="keywordflow">else</span> {
+<a name="l00092"></a>00092         <span class="keywordflow">while</span> ((dirp = readdir(dp)) != NULL) {
+<a name="l00093"></a>00093             <span class="keywordflow">if</span> (dirp-&gt;d_name != <span class="keywordtype">string</span>(<span class="stringliteral">&quot;.&quot;</span>) &amp;&amp; dirp-&gt;d_name != string (<span class="stringliteral">&quot;..&quot;</span>)) {
+<a name="l00094"></a>00094                 <span class="keywordflow">if</span> (<a class="code" href="classusbData.html#a2b695019bdabc6eed11dafaa7c959029" title="Controlla se è una cartella.">usbData::isDir</a>(baseDir + dirp-&gt;d_name) == <span class="keyword">true</span> &amp;&amp; recursive==<span class="keyword">true</span>) {
+<a name="l00095"></a>00095                     <a class="code" href="classusbData.html#ad2e65d4a17a15b8885ae7d78e12aa2db" title="Funzione interna per riempire l&#39;archivio(in realtà il vettore) delle canzoni.">usbData::riempiArchivio</a>(baseDir + dirp-&gt;d_name + <span class="stringliteral">&quot;/&quot;</span>,<span class="keyword">true</span>,arc);
+<a name="l00096"></a>00096                 } <span class="keywordflow">else</span> {
+<a name="l00097"></a>00097                     <span class="keywordflow">if</span> (<a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">usbData::isAudio</a>(dirp-&gt;d_name,<span class="keyword">false</span>)) {
+<a name="l00098"></a>00098                             arc.<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>.push_back((<span class="keywordtype">string</span>)(baseDir+dirp-&gt;d_name));
+<a name="l00099"></a>00099                     }
+<a name="l00100"></a>00100                 }
+<a name="l00101"></a>00101             }
+<a name="l00102"></a>00102         }
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104 }
+</pre></div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:50 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

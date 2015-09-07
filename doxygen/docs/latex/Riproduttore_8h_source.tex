@@ -1,0 +1,71 @@
+\hypertarget{Riproduttore_8h_source}{\section{\-Process/\-Riproduttore.h}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 
+00004 
+00005 
+00006 \textcolor{preprocessor}{#ifndef RIPRODUTTORE\_H\_}
+00007 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define RIPRODUTTORE\_H\_}
+00008 \textcolor{preprocessor}{}\textcolor{comment}{//Static Linked}
+00009 \textcolor{preprocessor}{#include "../Input/usbData.h"}
+00010 \textcolor{comment}{//Dynamic Linked}
+00011 \textcolor{preprocessor}{#include <iostream>}
+00012 \textcolor{preprocessor}{#include <string>}
+00013 \textcolor{preprocessor}{#include <thread>}           
+00014 \textcolor{preprocessor}{#include <mutex>}            
+00015 
+\hypertarget{Riproduttore_8h_source_l00017}{}\hyperlink{classRiproduttore}{00017} \textcolor{keyword}{class }\hyperlink{classRiproduttore}{Riproduttore}
+00018 \{
+00019 \textcolor{keyword}{public}:
+00031     \hyperlink{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{Riproduttore}(std::string percorso, \textcolor{keywordtype}{bool} recursive,\textcolor{keywordtype}{bool} autoskip);
+\hypertarget{Riproduttore_8h_source_l00032}{}\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{00032}     \hyperlink{classusbData}{usbData}* \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}; 
+00033 
+00041     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{update}(std::string percorso=\textcolor{stringliteral}{""});
+00042     \textcolor{keywordtype}{void} scegliCanzone(\textcolor{keywordtype}{int} posizione);
+00043     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{prevSong}(); 
+00044     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{nextSong}(); 
+00045 
+00056     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}(\textcolor{keywordtype}{int} status=9);
+00057     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{stop}(); 
+00058     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{setTrackEnded}(\textcolor{keywordtype}{bool} value); 
+00059     \textcolor{keywordtype}{bool} \hyperlink{classRiproduttore_abf360eff47ce41b498b6d66672225929}{getTrackEnded}(); 
+00060     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{lock}(); 
+00061     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{unlock}(); 
+\hypertarget{Riproduttore_8h_source_l00062}{}\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{00062}     \textcolor{keyword}{mutable} std::mutex  \hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio};        
+00063 
+\hypertarget{Riproduttore_8h_source_l00064}{}\hyperlink{classRiproduttore_a084180b417949e5e1c13443711ed9215}{00064}     \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a084180b417949e5e1c13443711ed9215}{kill}() \{\hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal}=\textcolor{keyword}{true};\};
+00072     \hyperlink{classRiproduttore_af125f230183970d506e616bf444e3771}{~Riproduttore}();
+\hypertarget{Riproduttore_8h_source_l00074}{}\hyperlink{classRiproduttore_ae4e04ee770a1f551abfe57dcd8a3cfac}{00074}     \hyperlink{classRiproduttore_ae4e04ee770a1f551abfe57dcd8a3cfac}{Riproduttore}( \textcolor{keyword}{const} \hyperlink{classRiproduttore}{Riproduttore} &other) \{
+00075         std::lock\_guard<std::mutex> \hyperlink{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{lock}(other.\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00076         \hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs} = other.\hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs};
+00077         \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack} = \textcolor{keyword}{true};
+00078         \hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}=\textcolor{keyword}{true};
+00079         \textcolor{comment}{// deep copy}
+00080         \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica} = \textcolor{keyword}{new} \hyperlink{classusbData}{usbData}(*other.\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}); \textcolor{comment}{// Allocazione di un nuovo
+       puntatore necessaria perche la dimensione della musica cambia}
+00081         \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal} = \textcolor{keyword}{false};
+00082     \}
+00083     \textcolor{comment}{//Copy assignment}
+\hypertarget{Riproduttore_8h_source_l00085}{}\hyperlink{classRiproduttore_aa3a459e664eb06e359d11e5fd05118f7}{00085} \textcolor{comment}{}    \hyperlink{classRiproduttore}{Riproduttore}& \hyperlink{classRiproduttore_aa3a459e664eb06e359d11e5fd05118f7}{operator = }(\textcolor{keyword}{const} \hyperlink{classRiproduttore}{Riproduttore}& other) \{
+00086         \textcolor{keywordflow}{if} (\textcolor{keyword}{this}!=&other) \{
+00087             \hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}=\textcolor{keyword}{true};
+00088             \hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs} = other.\hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs};
+00089             \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack} = other.\hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack};
+00090             *\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica} = *other.\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica};
+00091             \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal} = other.\hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal};
+00092             \hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}=\textcolor{keyword}{false};
+00093         \}
+00094         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00095     \}
+00096 \textcolor{keyword}{private}:
+\hypertarget{Riproduttore_8h_source_l00097}{}\hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{00097}     \textcolor{keywordtype}{bool} \hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs}; 
+\hypertarget{Riproduttore_8h_source_l00098}{}\hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{00098}     \textcolor{keywordtype}{bool} \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack}; 
+\hypertarget{Riproduttore_8h_source_l00099}{}\hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{00099}     \textcolor{keywordtype}{bool} \hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}; 
+\hypertarget{Riproduttore_8h_source_l00100}{}\hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{00100}     \textcolor{keywordtype}{bool} \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal}; 
+00101     \textcolor{keywordtype}{void} riproduttore\_thr();
+00102 \};
+00103 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

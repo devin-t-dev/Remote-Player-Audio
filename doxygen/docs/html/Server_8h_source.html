@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza:  File sorgente Input/Socket/Server.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Input/Socket/Server.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Server_8h.html">Vai alla documentazione di questo file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#ifndef SERVER_H</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define SERVER_H</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00008"></a><a class="code" href="classServer.html">00008</a> <span class="keyword">class </span><a class="code" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a> {
+<a name="l00009"></a>00009 <span class="keyword">public</span>:
+<a name="l00014"></a>00014     <a class="code" href="classServer.html#af11aa19a47fed238c575c432bd7f1ce9">Server</a>(<span class="keywordtype">int</span> porta);
+<a name="l00015"></a>00015     <span class="keywordtype">void</span> SetactiveThread(<span class="keywordtype">bool</span> status); <span class="comment">//Attiva o disattiva il server.</span>
+<a name="l00016"></a>00016     <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a23b2a4e9819bd2ad2dbb6a0ccc63adc2" title="Indica se il Server è attivo.">getActived</a>(); 
+<a name="l00017"></a>00017     <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a343411b66598c4a18a85ff8ed3bc70d3" title="Test della connessione al client.">isConn</a>(); 
+<a name="l00018"></a>00018     <span class="keywordtype">void</span> sendData(std::string <a class="code" href="classServer.html#a0493d162448907be150f830457808e51" title="Mantiene il messaggio fino a che non è richiesto.">message</a>,std::string type);
+<a name="l00027"></a>00027     <span class="keywordtype">void</span> <a class="code" href="classServer.html#a212514d665699ff74c168b81303be815">getData</a>();
+<a name="l00028"></a>00028     <span class="keywordtype">int</span> <a class="code" href="classServer.html#abf528e3dd8190943593c4094b20201f2">getApp</a>(); 
+<a name="l00029"></a>00029     std::string <a class="code" href="classServer.html#a968480d1fc8a455f708fdc5ec9f1e7d2">getMessage</a>(); 
+<a name="l00030"></a>00030     <a class="code" href="classServer.html#a4b3aa2579cb1c8cd1d069582c14d0fa6" title="Distruttore della classe Server.">~Server</a>(); 
+<a name="l00031"></a>00031 <span class="keyword">private</span>:
+<a name="l00032"></a><a class="code" href="classServer.html#af6c0542f9031f20f71bb4a276dfbac64">00032</a>     <span class="keywordtype">bool</span> <a class="code" href="classServer.html#af6c0542f9031f20f71bb4a276dfbac64" title="Variabile privata che indica se attualmente il client è connesso.">conn</a>; 
+<a name="l00033"></a><a class="code" href="classServer.html#a693131a2a6c6a5df3461fbdefa73b0b2">00033</a>     <span class="keywordtype">bool</span> <a class="code" href="classServer.html#a693131a2a6c6a5df3461fbdefa73b0b2" title="Variabile privata che indica se il processo deve essere killato.">kill</a>; 
+<a name="l00034"></a>00034     <span class="keywordtype">bool</span> thrActive; <span class="comment">//If false the main thread is paused (if with skip)</span>
+<a name="l00035"></a><a class="code" href="classServer.html#af0575ea98923ea4c2ec76bb91e3a7701">00035</a>     <span class="keywordtype">int</span> <a class="code" href="classServer.html#af0575ea98923ea4c2ec76bb91e3a7701" title="Mantiene in memoria fino a che non viene richiesta l&#39;app corrente.">currentApp</a>; 
+<a name="l00036"></a>00036     <span class="keywordtype">int</span> msgLen;
+<a name="l00037"></a><a class="code" href="classServer.html#a0493d162448907be150f830457808e51">00037</a>     std::string <a class="code" href="classServer.html#a0493d162448907be150f830457808e51" title="Mantiene il messaggio fino a che non è richiesto.">message</a>; 
+<a name="l00038"></a>00038     <span class="keywordtype">void</span> <a class="code" href="classServer.html#a4b2f368d2da82dcdfa1523e27840cd3e" title="Processo che gira in continuazione in attesa di nuove connessioni.">ServerThread</a>(); 
+<a name="l00039"></a>00039 };
+<a name="l00040"></a>00040 <span class="preprocessor">#endif</span>
+</pre></div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:50 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+\hypertarget{Server_8cpp_source}{\section{\-Input/\-Socket/\-Server.cpp}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/* @file Server.cpp}
+00002 \textcolor{comment}{ * @brief File del Server}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ * In questo file c'è la classe Server. Si occupa di gestire la Socket e
+       l'invio e il ricevimento dei dati.}
+00005 \textcolor{comment}{ *}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#include "\hyperlink{ServerUtil_8cpp}{ServerUtil.cpp}"}
+00009 \textcolor{preprocessor}{#include "\hyperlink{Server_8h}{Server.h}"}
+00010 \textcolor{preprocessor}{#include <iostream>}
+00011 \textcolor{preprocessor}{#include <string>}
+00012 
+00013 \textcolor{comment}{//Used For Multithetering (-std=c++0x) -lphtreah}
+00014 \textcolor{preprocessor}{#include <thread>}                                   \textcolor{comment}{//Libreria per il
+       multithetering}
+00015 \textcolor{preprocessor}{#include <mutex>}                                    \textcolor{comment}{//Blocco sezioni critiche}
+00016 \textcolor{preprocessor}{#include <condition\_variable>}                       \textcolor{comment}{//Condizioni variabili}
+00017 
+00018 \textcolor{keyword}{using namespace }std;
+00019 
+\hypertarget{Server_8cpp_source_l00020}{}\hyperlink{classServer_af11aa19a47fed238c575c432bd7f1ce9}{00020} \hyperlink{classServer_af11aa19a47fed238c575c432bd7f1ce9}{Server::Server}(\textcolor{keywordtype}{int} porta) \{
+00021     initServer(porta);
+00022     kill=\textcolor{keyword}{false}; conn=\textcolor{keyword}{false}; thrActive=\textcolor{keyword}{false};
+00023     std::thread thr\_server(&\hyperlink{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{Server::ServerThread},\textcolor{keyword}{this});
+00024     thr\_server.detach();
+00025 \}
+00026 
+\hypertarget{Server_8cpp_source_l00027}{}\hyperlink{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{00027} \textcolor{keywordtype}{void} \hyperlink{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{Server::ServerThread}() \{
+00028     conn=\textcolor{keyword}{false};
+00029     \textcolor{keywordflow}{while} (!\hyperlink{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}{Server::kill}) \{
+00030         acceptClient();
+00031         \textcolor{keywordflow}{if} (thrActive) conn=\textcolor{keyword}{true}; \textcolor{keywordflow}{else} closeServer();
+00032     \}
+00033 \}
+\hypertarget{Server_8cpp_source_l00034}{}\hyperlink{classServer_a212514d665699ff74c168b81303be815}{00034} \textcolor{keywordtype}{void} \hyperlink{classServer_a212514d665699ff74c168b81303be815}{Server::getData}() \{
+00035     std::string rawData=\hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{ottieniData}();
+00036     \textcolor{keywordflow}{if} (conn&&rawData.length()>0&&thrActive)
+00037     \{
+00038         currentApp=(int)(rawData[0]-\textcolor{charliteral}{'0'});
+00039         \textcolor{keywordtype}{int} n=1;
+00040         \textcolor{keywordflow}{for} (n=1;n<1024&&rawData[n]!=\textcolor{charliteral}{'\(\backslash\)n'}&&rawData[n]!=\textcolor{charliteral}{'\(\backslash\)0'};n++) \{\}
+00041         n=n-1;
+00042         rawData = rawData.substr(1,n); \textcolor{comment}{//Make a string starting from 1st and
+       ending at limit of message}
+00043         message=rawData;
+00044         msgLen=n-2;
+00045         conn=\textcolor{keyword}{false};
+00046     \}
+00047 \}
+00048 
+00049 \textcolor{keywordtype}{void} Server::sendData(std::string message,std::string type) \{
+00050     \textcolor{keywordflow}{if} (thrActive) \{
+00051         std::string partialMessage;
+00052         partialMessage=JSONEncode(message,type);
+00053         \hyperlink{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}{mandaData}(const\_cast<char *>(partialMessage.c\_str()),partialMessage.
+      length());
+00054     \}
+00055 \}
+00056 
+\hypertarget{Server_8cpp_source_l00057}{}\hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{00057} \textcolor{keywordtype}{int} \hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{Server::getApp}() \{\textcolor{keywordtype}{int} temp=currentApp; currentApp=-1; \textcolor{keywordflow}{return} temp;\} \textcolor{comment}{//Reset
+       currentApp for avoid to pass twoice the same comand}
+\hypertarget{Server_8cpp_source_l00058}{}\hyperlink{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{00058} \textcolor{keywordtype}{bool} \hyperlink{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{Server::isConn}() \{\textcolor{keywordflow}{return} conn;\}
+\hypertarget{Server_8cpp_source_l00059}{}\hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{00059} \textcolor{keywordtype}{bool} \hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{Server::getActived}()\{\textcolor{keywordflow}{return} thrActive;\}
+00060 \textcolor{keywordtype}{void} Server::SetactiveThread(\textcolor{keywordtype}{bool} status) \{thrActive=status;\}
+00061 
+\hypertarget{Server_8cpp_source_l00062}{}\hyperlink{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{00062} std::string \hyperlink{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{Server::getMessage}()\{std::string temp=message; message=\textcolor{stringliteral}{""};\textcolor{keywordflow}{return} 
+      temp;\}
+00063 
+\hypertarget{Server_8cpp_source_l00064}{}\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{00064} \hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{Server::~Server} () \{
+00065     killServer();
+00066     std::cout<<\textcolor{stringliteral}{"Quitting Server"};
+00067     kill=\textcolor{keyword}{true};
+00068 \}
+\end{DoxyCode}

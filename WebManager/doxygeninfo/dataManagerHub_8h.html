@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza: Riferimenti per il file Process/dataManagerHub.h</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Composti</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file Process/dataManagerHub.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
+</div>
+<p><a href="dataManagerHub_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Composti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdataManager.html">dataManager</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This class manage all the inputs and select the correct jobs or output.  <a href="classdataManager.html#details">Continua...</a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Descrizione dettagliata</h2>
+<div class="textblock"><p>(EN) This file and his associated class manage all inputs and select the correct jobs or output (IT) Questo file gestisce tutti gli input e seleziona il giusto lavoro da eseguire.</p>
+<ul>
+<li>Nella fase di <b>input</b> Analizza i dati che gli arrivano seguendo questo codice:</li>
+<li>Nella fase di <b>risposta</b> <b>da</b> <b>server</b> a <b>client</b>, risponde usando la codifica JSON.  anche la lista delle canzoni viene mandata in formato JSON per essere inserita poi nel database WEB.</li>
+<li>Manda inoltre i comandi alla classe/funzione Streaming che gestirà la scrittura su scheda Audio</li>
+<li>Manda comandi e informazioni al gestore delle informazioni che si occupa di scegliere il mezzo più appropriato per notificare quella particolare informazione all'utente. Teoria codici passati per la comunicazione ------------------------------------------ Si è voluto cercare un sistema per permettere una comunicazione efficace tra il client e il server. Il problema principale è nato dal fatto che il comportamento non è standard ma dipende dall'applicazione che ha generato i dati che vengono inviati attraverso la Socket. <br/>
+</li>
+<li>Il <b>primo</b> numero in arrivo corrisponde all'applicativo che ha mandato il segnale</li>
+</ul>
+<ol type="1">
+<li><b>0</b> Rappresenta l'interfaccia mostrata a riga di comando</li>
+<li><b>1</b> Rappresenta i tasti comunicanti attraverso la GPIO (General Purpose Input/Output) di Raspberry [DA IMPLEMENTARE]</li>
+<li><b>2</b> Rappresenta l'interfaccia WEB presente sul server Apache installato sulla macchina dove risiede il programma</li>
+<li><b>3</b> Rappresenta l'applicazione JAVA installabile su dispositivi Android che invia direttamente il frame da riprodurre </li>
+</ol>
+
+<p>Definizione nel file <a class="el" href="dataManagerHub_8h_source.html">dataManagerHub.h</a>.</p>
+</div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:51 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

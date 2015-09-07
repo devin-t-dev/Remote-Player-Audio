@@ -1,0 +1,53 @@
+\hypertarget{ffmpeg_8cpp}{\section{\-Riferimenti per il file \-Process/ffmpeg.cpp}
+\label{ffmpeg_8cpp}\index{\-Process/ffmpeg.\-cpp@{\-Process/ffmpeg.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}ffmpeg.\-h\char`\"{}}\*
+{\ttfamily \#include $<$libavutil/mathematics.\-h$>$}\*
+{\ttfamily \#include $<$libavformat/avformat.\-h$>$}\*
+{\ttfamily \#include $<$libswscale/swscale.\-h$>$}\*
+{\ttfamily \#include $<$libavcodec/avcodec.\-h$>$}\*
+{\ttfamily \#include \char`\"{}../\-Output/aosender.\-h\char`\"{}}\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\*
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include $<$string.\-h$>$}\*
+{\ttfamily \#include $<$math.\-h$>$}\*
+\subsection*{\-Definizioni}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ffmpeg_8cpp_a3a513b5612784dd20c0dfbdf456abd01}{\#define {\bfseries \-A\-U\-D\-I\-O\-\_\-\-I\-N\-B\-U\-F\-\_\-\-S\-I\-Z\-E}~20480}\label{ffmpeg_8cpp_a3a513b5612784dd20c0dfbdf456abd01}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ffmpeg_8cpp_a856a3a29369f13bcc2d192805b05a4e6}{void {\bfseries die} (const char $\ast$msg)}\label{ffmpeg_8cpp_a856a3a29369f13bcc2d192805b05a4e6}
+
+\item 
+\hypertarget{ffmpeg_8cpp_a2f4a345e521d3d067b863e1d29c275dc}{void {\bfseries reset\-Audio} (char $\ast$song)}\label{ffmpeg_8cpp_a2f4a345e521d3d067b863e1d29c275dc}
+
+\item 
+\hypertarget{ffmpeg_8cpp_a143dd15045da18bb614cc4a7b6e2f963}{int {\bfseries play\-Audio} ()}\label{ffmpeg_8cpp_a143dd15045da18bb614cc4a7b6e2f963}
+
+\item 
+\hypertarget{ffmpeg_8cpp_aa8d270a3a855ab2aa1b60dd24cb2bbd2}{void {\bfseries free\-Audio} ()}\label{ffmpeg_8cpp_aa8d270a3a855ab2aa1b60dd24cb2bbd2}
+
+\item 
+\hypertarget{ffmpeg_8cpp_a49109d95dccf0460c1de6e7db865f358}{void {\bfseries set\-Audio\-Status} (int value)}\label{ffmpeg_8cpp_a49109d95dccf0460c1de6e7db865f358}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Variabili}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ffmpeg_8cpp_ad938967a0500504f9a6b747f080958ba}{int {\bfseries \-F\-F\-M\-P\-E\-G\-\_\-is\-Paused}}\label{ffmpeg_8cpp_ad938967a0500504f9a6b747f080958ba}
+
+\item 
+\hypertarget{ffmpeg_8cpp_a9bd822a4ae927624f7827c898422d1db}{const int {\bfseries buffer\-\_\-size} = \-A\-U\-D\-I\-O\-\_\-\-I\-N\-B\-U\-F\-\_\-\-S\-I\-Z\-E + \-F\-F\-\_\-\-I\-N\-P\-U\-T\-\_\-\-B\-U\-F\-F\-E\-R\-\_\-\-P\-A\-D\-D\-I\-N\-G\-\_\-\-S\-I\-Z\-E}\label{ffmpeg_8cpp_a9bd822a4ae927624f7827c898422d1db}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+
+
+\-Definizione nel file \hyperlink{ffmpeg_8cpp_source}{ffmpeg.\-cpp}.
+

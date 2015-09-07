@@ -1,0 +1,290 @@
+/*@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+	padding-top: 80px;
+	overflow-x:hidden;
+	font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.btn-default {
+	background-color: transparent;
+	color:white;
+	border-radius: 50%;
+	border:0px;
+}
+.btn-default:hover {
+	background-color: transparent;
+	color:white;
+	border-radius: 50%;
+}
+.navbar-inverse .btn-default {
+	background-color: transparent;
+	border: 0px;
+	height: 3.3em;
+}
+table .btn-default {
+	color: #3F51B5;
+}
+#navbar input {
+	color:white;
+	background-color: transparent;
+	border: 2px solid transparent;
+	height: 3.3em;
+}
+#coverContainer {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	color:black;
+}
+#coverContainer p {
+	padding-left: 20px;
+}
+table thead {
+	background-color: #3F51B5;
+	color:white;
+}
+#canzoneAttuale {
+	font-size: 1.5em;
+}
+footer.btn {
+	background-color: black;
+	color:white;
+	border: 0px;
+}
+.navbar-inverse {
+	background-color: #3F51B5;
+}
+.navbar-inverse .navbar-nav > li {
+	color:white;
+	opacity: 54%;
+}
+.navbar-brand {
+	font-family: 'Lobster', sans-serif;
+}
+.navbar-inverse .navbar-brand {
+	color:white;
+	opacity: 100%;
+}
+.actionMenu {
+	/*padding-left: 50%;*/
+/*§	margin-left: 50%;
+	margin-right: auto;
+}
+.mobile-text {
+	text-align: left;
+	position: relative;
+}
+@media(min-width:768px) {
+	.mobile-text {
+		display: none;
+	}
+	.actionMenu {
+		margin-left: 0px;
+	}
+    .navbar-default {
+        padding: 25px 0;
+        border: 0;
+        /*background-color: transparent;*/
+/*        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+    }
+
+    .navbar-default .navbar-brand {
+        font-size: 2em;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+    }
+
+    .navbar-default .navbar-nav>.active>a {
+        border-radius: 3px;
+    }
+
+    .navbar-default.navbar-shrink {
+        padding: 10px 0;
+        background-color: #222;
+    }
+
+    .navbar-default.navbar-shrink .navbar-brand {
+        font-size: 1.5em;
+    }
+}
+.footer {
+	position: fixed;
+	bottom: 0;
+	/*max-height: 100px;*/
+/*	width:100%;
+	background-color: #3F51B5;
+	color:white;
+	font-family: 'Lobster', sans-serif;
+	margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*.footer-play {
+	bottom: 20px;
+	height: 40px;
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
+	margin-left: auto;
+    margin-right: auto;
+}*/
+/*§@media(min-width:@screen-md-min) {
+	.footer {
+		margin-left: 0px;
+		text-align: left;
+	}
+}*/
+
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+	padding-top: 80px;
+	overflow-x:hidden;
+	font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.btn-default {
+	background-color: transparent;
+	color:white;
+	border-radius: 50%;
+	border:0px;
+}
+.btn-default:hover {
+	background-color: transparent;
+	color:white;
+	border-radius: 50%;
+}
+.navbar-inverse .btn-default {
+	background-color: transparent;
+	border: 0px;
+	height: 3.3em;
+}
+table .btn-default {
+	color: #3F51B5;
+}
+#navbar input {
+	color:white;
+	background-color: transparent;
+	border: 2px solid transparent;
+	height: 3.3em;
+}
+#coverContainer {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	color:black;
+}
+#coverContainer p {
+	padding-left: 20px;
+}
+table thead {
+	background-color: #3F51B5;
+	color:white;
+}
+#canzoneAttuale {
+	font-size: 1.5em;
+}
+footer.btn {
+	background-color: black;
+	color:white;
+	border: 0px;
+}
+.navbar-toggle{
+	border:0px;
+}
+.navbar-inverse {
+	background-color: #3F51B5;
+}
+.navbar-inverse .navbar-nav > li {
+	color:white;
+	opacity: 54%;
+}
+.navbar-brand {
+	font-family: 'Lobster', sans-serif;
+}
+.navbar-inverse .navbar-brand {
+	color:white;
+	opacity: 100%;
+}
+.actionMenu {
+	/*padding-left: 50%;*/
+	margin-left: 50%;
+	margin-right: auto;
+}
+.mobile-text {
+	text-align: left;
+	position: relative;
+}
+@media(min-width:768px) {
+	.mobile-text {
+		display: none;
+	}
+	.actionMenu {
+		margin-left: 0px;
+	}
+    .navbar-default {
+        padding: 25px 0;
+        border: 0;
+        /*background-color: transparent;*/
+        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+    }
+
+    .navbar-default .navbar-brand {
+        font-size: 2em;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+    }
+
+    .navbar-default .navbar-nav>.active>a {
+        border-radius: 3px;
+    }
+
+    .navbar-default.navbar-shrink {
+        padding: 10px 0;
+        background-color: #222;
+    }
+
+    .navbar-default.navbar-shrink .navbar-brand {
+        font-size: 1.5em;
+    }
+}
+.footer {
+	position: fixed;
+	bottom: 0;
+	/*max-height: 100px;*/
+	width:100%;
+	background-color: #3F51B5;
+	color:white;
+	font-family: 'Lobster', sans-serif;
+	margin-left: -15px;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*.footer-play {
+	bottom: 20px;
+	height: 40px;
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
+	margin-left: auto;
+    margin-right: auto;
+}*/
+@media(min-width:@screen-md-min) {
+	.footer {
+		margin-left: 0px;
+		text-align: left;
+	}
+}

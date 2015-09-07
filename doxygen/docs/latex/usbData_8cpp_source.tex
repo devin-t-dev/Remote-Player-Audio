@@ -1,0 +1,113 @@
+\hypertarget{usbData_8cpp_source}{\section{\-Input/usb\-Data.cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{comment}{// Devin Taietta}
+00003 \textcolor{comment}{// usbData.cpp -- Gestione dell'archivio delle canzoni e ottenimento
+       informazioni sui file}
+00004 \textcolor{comment}{//Dynamic Linked}
+00005 \textcolor{preprocessor}{#include <iostream>}
+00006 \textcolor{preprocessor}{#include <string>}
+00007 \textcolor{preprocessor}{#include <vector>}
+00008 \textcolor{preprocessor}{#include <errno.h>}  \textcolor{comment}{//Managing Error}
+00009 \textcolor{comment}{//Static Linked}
+00010 \textcolor{preprocessor}{#include "\hyperlink{usbData_8h}{usbData.h}"}
+00011 \textcolor{preprocessor}{#include "/usr/include/taglib/fileref.h"}
+00012 \textcolor{preprocessor}{#include "/usr/include/taglib/tag.h"} \textcolor{comment}{//Per trovare i tag ID3 delle canzoni}
+00013 \textcolor{comment}{//Only Linux - Browse directories}
+00014 \textcolor{preprocessor}{#include <dirent.h>} \textcolor{comment}{//Access to Linux Directory}
+00015 \textcolor{preprocessor}{#include <sys/stat.h>} \textcolor{comment}{//Information about attribs of files}
+00016 \textcolor{keyword}{using namespace }std;
+00017 
+\hypertarget{usbData_8cpp_source_l00018}{}\hyperlink{classusbData_afd7ef352616d15a05bca0e56f46e52a0}{00018} \hyperlink{classusbData_afd7ef352616d15a05bca0e56f46e52a0}{usbData::usbData}(std::string baseDir,\textcolor{keywordtype}{bool} recursive)
+00019 \{
+00020     \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{usbData::riempiArchivio}(baseDir,recursive,*\textcolor{keyword}{this});
+00021     \textcolor{keywordflow}{if} (elementi.size()<=0) \{
+00022         \textcolor{keywordflow}{try} \{
+00023             std::cout<<\textcolor{stringliteral}{"Nessuna canzone trovata al percorso indicato!"};
+00024             \textcolor{keywordflow}{throw} 20;
+00025         \}
+00026         \textcolor{keywordflow}{catch} (\textcolor{keywordtype}{int} e)
+00027         \{
+00028             std::cout<<\textcolor{stringliteral}{"Nessuna canzone trovata al percorso indicato!"};
+00029             \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{usbData::riempiArchivio}(baseDir,recursive,*\textcolor{keyword}{this}); \textcolor{comment}{//Media}
+00030         \}
+00031     \}
+00032     puntatore=0;
+00033 \}
+\hypertarget{usbData_8cpp_source_l00034}{}\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{00034} \textcolor{keywordtype}{void} \hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{usbData::setPuntatore}(\textcolor{keywordtype}{int} posizione)\{puntatore=posizione;\}
+\hypertarget{usbData_8cpp_source_l00035}{}\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{00035} \textcolor{keywordtype}{int} \hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{usbData::getPuntatore}() \{\textcolor{keywordflow}{return} puntatore;\}
+00036 
+00037 \textcolor{comment}{//void usbData::analyzeID(usbDataPlus &arcplus)}
+00038 \textcolor{comment}{//\{}
+00039 \textcolor{comment}{/*  for (int i=0;i<arcplus.elementi.size();i++)}
+00040 \textcolor{comment}{    \{}
+00041 \textcolor{comment}{        TagLib::FileRef f(arcplus.elementi[i]);}
+00042 \textcolor{comment}{        arcplus.titolo = f.tag()->title();}
+00043 \textcolor{comment}{        arcplus.autore = f.tag()->author();}
+00044 \textcolor{comment}{        TagLib::AudioProperties *properties = f.audioProperties();}
+00045 \textcolor{comment}{        //int seconds = properties->length() % 60;}
+00046 \textcolor{comment}{        //int minutes = (properties->length() - seconds) / 60;}
+00047 \textcolor{comment}{        arcplus.durata=properties->length();}
+00048 \textcolor{comment}{    \}*/}
+00049 \textcolor{comment}{//\}}
+00050 
+\hypertarget{usbData_8cpp_source_l00051}{}\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{00051} \textcolor{keywordtype}{bool} \hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{usbData::isAudio} (std::string percorso,\textcolor{keywordtype}{bool} onlymp3) \{
+00052     std::string validformat[6] = \{\textcolor{stringliteral}{"MP3"},\textcolor{stringliteral}{"mp3"},\textcolor{stringliteral}{"WAW"},\textcolor{stringliteral}{"waw"},\textcolor{stringliteral}{"FLAC"},\textcolor{stringliteral}{"flac"}\};
+00053     \textcolor{keywordtype}{int} imax;
+00054     \textcolor{keywordflow}{if} (onlymp3) \{
+00055         imax=2;
+00056     \} \textcolor{keywordflow}{else} \{
+00057 
+00058         imax=6;
+00059     \}
+00060     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<imax;i++)
+00061         \{
+00062             \textcolor{keywordflow}{if} (percorso[percorso.length()-3]==validformat[i][0]&&
+00063                     percorso[percorso.length()-2]==validformat[i][1]&&
+00064                     percorso[percorso.length()-1]==validformat[i][2])
+00065                     \{
+00066                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00067                     \}
+00068         \}
+00069     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00070 \}
+00071 
+\hypertarget{usbData_8cpp_source_l00072}{}\hyperlink{classusbData_a2b695019bdabc6eed11dafaa7c959029}{00072} \textcolor{keywordtype}{bool} \hyperlink{classusbData_a2b695019bdabc6eed11dafaa7c959029}{usbData::isDir}(\textcolor{keywordtype}{string} dir)
+00073 \{
+00074     \textcolor{keyword}{struct }stat fileInfo;
+00075     stat(dir.c\_str(), &fileInfo);
+00076     \textcolor{keywordflow}{if} (S\_ISDIR(fileInfo.st\_mode))
+00077     \{
+00078         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00079     \}\textcolor{keywordflow}{else}\{
+00080         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00081     \}
+00082 \}
+00083 
+\hypertarget{usbData_8cpp_source_l00084}{}\hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{00084} \textcolor{keywordtype}{void} \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{usbData::riempiArchivio}(\textcolor{keywordtype}{string} baseDir, \textcolor{keywordtype}{bool} recursive, \hyperlink{classusbData}{usbData} &arc)
+00085 \{
+00086     DIR *dp;
+00087     \textcolor{keyword}{struct }dirent *dirp;
+00088     \textcolor{keywordflow}{if} ((dp = opendir(baseDir.c\_str())) == NULL) \{
+00089         \textcolor{comment}{//Genera errore apertura cartella!}
+00090         \textcolor{keywordflow}{return};
+00091     \} \textcolor{keywordflow}{else} \{
+00092         \textcolor{keywordflow}{while} ((dirp = readdir(dp)) != NULL) \{
+00093             \textcolor{keywordflow}{if} (dirp->d\_name != \textcolor{keywordtype}{string}(\textcolor{stringliteral}{"."}) && dirp->d\_name != string (\textcolor{stringliteral}{".."})) \{
+00094                 \textcolor{keywordflow}{if} (\hyperlink{classusbData_a2b695019bdabc6eed11dafaa7c959029}{usbData::isDir}(baseDir + dirp->d\_name) == \textcolor{keyword}{true} && recursive
+      ==\textcolor{keyword}{true}) \{
+00095                     \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{usbData::riempiArchivio}(baseDir + dirp->d\_name + \textcolor{stringliteral}{"/"},\textcolor{keyword}{true},
+      arc);
+00096                 \} \textcolor{keywordflow}{else} \{
+00097                     \textcolor{keywordflow}{if} (\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{usbData::isAudio}(dirp->d\_name,\textcolor{keyword}{false})) \{
+00098                             arc.\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}.push\_back((\textcolor{keywordtype}{string})(baseDir+dirp->
+      d\_name));
+00099                     \}
+00100                 \}
+00101             \}
+00102         \}
+00103     \}
+00104 \}
+\end{DoxyCode}

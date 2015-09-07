@@ -1,0 +1,53 @@
+\hypertarget{usbData_8h_source}{\section{\-Input/usb\-Data.h}
+}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{comment}{/*}
+00003 \textcolor{comment}{    usbData.h - Header della ononima classe.}
+00004 \textcolor{comment}{    Gestisce i file da Pendrive e li memorizza in un vettore (vector c++11)}
+00005 \textcolor{comment}{*/}
+00006 \textcolor{preprocessor}{#ifndef usbDATA\_H\_}
+00007 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define usbDATA\_H\_}
+00008 \textcolor{preprocessor}{}\textcolor{preprocessor}{#include <iostream>}
+00009 \textcolor{preprocessor}{#include <vector>}
+00010 \textcolor{preprocessor}{#include <string>}
+\hypertarget{usbData_8h_source_l00012}{}\hyperlink{classusbData}{00012} \textcolor{keyword}{class }\hyperlink{classusbData}{usbData}
+00013 \{
+00014 \textcolor{keyword}{private}:
+00015     \textcolor{keywordtype}{int} puntatore;
+00016     \textcolor{comment}{//void analyzeID(usbDataPlus &arcplus);}
+00017     \textcolor{keywordtype}{bool} \hyperlink{classusbData_a2b695019bdabc6eed11dafaa7c959029}{isDir}(std::string dir); 
+00018     \textcolor{keywordtype}{void} \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{riempiArchivio}(std::string baseDir, \textcolor{keywordtype}{bool} recursive, \hyperlink{classusbData}{usbData} &arc); 
+00019 \textcolor{keyword}{public}:
+00020     \hyperlink{classusbData_afd7ef352616d15a05bca0e56f46e52a0}{usbData}(std::string baseDir,\textcolor{keywordtype}{bool} recursive);
+00021     \textcolor{keywordtype}{void} \hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(\textcolor{keywordtype}{int} posizione); 
+00022     \textcolor{keywordtype}{int} \hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}(); 
+\hypertarget{usbData_8h_source_l00023}{}\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{00023}     std::vector<std::string> \hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}; 
+00024 
+00025     \textcolor{keywordtype}{bool} \hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{isAudio} (std::string percorso,\textcolor{keywordtype}{bool} onlymp3); 
+00026     \hyperlink{classusbData}{usbData}& operator = (\textcolor{keyword}{const} \hyperlink{classusbData}{usbData}& other) \{ \textcolor{comment}{//??}
+00027         puntatore=other.puntatore;
+00028         \hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}=other.\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi};
+00029         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00030     \}
+00031 \};
+00032 
+00033 \textcolor{comment}{/*class usbDataPlus : public usbData}
+00034 \textcolor{comment}{// Oltre a derivare la classe usbData, questa classe se configurata per
+       funzionare contiene anche i vettori per contenere le informazioni scritte sul tag ID3.}
+00035 \textcolor{comment}{// E stata scritta come Plus perchè dovrà essere in grado di essere
+       disabilitabile.}
+00036 \textcolor{comment}{\{}
+00037 \textcolor{comment}{private:}
+00038 \textcolor{comment}{}
+00039 \textcolor{comment}{public:}
+00040 \textcolor{comment}{    //Nota per le tre successive righe: Valutare se è bene tenerle in memoria o
+       è meglio un file su hd.}
+00041 \textcolor{comment}{    std::vector<std::string> titolo;}
+00042 \textcolor{comment}{    std::vector<std::string> autore;}
+00043 \textcolor{comment}{    std::vector<std::string> durata;}
+00044 \textcolor{comment}{    //usbDataInfo();//Costruttore, DEVE ESEGUIRE PRIMA usbData().}
+00045 \textcolor{comment}{\};*/}
+00046 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

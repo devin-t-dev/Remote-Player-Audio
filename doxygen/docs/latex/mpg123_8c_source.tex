@@ -1,0 +1,81 @@
+\hypertarget{mpg123_8c_source}{\section{\-Process/mpg123.c}
+}
+
+\begin{DoxyCode}
+00001 
+00004 \textcolor{comment}{//Dynamic Linked}
+00005 \textcolor{preprocessor}{#include <\hyperlink{mpg123_8h}{mpg123.h}>}
+00006 \textcolor{comment}{//Static Linked}
+00007 \textcolor{preprocessor}{#include "\hyperlink{mpg123_8h}{mpg123.h}"}
+00008 \textcolor{preprocessor}{#include "../Output/aosender.h"}
+00009 \textcolor{comment}{//#include "../Process/Fx/Reverb.c"}
+00010 \textcolor{comment}{//#include "../Process/sampleConversion.c" //Commented, Only Testing}
+00011 \textcolor{comment}{//Global}
+00012 \textcolor{keyword}{const} \textcolor{keywordtype}{int}       BITS=8;
+00013 \textcolor{keywordtype}{int}         isPaused=0;
+00014 \textcolor{keyword}{static} mpg123\_handle    *mh;
+00015 \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}    *buffer=NULL;
+00016 \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t}       buffer\_size;
+00017 \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t}       done;
+00018 
+\hypertarget{mpg123_8c_source_l00024}{}\hyperlink{mpg123_8h_a644a4493a8aeafe0544786ffb8b2a96a}{00024} \textcolor{keywordtype}{void} \hyperlink{mpg123_8c_a644a4493a8aeafe0544786ffb8b2a96a}{resetMp3}(\textcolor{keywordtype}{char} * song)
+00025 \{
+00026     \textcolor{keywordflow}{if} (buffer!=NULL) \{\hyperlink{mpg123_8c_ad8bff7d817bc1b5f8c1ab8388158bc29}{freeMp3}();\}
+00027     \textcolor{keywordtype}{int} err;
+00028     \textcolor{keywordtype}{int} channels, encoding;
+00029     \textcolor{keywordtype}{long} rate;
+00030     \textcolor{comment}{/* Inizialize */}
+00031     mpg123\_init();
+00032     mh = mpg123\_new(NULL, &err);
+00033     buffer\_size = mpg123\_outblock(mh);
+00034     buffer = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*) malloc(buffer\_size * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}));
+00035     \textcolor{comment}{/* open the file and get the decoding format */}
+00036     mpg123\_open(mh,song);
+00037     mpg123\_getformat(mh, &rate, &channels, &encoding);
+00038     \textcolor{comment}{/* set the output format and open the output device */}
+00039     \textcolor{keywordtype}{int} bits=(mpg123\_encsize(encoding) * BITS);
+00040     initAudioDev(bits,rate,channels);
+00041 \}
+\hypertarget{mpg123_8c_source_l00046}{}\hyperlink{mpg123_8h_a548762aaed08753cbed2cfabe0a5202b}{00046} \textcolor{keywordtype}{int} \hyperlink{mpg123_8c_a548762aaed08753cbed2cfabe0a5202b}{playMp3}()\{
+00047     \textcolor{comment}{/* decode and play */}
+00048     \textcolor{keywordflow}{if} (isPaused==0 && mpg123\_read(mh, buffer, buffer\_size, &done) == MPG123\_OK
+      )
+00049     \{
+00050         writeAudio((\textcolor{keywordtype}{char}*)buffer,done);
+00051     \} \textcolor{keywordflow}{else} \{
+00052         \textcolor{keywordflow}{if} (isPaused==0) \textcolor{keywordflow}{return} 2;
+00053     \}
+00054     \textcolor{keywordflow}{return} 0;
+00055 \}
+00056 \textcolor{comment}{/* @name Pulizia Mp3}
+00057 \textcolor{comment}{ * Questa funzione si occupa di liberare le variabili per riprodurre l'Mp3}
+00058 \textcolor{comment}{ */}
+\hypertarget{mpg123_8c_source_l00059}{}\hyperlink{mpg123_8h_ad8bff7d817bc1b5f8c1ab8388158bc29}{00059} \textcolor{keywordtype}{void} \hyperlink{mpg123_8c_ad8bff7d817bc1b5f8c1ab8388158bc29}{freeMp3}()
+00060 \{
+00061     free(buffer);
+00062     buffer=NULL;
+00063     mpg123\_close(mh);
+00064     mpg123\_delete(mh);
+00065     mpg123\_exit();
+00066     freeAudioDev();
+00067     mh=NULL;
+00068     \textcolor{comment}{//endResample(); // -ONLY TESTING- Check header}
+00069 \}
+00070 \textcolor{comment}{/*}
+00071 \textcolor{comment}{ * @name Imposta lo stato (MP3)}
+00072 \textcolor{comment}{ * Questa funzione si occupa di mettere in pausa il lettore o no}
+00073 \textcolor{comment}{ */}
+\hypertarget{mpg123_8c_source_l00074}{}\hyperlink{mpg123_8h_a852896f3beba9503ee018f0a1bdf28ea}{00074} \textcolor{keywordtype}{void} \hyperlink{mpg123_8c_a852896f3beba9503ee018f0a1bdf28ea}{setMp3Status}(\textcolor{keywordtype}{int} value)
+00075 \{
+00076     \textcolor{keywordflow}{if}(value==0||value==1)
+00077     \{
+00078         isPaused=value;
+00079     \} \textcolor{keywordflow}{else} \{
+00080         isPaused=!isPaused;
+00081     \}
+00082 \}
+00083 \textcolor{comment}{/*int mp3GetPlayStatus()}
+00084 \textcolor{comment}{\{}
+00085 \textcolor{comment}{    return isPaused;}
+00086 \textcolor{comment}{\}*/}
+\end{DoxyCode}

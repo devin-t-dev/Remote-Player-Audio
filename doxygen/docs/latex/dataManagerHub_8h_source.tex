@@ -1,0 +1,47 @@
+\hypertarget{dataManagerHub_8h_source}{\section{\-Process/data\-Manager\-Hub.h}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 
+00004 
+00005 
+00006 
+00007 
+00008 
+00009 
+00010 
+00011 
+00012 
+00013 
+00014 
+00015 
+00016 
+00017 
+00018 
+00019 
+00020 
+00026 
+00027 \textcolor{preprocessor}{#ifndef DATAMANAGER\_H\_}
+00028 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define DATAMANAGER\_H\_}
+00029 \textcolor{preprocessor}{}\textcolor{preprocessor}{#include <iostream>}
+\hypertarget{dataManagerHub_8h_source_l00031}{}\hyperlink{classdataManager}{00031} \textcolor{keyword}{class }\hyperlink{classdataManager}{dataManager} \{
+00032 \textcolor{keyword}{public}:
+00034 
+00040     \hyperlink{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}{dataManager}(std::string dir);
+00041     \textcolor{keywordtype}{void} setMenu(\textcolor{keywordtype}{bool} status) \{\hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}=status;\}; 
+\hypertarget{dataManagerHub_8h_source_l00042}{}\hyperlink{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}{00042}     \textcolor{keywordtype}{void} \hyperlink{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}{setStream}(\textcolor{keywordtype}{bool} status) \{\hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}=status;\} 
+00043     \textcolor{keywordtype}{bool} killSignal() \{\textcolor{keywordflow}{return} \hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal};\}; 
+00044 
+00047     \hyperlink{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}{~dataManager}();
+00048 \textcolor{keyword}{private}:
+00049     \textcolor{keywordtype}{void} \hyperlink{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{menu_thr}(); 
+00050     \textcolor{keywordtype}{void} \hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{data_thr}(); 
+00051     \textcolor{keywordtype}{void} \hyperlink{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{sendSongsToWeb}(); 
+\hypertarget{dataManagerHub_8h_source_l00052}{}\hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{00052}     \textcolor{keywordtype}{bool} \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}; 
+\hypertarget{dataManagerHub_8h_source_l00053}{}\hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{00053}     \textcolor{keywordtype}{bool} \hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}; 
+\hypertarget{dataManagerHub_8h_source_l00054}{}\hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{00054}     \textcolor{keywordtype}{bool} \hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal};
+00055 \};
+00056 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

@@ -1,0 +1,83 @@
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}|hyperpage}{9}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}|hyperpage}{10}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{10}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!$\sim $data\discretionary {-}{}{}Manager@{$\sim $data\discretionary {-}{}{}Manager}|hyperpage}{10}
+\indexentry{$\sim $data\discretionary {-}{}{}Manager@{$\sim $data\discretionary {-}{}{}Manager}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{10}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!data\discretionary {-}{}{}\_\discretionary {-}{}{}thr@{data\discretionary {-}{}{}\_\discretionary {-}{}{}thr}|hyperpage}{11}
+\indexentry{data\discretionary {-}{}{}\_\discretionary {-}{}{}thr@{data\discretionary {-}{}{}\_\discretionary {-}{}{}thr}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{11}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!set\discretionary {-}{}{}Stream@{set\discretionary {-}{}{}Stream}|hyperpage}{11}
+\indexentry{set\discretionary {-}{}{}Stream@{set\discretionary {-}{}{}Stream}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{11}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!menu\discretionary {-}{}{}Active@{menu\discretionary {-}{}{}Active}|hyperpage}{11}
+\indexentry{menu\discretionary {-}{}{}Active@{menu\discretionary {-}{}{}Active}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{11}
+\indexentry{data\discretionary {-}{}{}Manager@{data\discretionary {-}{}{}Manager}!stream\discretionary {-}{}{}Active@{stream\discretionary {-}{}{}Active}|hyperpage}{11}
+\indexentry{stream\discretionary {-}{}{}Active@{stream\discretionary {-}{}{}Active}!dataManager@{data\discretionary {-}{}{}Manager}|hyperpage}{11}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{12}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{13}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{13}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!$\sim $\discretionary {-}{}{}Riproduttore@{$\sim $\discretionary {-}{}{}Riproduttore}|hyperpage}{14}
+\indexentry{$\sim $\discretionary {-}{}{}Riproduttore@{$\sim $\discretionary {-}{}{}Riproduttore}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{14}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!play\discretionary {-}{}{}Pause@{play\discretionary {-}{}{}Pause}|hyperpage}{14}
+\indexentry{play\discretionary {-}{}{}Pause@{play\discretionary {-}{}{}Pause}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{14}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!prev\discretionary {-}{}{}Song@{prev\discretionary {-}{}{}Song}|hyperpage}{14}
+\indexentry{prev\discretionary {-}{}{}Song@{prev\discretionary {-}{}{}Song}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{14}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!set\discretionary {-}{}{}Track\discretionary {-}{}{}Ended@{set\discretionary {-}{}{}Track\discretionary {-}{}{}Ended}|hyperpage}{14}
+\indexentry{set\discretionary {-}{}{}Track\discretionary {-}{}{}Ended@{set\discretionary {-}{}{}Track\discretionary {-}{}{}Ended}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{14}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!update@{update}|hyperpage}{15}
+\indexentry{update@{update}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{15}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!lockaudio@{lockaudio}|hyperpage}{15}
+\indexentry{lockaudio@{lockaudio}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{15}
+\indexentry{\discretionary {-}{}{}Riproduttore@{\discretionary {-}{}{}Riproduttore}!\discretionary {-}{}{}Musica@{\discretionary {-}{}{}Musica}|hyperpage}{15}
+\indexentry{\discretionary {-}{}{}Musica@{\discretionary {-}{}{}Musica}!Riproduttore@{\discretionary {-}{}{}Riproduttore}|hyperpage}{15}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}|hyperpage}{16}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}|hyperpage}{17}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!Server@{\discretionary {-}{}{}Server}|hyperpage}{17}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!get\discretionary {-}{}{}Actived@{get\discretionary {-}{}{}Actived}|hyperpage}{17}
+\indexentry{get\discretionary {-}{}{}Actived@{get\discretionary {-}{}{}Actived}!Server@{\discretionary {-}{}{}Server}|hyperpage}{17}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!get\discretionary {-}{}{}App@{get\discretionary {-}{}{}App}|hyperpage}{17}
+\indexentry{get\discretionary {-}{}{}App@{get\discretionary {-}{}{}App}!Server@{\discretionary {-}{}{}Server}|hyperpage}{17}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!get\discretionary {-}{}{}Data@{get\discretionary {-}{}{}Data}|hyperpage}{17}
+\indexentry{get\discretionary {-}{}{}Data@{get\discretionary {-}{}{}Data}!Server@{\discretionary {-}{}{}Server}|hyperpage}{17}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!get\discretionary {-}{}{}Message@{get\discretionary {-}{}{}Message}|hyperpage}{18}
+\indexentry{get\discretionary {-}{}{}Message@{get\discretionary {-}{}{}Message}!Server@{\discretionary {-}{}{}Server}|hyperpage}{18}
+\indexentry{\discretionary {-}{}{}Server@{\discretionary {-}{}{}Server}!is\discretionary {-}{}{}Conn@{is\discretionary {-}{}{}Conn}|hyperpage}{18}
+\indexentry{is\discretionary {-}{}{}Conn@{is\discretionary {-}{}{}Conn}!Server@{\discretionary {-}{}{}Server}|hyperpage}{18}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}|hyperpage}{19}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}|hyperpage}{20}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{20}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!get\discretionary {-}{}{}Puntatore@{get\discretionary {-}{}{}Puntatore}|hyperpage}{20}
+\indexentry{get\discretionary {-}{}{}Puntatore@{get\discretionary {-}{}{}Puntatore}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{20}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!is\discretionary {-}{}{}Audio@{is\discretionary {-}{}{}Audio}|hyperpage}{20}
+\indexentry{is\discretionary {-}{}{}Audio@{is\discretionary {-}{}{}Audio}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{20}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!is\discretionary {-}{}{}Dir@{is\discretionary {-}{}{}Dir}|hyperpage}{20}
+\indexentry{is\discretionary {-}{}{}Dir@{is\discretionary {-}{}{}Dir}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{20}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!set\discretionary {-}{}{}Puntatore@{set\discretionary {-}{}{}Puntatore}|hyperpage}{21}
+\indexentry{set\discretionary {-}{}{}Puntatore@{set\discretionary {-}{}{}Puntatore}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{21}
+\indexentry{usb\discretionary {-}{}{}Data@{usb\discretionary {-}{}{}Data}!elementi@{elementi}|hyperpage}{21}
+\indexentry{elementi@{elementi}!usbData@{usb\discretionary {-}{}{}Data}|hyperpage}{21}
+\indexentry{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server.\discretionary {-}{}{}cpp}|hyperpage}{23}
+\indexentry{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server.\discretionary {-}{}{}h@{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server.\discretionary {-}{}{}h}|hyperpage}{24}
+\indexentry{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Input/\discretionary {-}{}{}Socket/\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp}|hyperpage}{25}
+\indexentry{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp}!manda\discretionary {-}{}{}Data@{manda\discretionary {-}{}{}Data}|hyperpage}{26}
+\indexentry{manda\discretionary {-}{}{}Data@{manda\discretionary {-}{}{}Data}!ServerUtil.cpp@{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp}|hyperpage}{26}
+\indexentry{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp}!ottieni\discretionary {-}{}{}Data@{ottieni\discretionary {-}{}{}Data}|hyperpage}{26}
+\indexentry{ottieni\discretionary {-}{}{}Data@{ottieni\discretionary {-}{}{}Data}!ServerUtil.cpp@{\discretionary {-}{}{}Server\discretionary {-}{}{}Util.\discretionary {-}{}{}cpp}|hyperpage}{26}
+\indexentry{\discretionary {-}{}{}Input/usb\discretionary {-}{}{}Data.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Input/usb\discretionary {-}{}{}Data.\discretionary {-}{}{}cpp}|hyperpage}{28}
+\indexentry{\discretionary {-}{}{}Input/usb\discretionary {-}{}{}Data.\discretionary {-}{}{}h@{\discretionary {-}{}{}Input/usb\discretionary {-}{}{}Data.\discretionary {-}{}{}h}|hyperpage}{29}
+\indexentry{main\discretionary {-}{}{}\_\discretionary {-}{}{}cli.\discretionary {-}{}{}cpp@{main\discretionary {-}{}{}\_\discretionary {-}{}{}cli.\discretionary {-}{}{}cpp}|hyperpage}{31}
+\indexentry{\discretionary {-}{}{}Output/aosender.\discretionary {-}{}{}c@{\discretionary {-}{}{}Output/aosender.\discretionary {-}{}{}c}|hyperpage}{31}
+\indexentry{\discretionary {-}{}{}Process/data\discretionary {-}{}{}Manager\discretionary {-}{}{}Hub.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Process/data\discretionary {-}{}{}Manager\discretionary {-}{}{}Hub.\discretionary {-}{}{}cpp}|hyperpage}{32}
+\indexentry{\discretionary {-}{}{}Process/data\discretionary {-}{}{}Manager\discretionary {-}{}{}Hub.\discretionary {-}{}{}h@{\discretionary {-}{}{}Process/data\discretionary {-}{}{}Manager\discretionary {-}{}{}Hub.\discretionary {-}{}{}h}|hyperpage}{37}
+\indexentry{\discretionary {-}{}{}Process/ffmpeg.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Process/ffmpeg.\discretionary {-}{}{}cpp}|hyperpage}{38}
+\indexentry{\discretionary {-}{}{}Process/ffmpeg.\discretionary {-}{}{}h@{\discretionary {-}{}{}Process/ffmpeg.\discretionary {-}{}{}h}|hyperpage}{41}
+\indexentry{\discretionary {-}{}{}Process/mpg123.\discretionary {-}{}{}c@{\discretionary {-}{}{}Process/mpg123.\discretionary {-}{}{}c}|hyperpage}{41}
+\indexentry{mpg123.\discretionary {-}{}{}c@{mpg123.\discretionary {-}{}{}c}!reset\discretionary {-}{}{}Mp3@{reset\discretionary {-}{}{}Mp3}|hyperpage}{42}
+\indexentry{reset\discretionary {-}{}{}Mp3@{reset\discretionary {-}{}{}Mp3}!mpg123.c@{mpg123.\discretionary {-}{}{}c}|hyperpage}{42}
+\indexentry{mpg123.\discretionary {-}{}{}c@{mpg123.\discretionary {-}{}{}c}!set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status@{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status}|hyperpage}{42}
+\indexentry{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status@{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status}!mpg123.c@{mpg123.\discretionary {-}{}{}c}|hyperpage}{42}
+\indexentry{\discretionary {-}{}{}Process/mpg123.\discretionary {-}{}{}h@{\discretionary {-}{}{}Process/mpg123.\discretionary {-}{}{}h}|hyperpage}{44}
+\indexentry{mpg123.\discretionary {-}{}{}h@{mpg123.\discretionary {-}{}{}h}!reset\discretionary {-}{}{}Mp3@{reset\discretionary {-}{}{}Mp3}|hyperpage}{44}
+\indexentry{reset\discretionary {-}{}{}Mp3@{reset\discretionary {-}{}{}Mp3}!mpg123.h@{mpg123.\discretionary {-}{}{}h}|hyperpage}{44}
+\indexentry{mpg123.\discretionary {-}{}{}h@{mpg123.\discretionary {-}{}{}h}!set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status@{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status}|hyperpage}{44}
+\indexentry{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status@{set\discretionary {-}{}{}Mp3\discretionary {-}{}{}Status}!mpg123.h@{mpg123.\discretionary {-}{}{}h}|hyperpage}{44}
+\indexentry{\discretionary {-}{}{}Process/\discretionary {-}{}{}Riproduttore.\discretionary {-}{}{}cpp@{\discretionary {-}{}{}Process/\discretionary {-}{}{}Riproduttore.\discretionary {-}{}{}cpp}|hyperpage}{45}
+\indexentry{\discretionary {-}{}{}Process/\discretionary {-}{}{}Riproduttore.\discretionary {-}{}{}h@{\discretionary {-}{}{}Process/\discretionary {-}{}{}Riproduttore.\discretionary {-}{}{}h}|hyperpage}{47}

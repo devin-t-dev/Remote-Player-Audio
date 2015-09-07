@@ -1,0 +1,44 @@
+\hypertarget{dataManagerHub_8cpp}{\section{\-Riferimenti per il file \-Process/data\-Manager\-Hub.cpp}
+\label{dataManagerHub_8cpp}\index{\-Process/data\-Manager\-Hub.\-cpp@{\-Process/data\-Manager\-Hub.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}data\-Manager\-Hub.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}../\-Input/\-Socket/\-Server.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}../\-Process/\-Riproduttore.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}util.\-h\char`\"{}}\*
+{\ttfamily \#include $<$iostream$>$}\*
+{\ttfamily \#include $<$string$>$}\*
+{\ttfamily \#include $<$cstring$>$}\*
+{\ttfamily \#include $<$thread$>$}\*
+{\ttfamily \#include $<$mutex$>$}\*
+{\ttfamily \#include $<$condition\-\_\-variable$>$}\*
+\subsection*{\-Variabili}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{dataManagerHub_8cpp_a0b4a89014dfc0ef38baf31b8d856c74e}{std\-::mutex {\bfseries lock\-Action}}\label{dataManagerHub_8cpp_a0b4a89014dfc0ef38baf31b8d856c74e}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_a9ba0f2f280a2a2e49c17508af48aad91}{int {\bfseries action} = -\/1}\label{dataManagerHub_8cpp_a9ba0f2f280a2a2e49c17508af48aad91}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_a3e7b983e39e729163edc564ba4769603}{int {\bfseries app} = -\/1}\label{dataManagerHub_8cpp_a3e7b983e39e729163edc564ba4769603}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_a7dfdd1953a2ad06ebcd95244471f44fe}{const std\-::string {\bfseries dir\-Upload} = \char`\"{}\-Web\-Manager/uploaded\-Files/\char`\"{}}\label{dataManagerHub_8cpp_a7dfdd1953a2ad06ebcd95244471f44fe}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_a1a99224df2c0a107d8edd53d13a2fc80}{\hyperlink{classServer}{\-Server} {\bfseries comandi\-Server} (7777)}\label{dataManagerHub_8cpp_a1a99224df2c0a107d8edd53d13a2fc80}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_aa01f89d858bf2dac1a9b4bc0fca48da1}{\hyperlink{classRiproduttore}{\-Riproduttore} $\ast$ {\bfseries \-Audio}}\label{dataManagerHub_8cpp_aa01f89d858bf2dac1a9b4bc0fca48da1}
+
+\item 
+\hypertarget{dataManagerHub_8cpp_a0b71accc3ee90832560f44e5d93cdb27}{\hyperlink{classRiproduttore}{\-Riproduttore} $\ast$ {\bfseries disabled\-Player}}\label{dataManagerHub_8cpp_a0b71accc3ee90832560f44e5d93cdb27}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+\-File d'implementazione relativo alla classe \hyperlink{classdataManager}{data\-Manager}. 
+
+\-Definizione nel file \hyperlink{dataManagerHub_8cpp_source}{data\-Manager\-Hub.\-cpp}.
+

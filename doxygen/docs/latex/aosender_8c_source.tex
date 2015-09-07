@@ -1,0 +1,35 @@
+\hypertarget{aosender_8c_source}{\section{\-Output/aosender.c}
+}
+
+\begin{DoxyCode}
+00001 
+00005 \textcolor{comment}{// Devin Taietta -- aosender.c -- Scrittura su dispositivo Audio.}
+00006 \textcolor{preprocessor}{#include <ao/ao.h>}
+00007 \textcolor{preprocessor}{#include "aosender.h"}
+00008 \textcolor{keyword}{static} ao\_device    *dev;
+00013 \textcolor{keywordtype}{void} initAudioDev(\textcolor{keywordtype}{int} bits, \textcolor{keywordtype}{long} rate,\textcolor{keywordtype}{int} channels)
+00014 \{
+00015     \textcolor{keywordtype}{int} driver;
+00016     ao\_initialize();
+00017     driver = ao\_default\_driver\_id();
+00018     ao\_sample\_format format;
+00019     format.bits = bits;
+00020     format.rate = rate;
+00021     format.channels = channels;
+00022     format.byte\_format = AO\_FMT\_NATIVE;
+00023     format.matrix = 0;
+00024     dev = ao\_open\_live(driver, &format, NULL);
+00025 \}
+00030 \textcolor{keywordtype}{void} freeAudioDev()
+00031 \{
+00032     ao\_close(dev);
+00033     dev=NULL;
+00034     ao\_shutdown();
+00035 \}
+00040 \textcolor{keywordtype}{int} writeAudio(\textcolor{keywordtype}{char}* buffer, uint\_32 numBytesMemory)
+00041 \{
+00042         \textcolor{keywordflow}{if}((ao\_play(dev, (\textcolor{keywordtype}{char}*)buffer, numBytesMemory)==0))\{
+00043             \textcolor{keywordflow}{return} 1;
+00044         \}
+00045 \}
+\end{DoxyCode}

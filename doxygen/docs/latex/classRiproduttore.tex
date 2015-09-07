@@ -1,0 +1,252 @@
+\hypertarget{classRiproduttore}{\section{\-Riferimenti per la classe \-Riproduttore}
+\label{classRiproduttore}\index{\-Riproduttore@{\-Riproduttore}}
+}
+
+
+\-Classe \hyperlink{classRiproduttore}{\-Riproduttore} usata per gesitre le azioni sulle canzoni, scegliendo la libreria più adatta.  
+
+
+
+
+{\ttfamily \#include $<$\-Riproduttore.\-h$>$}
+
+\subsection*{\-Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{\-Riproduttore} (std\-::string percorso, bool recursive, bool autoskip)
+\item 
+void \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{update} (std\-::string percorso=\char`\"{}\char`\"{})
+\item 
+\hypertarget{classRiproduttore_ac7d914e4ef1e08413aa452b5bd19ee36}{void {\bfseries scegli\-Canzone} (int posizione)}\label{classRiproduttore_ac7d914e4ef1e08413aa452b5bd19ee36}
+
+\item 
+void \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{prev\-Song} ()
+\begin{DoxyCompactList}\small\item\em \-La funzione \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{prev\-Song()} viene usata per scegliere la canzone precedente e riprodurla. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{void \hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{next\-Song} ()}\label{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}
+
+\begin{DoxyCompactList}\small\item\em \-La funzione next \hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{next\-Song()} viene usata per scegliere la canzone successiva e riprodurla. \end{DoxyCompactList}\item 
+void \hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{play\-Pause} (int status=9)
+\item 
+\hypertarget{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{void \hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{stop} ()}\label{classRiproduttore_a837bea01fa68487694b661ec94781f5d}
+
+\begin{DoxyCompactList}\small\item\em \-Stoppa la riproduzione dell'audio. \end{DoxyCompactList}\item 
+void \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{set\-Track\-Ended} (bool value)
+\begin{DoxyCompactList}\small\item\em \-Imposta l'attuale stato della traccia. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_abf360eff47ce41b498b6d66672225929}{bool \hyperlink{classRiproduttore_abf360eff47ce41b498b6d66672225929}{get\-Track\-Ended} ()}\label{classRiproduttore_abf360eff47ce41b498b6d66672225929}
+
+\begin{DoxyCompactList}\small\item\em \-Ottiene se l'attuale traccia è terminata o no. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{void \hyperlink{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{lock} ()}\label{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}
+
+\begin{DoxyCompactList}\small\item\em \-Set the thread in wait. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{void \hyperlink{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{unlock} ()}\label{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}
+
+\begin{DoxyCompactList}\small\item\em \-Set the thread in resume. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a084180b417949e5e1c13443711ed9215}{void \hyperlink{classRiproduttore_a084180b417949e5e1c13443711ed9215}{kill} ()}\label{classRiproduttore_a084180b417949e5e1c13443711ed9215}
+
+\begin{DoxyCompactList}\small\item\em \-Kill the player(so the thread) \end{DoxyCompactList}\item 
+\hyperlink{classRiproduttore_af125f230183970d506e616bf444e3771}{$\sim$\-Riproduttore} ()
+\item 
+\hypertarget{classRiproduttore_ae4e04ee770a1f551abfe57dcd8a3cfac}{\hyperlink{classRiproduttore_ae4e04ee770a1f551abfe57dcd8a3cfac}{\-Riproduttore} (const \hyperlink{classRiproduttore}{\-Riproduttore} \&other)}\label{classRiproduttore_ae4e04ee770a1f551abfe57dcd8a3cfac}
+
+\begin{DoxyCompactList}\small\item\em \-Overload del costruttore in fase di copia. \-Necessario per il fatto che il mutex non è copiabile ed elimina quindi il suddetto metodo. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_aa3a459e664eb06e359d11e5fd05118f7}{\hyperlink{classRiproduttore}{\-Riproduttore} \& \hyperlink{classRiproduttore_aa3a459e664eb06e359d11e5fd05118f7}{operator=} (const \hyperlink{classRiproduttore}{\-Riproduttore} \&other)}\label{classRiproduttore_aa3a459e664eb06e359d11e5fd05118f7}
+
+\begin{DoxyCompactList}\small\item\em \-Overload dell'operatore di copia, necessario perchè senno il mutex non è copiabile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Attributi pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classusbData}{usb\-Data} $\ast$ \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{\-Musica}
+\begin{DoxyCompactList}\small\item\em \-Puntatore \char`\"{}\-Musica\char`\"{} per un oggetto di tipo \hyperlink{classusbData}{usb\-Data}. \end{DoxyCompactList}\item 
+std\-::mutex \hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio}
+\end{DoxyCompactItemize}
+\subsection*{\-Membri privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classRiproduttore_ae0c66114fda15b67f39e641bc2318ba7}{void {\bfseries riproduttore\-\_\-thr} ()}\label{classRiproduttore_ae0c66114fda15b67f39e641bc2318ba7}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Attributi privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{bool \hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loop\-Songs}}\label{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}
+
+\begin{DoxyCompactList}\small\item\em \-Questa variabile ci indica se le canzoni dovranno essere riprodotte in successione o no. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{bool \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack}}\label{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}
+
+\begin{DoxyCompactList}\small\item\em \-Indica se la traccia è attualmente finita. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{bool \hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}}\label{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}
+
+\begin{DoxyCompactList}\small\item\em \-Variabile usata per mettere in pausa il processo. \end{DoxyCompactList}\item 
+\hypertarget{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{bool \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{\-Riproduttore\-Quit\-Signal}}\label{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}
+
+\begin{DoxyCompactList}\small\item\em \-Se impostata a \-Vero termina si termina il processo riproduttore\-\_\-thr e si chiama il distruttore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+\-Classe \hyperlink{classRiproduttore}{\-Riproduttore} usata per gesitre le azioni sulle canzoni, scegliendo la libreria più adatta. 
+
+\-Libreria per il multithetering \-Blocco sezioni critiche !check or implement in the right way 
+
+\-Definizione alla linea \hyperlink{Riproduttore_8h_source_l00017}{17} del file \hyperlink{Riproduttore_8h_source}{\-Riproduttore.\-h}.
+
+
+
+\subsection{\-Documentazione dei costruttori e dei distruttori}
+\hypertarget{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{\index{\-Riproduttore@{\-Riproduttore}!\-Riproduttore@{\-Riproduttore}}
+\index{\-Riproduttore@{\-Riproduttore}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{\-Riproduttore}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Riproduttore\-::\-Riproduttore} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{percorso, }
+\item[{bool}]{recursive, }
+\item[{bool}]{autoskip}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}
+\-La funzione \hyperlink{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{\-Riproduttore\-::\-Riproduttore} corrisponde al costruttore dell'ononima classe. \par
+ \-Prende in ingresso due parametri e si occupa di\-: \par
+ 1) \-Inizializzare le variabili private \par
+ 2) \-Analizzare un percorso di dati per trovare tutti i file audio al suo interno \par
+ 3) \-Impostare il puntatore a 0 (\-Prima traccia) \par
+ 4) \-Far partire in background il processo che gestisce l'audio \par
+
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em percorso} & {\bfseries }(\-Stringa) \-Cartella da analizzare per scoprire le tracce audio. \\
+\hline
+{\em recursive} & {\bfseries }(\-Booleano) \-Impostare a vero se si vuole ottenere la scansione delle {\bfseries sotto-\/directory}. \\
+\hline
+{\em autoskip} & {\bfseries }(booleano)\-: \-Indica se le traccie devono essere scorse automaticamente \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00020}{20} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+\hypertarget{classRiproduttore_af125f230183970d506e616bf444e3771}{\index{\-Riproduttore@{\-Riproduttore}!$\sim$\-Riproduttore@{$\sim$\-Riproduttore}}
+\index{$\sim$\-Riproduttore@{$\sim$\-Riproduttore}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{$\sim$\-Riproduttore}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Riproduttore\-::$\sim$\-Riproduttore} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_af125f230183970d506e616bf444e3771}
+\-Il distruttore si occuperà di\-: \par
+ 1) liberare la memoria occupata dal vettore contenente le posizioni \par
+ 2) liberare la memoria occupata dal decoder \par
+ 3) \-Terminare il processo di riproduzione dei frammenti audio \par
+ 4) \-Eliminare la classe 
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00123}{123} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+
+
+\subsection{\-Documentazione delle funzioni membro}
+\hypertarget{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{\index{\-Riproduttore@{\-Riproduttore}!play\-Pause@{play\-Pause}}
+\index{play\-Pause@{play\-Pause}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{play\-Pause}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Riproduttore\-::play\-Pause} (
+\begin{DoxyParamCaption}
+\item[{int}]{status = {\ttfamily 9}}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}
+\-La funzione play\-Pause serve per gestire lo stato del lettore. \-Si può quindi decidere se stiamo in riproduzione o in pausa
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em status} & (intero) \-Può assumere questi valori\-: \par
+ {\bfseries 9} (\-Predefinito)\-: \-Dopo aver controllato che la traccia non è finita, riproduci il frammento \-Audio \par
+ {\bfseries 0}\-: \-Metti in pausa il decoder audio \par
+ {\bfseries 1}\-: \-Metti in \-Play il decoder audio \par
+ {\bfseries \-Altro\-:} \-Se viene impostato un altro numero (\-Es. 3) il decoder inverte il suo stato tramite il flip/flop della variabile booleana \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00092}{92} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+\hypertarget{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{\index{\-Riproduttore@{\-Riproduttore}!prev\-Song@{prev\-Song}}
+\index{prev\-Song@{prev\-Song}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{prev\-Song}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Riproduttore\-::prev\-Song} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}
+
+
+\-La funzione \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{prev\-Song()} viene usata per scegliere la canzone precedente e riprodurla. 
+
+\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{\-Riproduttore\-::play\-Pause()}; 
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00074}{74} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+\hypertarget{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{\index{\-Riproduttore@{\-Riproduttore}!set\-Track\-Ended@{set\-Track\-Ended}}
+\index{set\-Track\-Ended@{set\-Track\-Ended}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{set\-Track\-Ended}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Riproduttore\-::set\-Track\-Ended} (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}
+
+
+\-Imposta l'attuale stato della traccia. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em value} & (\-Booleano) \-Impostare a \-T\-R\-U\-E per indicare la fine della traccia \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00050}{50} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+\hypertarget{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{\index{\-Riproduttore@{\-Riproduttore}!update@{update}}
+\index{update@{update}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Riproduttore\-::update} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{percorso = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}}\label{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}
+\-La funzione update ha duplice scopo\-: \par
+ \-Con percorso impostato si occupa di riprodurre esattamente il file che gli viene passato. \-Reset \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{mpg123_8c_a644a4493a8aeafe0544786ffb8b2a96a}{reset\-Mp3()} 
+
+reset\-Audio() \par
+
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{\-Parametri}
+{\em percorso} & (\-Stringa) \-Senza parametri inseriti, quindi con percorso valore \char`\"{}\char`\"{}, la funzione verifica se ciò che arriva è un \-M\-P3 o un altro file audio e chiama il corretto \-Reset \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{Riproduttore_8cpp_source_l00052}{52} del file \hyperlink{Riproduttore_8cpp_source}{\-Riproduttore.\-cpp}.
+
+
+
+\subsection{\-Documentazione dei membri dato}
+\hypertarget{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{\index{\-Riproduttore@{\-Riproduttore}!lockaudio@{lockaudio}}
+\index{lockaudio@{lockaudio}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{lockaudio}]{\setlength{\rightskip}{0pt plus 5cm}std\-::mutex {\bf \-Riproduttore\-::lockaudio}\hspace{0.3cm}{\ttfamily  \mbox{[}mutable\mbox{]}}}}\label{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}
+\-Usato nelle sezioni critiche per ottenere l'accesso esclusivo al processo 
+
+\-Definizione alla linea \hyperlink{Riproduttore_8h_source_l00062}{62} del file \hyperlink{Riproduttore_8h_source}{\-Riproduttore.\-h}.
+
+\hypertarget{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{\index{\-Riproduttore@{\-Riproduttore}!\-Musica@{\-Musica}}
+\index{\-Musica@{\-Musica}!Riproduttore@{\-Riproduttore}}
+\subsubsection[{\-Musica}]{\setlength{\rightskip}{0pt plus 5cm}{\bf usb\-Data}$\ast$ {\bf \-Riproduttore\-::\-Musica}}}\label{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}
+
+
+\-Puntatore \char`\"{}\-Musica\char`\"{} per un oggetto di tipo \hyperlink{classusbData}{usb\-Data}. 
+
+\begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classusbData}{usb\-Data}.$\ast$/ 
+\end{DoxySeeAlso}
+
+
+\-Definizione alla linea \hyperlink{Riproduttore_8h_source_l00032}{32} del file \hyperlink{Riproduttore_8h_source}{\-Riproduttore.\-h}.
+
+
+
+\-La documentazione per questa classe è stata generata a partire dai seguenti file\-:\begin{DoxyCompactItemize}
+\item 
+\-Process/\hyperlink{Riproduttore_8h}{\-Riproduttore.\-h}\item 
+\-Process/\hyperlink{Riproduttore_8cpp}{\-Riproduttore.\-cpp}\end{DoxyCompactItemize}

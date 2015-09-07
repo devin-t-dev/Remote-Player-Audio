@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza: Riferimenti per il file Output/aosender.c</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file Output/aosender.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;ao/ao.h&gt;</code><br/>
+<code>#include &quot;aosender.h&quot;</code><br/>
+</div>
+<p><a href="aosender_8c_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Inizializza Audio</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Questa funzione inizializza la scrittura sull'audio </p>
+</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2019347e13a59b9bdbb7bdd0723397d4"></a><!-- doxytag: member="aosender.c::initAudioDev" ref="a2019347e13a59b9bdbb7bdd0723397d4" args="(int bits, long rate, int channels)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initAudioDev</b> (int bits, long rate, int channels)</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Libera Audio</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Questa funzione libera la scrittura sull'audio </p>
+</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d279285bcf3b57c87a954e864d8c534"></a><!-- doxytag: member="aosender.c::freeAudioDev" ref="a2d279285bcf3b57c87a954e864d8c534" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>freeAudioDev</b> ()</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Scrivi Audio</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Questa funzione scrive un frammento Audio. </p>
+</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a629d27080f82c09aa9ca8cef1ea7d841"></a><!-- doxytag: member="aosender.c::writeAudio" ref="a629d27080f82c09aa9ca8cef1ea7d841" args="(char *buffer, uint_32 numBytesMemory)" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><b>writeAudio</b> (char *buffer, uint_32 numBytesMemory)</td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Descrizione dettagliata</h2>
+<div class="textblock"><p>Questo file si occupa di scrivere sull'hardware </p>
+
+<p>Definizione nel file <a class="el" href="aosender_8c_source.html">aosender.c</a>.</p>
+</div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:51 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

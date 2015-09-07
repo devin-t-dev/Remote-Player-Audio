@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza: Progetto Player Audio</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Progetto Player Audio </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This Software project is developed by Devin Taietta <br/>
+ </p>
+<dl class="author"><dt><b>Autore:</b></dt><dd>Devin Taietta Last Edit mer 24 giu 2015 18:24:02 CEST <br/>
+ All rights reserved to rispective authors. This "Player" Project contains some open source library for all info see legal notes.</dd></dl>
+<h2><a class="anchor" id="intro_sec"></a>
+Introduzione</h2>
+<p>Questo progetto riguarda la realizzazione di un player Audio. L'obbiettivo iniziale è stato quello di realizzare i semplici comandi di pausa, successivo, precedente e lo studio base di come funziona l'audio contenuto nelle tracce (DSP). Una volta realizzato, si è deciso di sperimentare l'uso delle Socket studiate durante il quinto anno. E' stato quindi creato il sito client di interfacciamento e il <a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a> per la gestione dei dati in arrivo. L'ultima implementazione è stata quella della trasmissione delle canzoni attraverso dispositivi Mobili come Smartphone e/o tablet attraverso lo strumento di sviluppo "Cordova" che permette di realizzare le applicazioni mobili per tutte le piattaforme. <br/>
+ </p>
+<h2><a class="anchor" id="install_sec"></a>
+Installazione</h2>
+<p>Per eseguire il file una volta eseguita la compilazione e' necessario avere installate le seguenti librerie:</p>
+<ul>
+<li>LibAo -&gt; Necessaria per scrivere sull'interfaccia audio</li>
+<li>LibMpg123 -&gt; Decoding (Ottenimento dai frammenti audio interlacciati e compressi di frammenti non compressi in formato PCM) dei file mp3</li>
+<li>ffMpeg (avcodec,avformat) -&gt; Decoding file audio in altri formati <br/>
+ Per la compilazione del progetto si usano gli strumenti gcc e g++. Se si vuole effettuare il debug dell'app allora si deve aggiungere l'opzione -g. E' inoltre necessaria l'opzione -std=c++0x che indica al compilatore che il progetto è stato realizzato con la nuova versione del C++ introdotta nel 2011 (Necessario per la libreria pthread del multithreading) Esempio di compilazione <div class="fragment"><pre class="fragment"> {.sh}
+ gcc -c -g <span class="stringliteral">&quot;Process/mpg123.c&quot;</span> <span class="stringliteral">&quot;Output/aosender.c&quot;</span>
+ g++ -g <span class="stringliteral">&quot;aosender.o&quot;</span> <span class="stringliteral">&quot;Input/usbData.cpp&quot;</span> <span class="stringliteral">&quot;Input/Socket/Server.cpp&quot;</span> <span class="stringliteral">&quot;Process/dataManagerHub.cpp&quot;</span> <span class="stringliteral">&quot;Process/util.cpp&quot;</span> <span class="stringliteral">&quot;mpg123.o&quot;</span> <span class="stringliteral">&quot;Process/Riproduttore.cpp&quot;</span> <span class="stringliteral">&quot;main_cli.cpp&quot;</span> -lao -lmpg123  -lavcodec -lavformat -std=c++0x -o AudioPlayer
+</pre></div> <br/>
+ Il sistema di versioning è gestito tramite Git. Si può vedere la lista dei commit digitando git log sul branch di sviluppo. <br/>
+ Successivamente è possibile eseguirlo digitando il nome dell'applicazione e il media esterno da tenere d'occhio. <div class="fragment"><pre class="fragment"> {.sh} AudioPlayer <span class="stringliteral">&quot;/home/utente/musica/&quot;</span> 
+</pre></div> </li>
+</ul>
+<h2><a class="anchor" id="hardware"></a>
+Hardware e Infrastrutture</h2>
+<p><b>Raspberry</b> è una piattaforma embeded con processore ARM, da un costo contenuto con gli schemi OpenSource. Viene impiegata per l'uso Le comunicazioni invece avvengono tramite connessione WiFi (IEEE 802.11) </p>
+<h2><a class="anchor" id="serverStruct"></a>
+Struttura e codice del Server</h2>
+<p>Il <a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a> viene sviluppato con il codice C (strutturato, linguaggio di medio livello) e C++ orientato agli oggetti. E' stato preferito questo linguaggio per il largo numero di librerie e per la sua velocità di esecuzione.</p>
+<ul>
+<li>Le funzioni del server possono essere trovate sulla classe <a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a> <dl class="see"><dt><b>Si veda anche:</b></dt><dd><a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a></dd></dl>
+</li>
+<li>La gestione dell'archivio su supporto di memorizzazione esterna viene affidata alla classe <a class="el" href="classusbData.html" title="usbData Class: Analizza cartelle in cerca di file e li carica in un vettore. Mantiene inoltre il punt...">usbData</a> <dl class="see"><dt><b>Si veda anche:</b></dt><dd><a class="el" href="classusbData.html" title="usbData Class: Analizza cartelle in cerca di file e li carica in un vettore. Mantiene inoltre il punt...">usbData</a></dd></dl>
+</li>
+<li>La gestione invece dell'audio è affidata alla classe <a class="el" href="classRiproduttore.html" title="Classe Riproduttore usata per gesitre le azioni sulle canzoni, scegliendo la libreria più adatta...">Riproduttore</a> <dl class="see"><dt><b>Si veda anche:</b></dt><dd><a class="el" href="classRiproduttore.html" title="Classe Riproduttore usata per gesitre le azioni sulle canzoni, scegliendo la libreria più adatta...">Riproduttore</a></dd></dl>
+</li>
+<li>Il cordinamento di tutte le attività avviene tramite il dataManagerHub <dl class="see"><dt><b>Si veda anche:</b></dt><dd><a class="el" href="classdataManager.html" title="This class manage all the inputs and select the correct jobs or output.">dataManager</a></dd></dl>
+L'uso di tutte le classi e gli oggetti all'interno del programma è stato suddiviso secondo dove vanno ad operare. Abbiamo gli oggetti che si occupano di gestire l'input, quello che gestiscono il processamento dei dati e quelli che si occupano dei dati. <div class="image">
+<img src="schemaPlayer.png" alt="schemaPlayer.png"/>
+<div class="caption">
+Schema del funzionamento principale del programma. In blu le classi e in rosso ci sono le funzioni più importanti</div></div>
+ <br/>
+ </li>
+</ul>
+<h2><a class="anchor" id="webStruct"></a>
+Struttura e codice della parte Web</h2>
+<p>La parte web è realizzata usando</p>
+<ul>
+<li><b>HTML5:</b> lingaggio di formattazione attraverso marcatori</li>
+<li><b>Jquery(con Ajax)</b>: Linguaggio derivato dal JavaScript che usa selettori sugli elementi DOM per effettuare le operazioni. AJAX è l'acronimo di Asynchronus Javascript and XML e viene usato per interagire con il server senza richiedere al client di ricaricare la pagina.</li>
+<li><b>PHP:</b> E' un linguaggio lato server viene usato nel progetto per interrogare il database e per gestire socket <a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a> &lt;--&gt; Client</li>
+<li><b>CSS</b> (Bootstrap): Il framework per il CSS che viene usato è Bootstrap. il CSS rappresenta delle regole di formattazione di documenti HTML. </li>
+</ul>
+<h2><a class="anchor" id="appMobileStruct"></a>
+Struttura dell'app mobile</h2>
+<p>L'applicazione mobile è scritta in Java per Android o Objective C per IOS. La struttura viene creata grazie al framework <b>Apache</b> <b>Cordova</b>. Grazie alle capacità della piattaforma è possibile integrare nello spazio web, in compatibilità con tutti i sistemi operativi più famosi, funzionalità d'interfacciamento al dispositivo come ad esempio l'accesso alla memoria di massa o l'upload di un file locale senza immissione manuale da parte dell'utente. Il codice delle pagine viene mostrato a parte e si basa principalmente sullo scambio di file JSON tra app e server WEB. Vengono sfruttate quindi le webview per mostrare un sito con cui interfacciarsi al server. </p>
+<h2><a class="anchor" id="usage_sec"></a>
+"Come si usa?"</h2>
+<h3><a class="anchor" id="fromConsole"></a>
+Da console</h3>
+<p>All'avvio dell'applicazione viene mostrato su schermo un menu che rappresenta tutte le operazioni svolgibili. Basta inserire il numero dell'operazione da svolgere per ottenere l'effetto desiderato. </p>
+<h3><a class="anchor" id="fromWeb"></a>
+Da sito web</h3>
+<p>Bisogna conoscere l'indirizzo IP del server per poter ottenere l'acccesso da web. Un impletazione futura vede uno schermo LCD dove sarà possibile attraverso pulsanti conoscere l'IP del server e configurare la connessione WiFi in maniera più personalizzata.ù Una volta acceduto attraverso un normale browser all'indirizzo sarà possibile interagire con l'applicazione attraverso una socket. ù </p>
+<h3><a class="anchor" id="fromApp"></a>
+Da applicazione mobile</h3>
+<p>Per semplificare l'accesso al server viene fornita un applicazione client. Automaticamente è in grado di effettuare la scansione sugli host della rete una volta conosciuto il dominio. L'applicazione inoltre fornisce la possibilita di fare l'upload delle proprie canzoni in maniera da riprodurla sul <a class="el" href="classServer.html" title="Questa classe gestisce la SocketServer e le socket di comunicazione tra dispositivi e questo programm...">Server</a>. </p>
+<h2><a class="anchor" id="praticalUse"></a>
+Applicazioni pratiche</h2>
+<p>L'idea principale di impiego per cui si presta questo progetto è da applicarsi ad un locale dove si vede l'installazione di una cassa installata fissa da una parte (lontano da malintenzionati) con un hardDisk integrato. A chi viene fornita la password di accesso (solitamente il personale, ma può essere estesa questa possibilità anche ai clienti) può comodamente da remoto scegliere la canzone da riprodurre o la playlist.</p>
+<p>Altre applicazioni a cui si presta bene questo progetto o può essere facilmente adattato sono:</p>
+<ul>
+<li>Una radio per una macchina: Devono essere aggiunti uno schermo e una radio FM. Adattando la parte esterna allo slot della macchina può essere realizzata una radio.</li>
+<li>Player Audio grafico locale: Il progetto è stato realizzato in maniera da tenere CLI e Core dell'app separati, volendo sviluppare con Qt un applicazione grafica è possibile farlo. <br/>
+ </li>
+</ul>
+<h2><a class="anchor" id="Funzionalità"></a>
+future</h2>
+<p>Il progetto e' in continua evoluzione e vede molte funzioni da aggiungere: </p>
+<h3><a class="anchor" id="apiIntegration"></a>
+Integrazione di API</h3>
+<h3><a class="anchor" id="automaticWakeUp"></a>
+Risveglio automatico</h3>
+</div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:52 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+\documentclass[a4paper]{book}
+\usepackage{makeidx}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{alltt}
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\else
+\usepackage[ps2pdf,
+            pagebackref=true,
+            colorlinks=true,
+            linkcolor=blue,
+            unicode
+           ]{hyperref}
+\usepackage{pspicture}
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{sectsty}
+\usepackage[titles]{tocloft}
+\usepackage{doxygen}
+\lstset{language=C++,inputencoding=utf8,basicstyle=\footnotesize,breaklines=true,breakatwhitespace=true,tabsize=4,numbers=left }
+\makeindex
+\setcounter{tocdepth}{3}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\familydefault}{\sfdefault}
+\hfuzz=15pt
+\setlength{\emergencystretch}{15pt}
+\hbadness=750
+\tolerance=750
+\begin{document}
+\hypersetup{pageanchor=false,citecolor=blue}
+\begin{titlepage}
+\vspace*{7cm}
+\begin{center}
+{\Large \-Player \-Audio a distanza }\\
+\vspace*{1cm}
+{\large \-Generato da Doxygen 1.7.6.1}\\
+\vspace*{0.5cm}
+{\small Mer 24 Giu 2015 23:20:52}\\
+\end{center}
+\end{titlepage}
+\clearemptydoublepage
+\pagenumbering{roman}
+\tableofcontents
+\clearemptydoublepage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true,citecolor=blue}
+\chapter{\-Progetto \-Player \-Audio}
+\label{index}\hypertarget{index}{}\input{index}
+\chapter{\-Indice dei tipi composti}
+\input{annotated}
+\chapter{\-Indice dei file}
+\input{files}
+\chapter{\-Documentazione delle classi}
+\input{classdataManager}
+\input{classRiproduttore}
+\input{classServer}
+\input{classusbData}
+\chapter{\-Documentazione dei file}
+\input{Server_8h}
+\input{Server_8h_source}
+\input{ServerUtil_8cpp}
+\input{ServerUtil_8cpp_source}
+\input{usbData_8cpp}
+\input{usbData_8cpp_source}
+\input{usbData_8h}
+\input{usbData_8h_source}
+\input{main__cli_8cpp}
+\input{main__cli_8cpp_source}
+\input{aosender_8c}
+\input{aosender_8c_source}
+\input{dataManagerHub_8cpp}
+\input{dataManagerHub_8cpp_source}
+\input{dataManagerHub_8h}
+\input{dataManagerHub_8h_source}
+\input{ffmpeg_8cpp}
+\input{ffmpeg_8cpp_source}
+\input{ffmpeg_8h}
+\input{ffmpeg_8h_source}
+\input{mpg123_8c}
+\input{mpg123_8c_source}
+\input{mpg123_8h}
+\input{mpg123_8h_source}
+\input{Riproduttore_8cpp}
+\input{Riproduttore_8cpp_source}
+\input{Riproduttore_8h}
+\input{Riproduttore_8h_source}
+\input{filesUploader_8php}
+\input{filesUploader_8php_source}

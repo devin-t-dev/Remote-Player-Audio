@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza: Riferimenti per il file Process/mpg123.c</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variabili</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file Process/mpg123.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;<a class="el" href="mpg123_8h_source.html">mpg123.h</a>&gt;</code><br/>
+<code>#include &quot;../Output/aosender.h&quot;</code><br/>
+</div>
+<p><a href="mpg123_8c_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Reset delle variabili Decoder</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Questa funzione inizializza le variabili necessarie in fase di riproduzione per il decoder </p>
+</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpg123_8c.html#a644a4493a8aeafe0544786ffb8b2a96a">resetMp3</a> (char *song)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Inizializza il decoder <br/>
+.  <a href="#a644a4493a8aeafe0544786ffb8b2a96a"></a><br/></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Play MP3</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Questa funzione si occupa di riprodurre un frame Audio </p>
+</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a548762aaed08753cbed2cfabe0a5202b"></a><!-- doxytag: member="mpg123.c::playMp3" ref="a548762aaed08753cbed2cfabe0a5202b" args="()" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpg123_8c.html#a548762aaed08753cbed2cfabe0a5202b">playMp3</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Riproduce un frammento d'Audio. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8bff7d817bc1b5f8c1ab8388158bc29"></a><!-- doxytag: member="mpg123.c::freeMp3" ref="ad8bff7d817bc1b5f8c1ab8388158bc29" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpg123_8c.html#ad8bff7d817bc1b5f8c1ab8388158bc29">freeMp3</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Pulisce l'heap dai puntatori creati e resetta le variabili. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpg123_8c.html#a852896f3beba9503ee018f0a1bdf28ea">setMp3Status</a> (int value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta la variabile status. 0=Pausa, 1=Play /n.  <a href="#a852896f3beba9503ee018f0a1bdf28ea"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variabili</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abec1f9b9ade3ad9217f1799f01c4701e"></a><!-- doxytag: member="mpg123.c::BITS" ref="abec1f9b9ade3ad9217f1799f01c4701e" args="" -->
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>BITS</b> = 8</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae94a6d0fee5bb82434df3fdafaec1704"></a><!-- doxytag: member="mpg123.c::isPaused" ref="ae94a6d0fee5bb82434df3fdafaec1704" args="" -->
+int&#160;</td><td class="memItemRight" valign="bottom"><b>isPaused</b> = 0</td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Descrizione dettagliata</h2>
+<div class="textblock"><p>Riproduzione file MP3 </p>
+
+<p>Definizione nel file <a class="el" href="mpg123_8c_source.html">mpg123.c</a>.</p>
+</div><hr/><h2>Documentazione delle funzioni</h2>
+<a class="anchor" id="a644a4493a8aeafe0544786ffb8b2a96a"></a><!-- doxytag: member="mpg123.c::resetMp3" ref="a644a4493a8aeafe0544786ffb8b2a96a" args="(char *song)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="mpg123_8h.html#a644a4493a8aeafe0544786ffb8b2a96a">resetMp3</a> </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>song</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Inizializza il decoder <br/>
+. </p>
+<dl class="params"><dt><b>Parametri:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">song</td><td>Percorso del file da leggere </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definizione alla linea <a class="el" href="mpg123_8c_source.html#l00024">24</a> del file <a class="el" href="mpg123_8c_source.html">mpg123.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a852896f3beba9503ee018f0a1bdf28ea"></a><!-- doxytag: member="mpg123.c::setMp3Status" ref="a852896f3beba9503ee018f0a1bdf28ea" args="(int value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="mpg123_8h.html#a852896f3beba9503ee018f0a1bdf28ea">setMp3Status</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Imposta la variabile status. 0=Pausa, 1=Play /n. </p>
+<dl class="params"><dt><b>Parametri:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Valore intero da impostare. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definizione alla linea <a class="el" href="mpg123_8c_source.html#l00074">74</a> del file <a class="el" href="mpg123_8c_source.html">mpg123.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:51 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

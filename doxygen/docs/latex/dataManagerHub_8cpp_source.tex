@@ -1,0 +1,253 @@
+\hypertarget{dataManagerHub_8cpp_source}{\section{\-Process/data\-Manager\-Hub.cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 \textcolor{comment}{//Static}
+00004 \textcolor{preprocessor}{#include "\hyperlink{dataManagerHub_8h}{dataManagerHub.h}"}
+00005 \textcolor{preprocessor}{#include "../Input/Socket/Server.h"}
+00006 \textcolor{preprocessor}{#include "../Process/Riproduttore.h"}
+00007 \textcolor{preprocessor}{#include "util.h"}
+00008 \textcolor{comment}{//Dynamic}
+00009 \textcolor{preprocessor}{#include <iostream>}                             \textcolor{comment}{//Libreria Input / Output}
+00010 \textcolor{preprocessor}{#include <string>}                                   \textcolor{comment}{//Libreria per gestire le
+       stringhe}
+00011 \textcolor{preprocessor}{#include <cstring>}                              \textcolor{comment}{//strcpy !check}
+00012 \textcolor{comment}{//Multitheathering}
+00013 \textcolor{comment}{//Used For Multithetering (-std=c++0x) -lphtreah}
+00014 \textcolor{preprocessor}{#include <thread>}                                   \textcolor{comment}{//Libreria per il
+       multithetering}
+00015 \textcolor{preprocessor}{#include <mutex>}                                    \textcolor{comment}{//Blocco sezioni critiche
+       !check or implement in the right way}
+00016 \textcolor{preprocessor}{#include <condition\_variable>}                       \textcolor{comment}{//Condizioni variabili
+       !check}
+00017 
+00018 std::mutex lockAction;
+00019 \textcolor{keywordtype}{int} action=-1; \textcolor{keywordtype}{int} app=-1;
+00020 \textcolor{keyword}{const} std::string dirUpload=\textcolor{stringliteral}{"WebManager/uploadedFiles/"};
+00021 \hyperlink{classServer}{Server} comandiServer(7777);
+00022 \hyperlink{classRiproduttore}{Riproduttore}*   Audio;
+00023 \hyperlink{classRiproduttore}{Riproduttore}*   disabledPlayer; \textcolor{comment}{//Contains only the song that we had uploaded}
+\hypertarget{dataManagerHub_8cpp_source_l00024}{}\hyperlink{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}{00024} \hyperlink{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}{dataManager::dataManager}(std::string dir) \{ \textcolor{comment}{//Gestirà tutti i thread!}
+00025     Audio=NULL;
+00026     disabledPlayer=NULL;
+00027     \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}=\textcolor{keyword}{false};                     \textcolor{comment}{//Set as actived the menu console
+       line interface}
+00028     \hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}=\textcolor{keyword}{false};
+00029     comandiServer.SetactiveThread(\textcolor{keyword}{true}); \textcolor{comment}{//Imposta come attivo il Server}
+00030     Audio = \textcolor{keyword}{new} \hyperlink{classRiproduttore}{Riproduttore}(dir,\textcolor{keyword}{true},\textcolor{keyword}{true}); \textcolor{comment}{//Start Audio Service}
+00031     std::thread thr\_menu(&\hyperlink{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{dataManager::menu_thr},\textcolor{keyword}{this});
+00032     std::thread thr\_data(&\hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{dataManager::data_thr},\textcolor{keyword}{this});
+00033     thr\_menu.detach();
+00034     thr\_data.detach(); \textcolor{comment}{//Manage all type of data}
+00035     \textcolor{comment}{//thr\_raspberry.detach();}
+00036     \textcolor{comment}{//thr\_output.detach();}
+00037 
+00038     \textcolor{comment}{//Inizializza tutti i servizi}
+00039     \textcolor{comment}{//Crea l'archivio delle tracce e lo manda alla WebApp (forse non deve stare
+       qui!)}
+00040     \textcolor{comment}{//Scegli quale App tenere (prob. fai partire l'app CLI e Web e tieni in
+       pausa quella di streaming)}
+00041     \textcolor{comment}{//AudioList: Generazione del JSON e invio al server WEB delle traccie
+       presenti in archivio.}
+00042     \textcolor{comment}{//NB: Essendo il server Web Apache sempre attivo, le canzoni vengono
+       caricate all'avvio del programma o}
+00043     \textcolor{comment}{//    se è necessario scegliere un altra canzone.}
+00044 \}
+\hypertarget{dataManagerHub_8cpp_source_l00045}{}\hyperlink{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{00045} \textcolor{keywordtype}{void} \hyperlink{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{dataManager::sendSongsToWeb}() \{
+00046     std::string AudioList;
+00047     \textcolor{keywordtype}{int} i=0; \textcolor{keywordtype}{int} len=Audio->\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}.size();
+00048     AudioList+=\textcolor{stringliteral}{"["};
+00049     \textcolor{keywordflow}{while} (i<len)
+00050     \{
+00051         std::string canzone=Audio->\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}[i];
+00052         AudioList+=\textcolor{stringliteral}{"\{\(\backslash\)"name\(\backslash\)": \(\backslash\)""}+utilGetName(canzone)+\textcolor{stringliteral}{"\(\backslash\)"\}, "};
+00053         i++;
+00054     \}
+00055     AudioList[AudioList.length()-2]=\textcolor{charliteral}{']'};
+00056     comandiServer.sendData(AudioList,\textcolor{stringliteral}{"ListOfSongs"});
+00057 \}
+\hypertarget{dataManagerHub_8cpp_source_l00075}{}\hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{00075} \textcolor{keywordtype}{void} \hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{dataManager::data_thr}() \{
+00076     \hyperlink{classRiproduttore}{Riproduttore} * tmp=Audio;
+00077     \textcolor{keywordflow}{while} (!\hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal})
+00078     \{
+00079         std::string input=\textcolor{stringliteral}{""};
+00080         std::string output=\textcolor{stringliteral}{""};
+00081         \textcolor{keywordtype}{int} azione=-1;
+00082         \textcolor{keywordflow}{if} ((comandiServer.\hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{getActived}()))
+00083         \{
+00084             \textcolor{keywordflow}{if} (comandiServer.\hyperlink{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{isConn}())
+00085             \{
+00086                 comandiServer.\hyperlink{classServer_a212514d665699ff74c168b81303be815}{getData}();
+00087                 app=comandiServer.\hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{getApp}();
+00088                 input=comandiServer.\hyperlink{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{getMessage}();
+00089             \}
+00090         \}
+00091 
+00092         \textcolor{comment}{//Adatto la richiesta dell'applicazione}
+00093         std::hash<std::string> hash\_fn;
+00094         \textcolor{keywordflow}{switch} (app)
+00095         \{
+00096         \textcolor{keywordflow}{case} 0:
+00097         \textcolor{keywordflow}{case} 1:
+00098             azione=action;
+00099             \textcolor{keywordflow}{break};
+00100         \textcolor{keywordflow}{case} 2: \textcolor{comment}{//Server Web}
+00101             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"songs"}) \{
+00102                 \hyperlink{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{dataManager::sendSongsToWeb}();
+00103                 app=-1;
+00104             \}
+00105             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"prev"}) azione=1;
+00106             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"playPause"}) azione=2;
+00107             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"skip"}) azione=3;
+00108             \textcolor{keywordflow}{if} (input[0]==\textcolor{charliteral}{'s'}&&input[1]==\textcolor{charliteral}{'e'}&&input[2]==\textcolor{charliteral}{'t'}) \{
+00109                 input[0]=input[3];
+00110                 azione=22;
+00111                 output+=\textcolor{stringliteral}{"Caricamento della "};
+00112                 output+=input[0];
+00113                 output+=\textcolor{stringliteral}{"° canzone"};
+00114             \}
+00115             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"killStreaming"}&&\hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}) \{
+00116                 output+=\textcolor{stringliteral}{"Applicazione in esecuzione. Chiedo la chiusura della
+       stessa"};
+00117                 azione=12;
+00118             \}
+00119             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"getPuntatore"}) \{
+00120                 \textcolor{keywordflow}{if} (\hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive})
+00121                     output+=\textcolor{stringliteral}{"appAttiva"};
+00122                 \textcolor{keywordflow}{else}
+00123                     output+=std::to\_string(Audio->\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}());
+00124             \}
+00125             \textcolor{keywordflow}{break};
+00126         \textcolor{keywordflow}{case} 3: \textcolor{comment}{//Applicazione}
+00127             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"hello"}) output+=\textcolor{stringliteral}{"0afa2d1d877998a438089be1487aedb6"};
+00128             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"startLoading"}) output+=\textcolor{stringliteral}{"Caricamento di una nuova
+       canzone in corso!"};
+00129             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"newStreamSong"}) \{ output+=\textcolor{stringliteral}{"Inizializzazione della nuova
+       canzone"}; azione=11; \}
+00130             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"getStreamStatus"})
+00131                 \textcolor{keywordflow}{if} (Audio->\hyperlink{classRiproduttore_abf360eff47ce41b498b6d66672225929}{getTrackEnded}())
+00132                     output+=\textcolor{stringliteral}{"nextSongRequired"};
+00133             \textcolor{comment}{//if (input=="end")}
+00134             \textcolor{keywordflow}{if} (input==\textcolor{stringliteral}{"forcePlay"}||input==\textcolor{stringliteral}{"op2"}) azione=-1;
+00135             \textcolor{keywordflow}{break};
+00136         \}
+00137 
+00138         \textcolor{comment}{//Eseguo l'operazione richiesta e mando l'output}
+00139 
+00140         \textcolor{keywordflow}{if} ((azione>=0&&azione<=3)||azione>10) Audio->\hyperlink{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{lock}();
+00141         \textcolor{keywordflow}{switch} (azione) \{
+00142             \textcolor{keywordflow}{case} 0:
+00143                 \{
+00144                     std::unique\_lock<std::mutex> locker(Audio->\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00145                     Audio->\hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{stop}(); \textcolor{comment}{// Stoppa la musica}
+00146                 \}
+00147                 \textcolor{keywordflow}{break};
+00148             \textcolor{keywordflow}{case} 1:
+00149                 \{
+00150                     std::unique\_lock<std::mutex> locker(Audio->\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00151                     Audio->\hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{prevSong}(); \textcolor{comment}{//Canzone Precedente}
+00152                     Audio->\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}(0); \textcolor{comment}{//Costringo il riproduttore a partire.}
+00153                 \}
+00154                 \textcolor{keywordflow}{break};
+00155             \textcolor{keywordflow}{case} 2:
+00156                 \{
+00157                     std::unique\_lock<std::mutex> locker(Audio->\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00158                     Audio->\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}(3); \textcolor{comment}{//Flip/Flop: Inverto lo stato del
+       lettore (in Pausa/in Riproduzione)}
+00159                 \}
+00160                 \textcolor{keywordflow}{break};
+00161             \textcolor{keywordflow}{case} 3:
+00162                 \{
+00163                     std::unique\_lock<std::mutex> locker(Audio->\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00164                     Audio->\hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{nextSong}();
+00165                     Audio->\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}(0);
+00166                 \}
+00167                 \textcolor{keywordflow}{break};
+00168             \textcolor{keywordflow}{case} 4:
+00169                 \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}=!\hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}; 
+00170                 \textcolor{keywordflow}{break};
+00171             \textcolor{keywordflow}{case} 5:
+00172                 comandiServer.SetactiveThread(!comandiServer.\hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{getActived}());
+00173                 \textcolor{keywordflow}{break};
+00174             \textcolor{keywordflow}{case} 9:
+00175                 \hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal}=\textcolor{keyword}{true};
+00176                 \textcolor{keywordflow}{break};
+00177             \textcolor{keywordflow}{case} 11: \textcolor{comment}{//Switch On App, Switch Off WebServer}
+00178                 \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}=\textcolor{keyword}{false}; \hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}=\textcolor{keyword}{true};
+00179                 Audio->\hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{stop}();
+00180                 disabledPlayer=Audio;
+00181                 \textcolor{keyword}{delete} Audio;
+00182                 Audio=\textcolor{keyword}{new} \hyperlink{classRiproduttore}{Riproduttore}(dirUpload,\textcolor{keyword}{true},\textcolor{keyword}{false});
+00183                 Audio->\hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{nextSong}();
+00184                 Audio->\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}(0);
+00185                 \textcolor{keywordflow}{break};
+00186             \textcolor{keywordflow}{case} 12: \textcolor{comment}{//Switch On WebServer, Switch Off App}
+00187                 \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}=\textcolor{keyword}{true}; \hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{streamActive}=\textcolor{keyword}{false};
+00188                 Audio->\hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{stop}();
+00189                 \textcolor{comment}{//delete Audio;}
+00190                 Audio=disabledPlayer;
+00191                 \textcolor{comment}{//delete disabledPlayer;}
+00192                 Audio->\hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{nextSong}();
+00193                 Audio->\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{playPause}();
+00194                 \textcolor{keywordflow}{break};
+00195             \textcolor{keywordflow}{case} 22: \textcolor{comment}{//Set a specific Song}
+00196                 Audio->scegliCanzone((\textcolor{keywordtype}{int})(input[0]-\textcolor{charliteral}{'0'}));
+00197                 \textcolor{keywordflow}{break};
+00198         \}
+00199 
+00200         \textcolor{keywordflow}{if} ((azione>=0&&azione<=3)||azione>10) Audio->\hyperlink{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{unlock}();
+00201 
+00202         \textcolor{keywordflow}{if} (output!=\textcolor{stringliteral}{""}) \{
+00203             comandiServer.sendData(\textcolor{stringliteral}{"\(\backslash\)""}+output+\textcolor{stringliteral}{"\(\backslash\)""},\textcolor{stringliteral}{"Reply from DataManager"});
+00204         \} \textcolor{keywordflow}{else} \{
+00205             \textcolor{keywordflow}{if} (app==2||app==3) \{ comandiServer.sendData(\textcolor{stringliteral}{"\(\backslash\)"Termine funzione
+       raggiunta, ma nessuna notifica\(\backslash\)""},\textcolor{stringliteral}{"Avviso"}); \}
+00206         \}
+00207         app=-1;
+00208     \}
+00209 \}
+00210 
+\hypertarget{dataManagerHub_8cpp_source_l00211}{}\hyperlink{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{00211} \textcolor{keywordtype}{void} \hyperlink{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{dataManager::menu_thr}()
+00212 \{
+00213     \textcolor{keywordtype}{int} tempAction;
+00214     \textcolor{keywordflow}{while}(!\hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal})
+00215     \{
+00216         \textcolor{keywordflow}{if} (\hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menuActive}) \{
+00217             std::cout << \textcolor{stringliteral}{"What you want to do? \(\backslash\)n"};
+00218             std::cout << \textcolor{stringliteral}{"0:\(\backslash\)tstop the player \(\backslash\)t1:\(\backslash\)tPlay a previus song\(\backslash\)n"}
+00219                      \textcolor{stringliteral}{"2:\(\backslash\)tPlay/pause Comand\(\backslash\)t3:\(\backslash\)tSkip this song\(\backslash\)n"}
+00220                      \textcolor{stringliteral}{"4:\(\backslash\)tDisable this CLI \(\backslash\)t5:\(\backslash\)tDisable Web Server\(\backslash\)n"}
+00221                      \textcolor{stringliteral}{"\(\backslash\)n9:\(\backslash\)tEXIT\(\backslash\)t\(\backslash\)t\(\backslash\)n"}
+00222                      \textcolor{stringliteral}{"(Inserisci 0-3 , 9 per uscire): "}
+00223                      \textcolor{stringliteral}{""}; \textcolor{comment}{//Plus FX in next time}
+00224             std::cin>>tempAction; \textcolor{comment}{// OR ACTION BY SERVER....}
+00225             \textcolor{keywordflow}{if}(!std::cin) \textcolor{comment}{// or if(cin.fail())}
+00226             \{
+00227                 std::cout<<\textcolor{stringliteral}{"(bad input)"};
+00228                 \textcolor{comment}{// user didn't input a number}
+00229                 std::cin.clear(); \textcolor{comment}{// reset failbit}
+00230                 std::cin.ignore(std::numeric\_limits<std::streamsize>::max(), \textcolor{charliteral}{
+      '\(\backslash\)n'}); \textcolor{comment}{//skip bad input}
+00231                 \textcolor{comment}{// next, request user reinput}
+00232                 action=-1;
+00233                 \textcolor{keywordflow}{continue}; \textcolor{comment}{//required if there is some code after this line for
+       skip one while cycle}
+00234             \}
+00235             \{ \textcolor{comment}{//Accesso esclusivo alla risorsa azione}
+00236                 std::unique\_lock<std::mutex> locker(lockAction);
+00237                 action=tempAction;
+00238                 app=0;
+00239             \}
+00240         \}
+00241     \}
+00242 \}
+00243 
+\hypertarget{dataManagerHub_8cpp_source_l00244}{}\hyperlink{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}{00244} \hyperlink{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}{dataManager::~dataManager} () \{
+00245     std::cout<<\textcolor{stringliteral}{"[I] Quitting all thread"};
+00246     free(Audio); \textcolor{comment}{//Audio->kill();}
+00247     \hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{dataManagerQuitSignal}=\textcolor{keyword}{true};
+00248     std::cout<<\textcolor{stringliteral}{"[OK]"}<<std::endl<<\textcolor{stringliteral}{"Bye!"};
+00249 \}
+\end{DoxyCode}

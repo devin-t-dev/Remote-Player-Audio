@@ -1,0 +1,32 @@
+\hypertarget{Server_8h_source}{\section{\-Input/\-Socket/\-Server.h}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 \textcolor{preprocessor}{#ifndef SERVER\_H}
+00004 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define SERVER\_H}
+00005 \textcolor{preprocessor}{}\textcolor{preprocessor}{#include <iostream>}
+00006 
+\hypertarget{Server_8h_source_l00008}{}\hyperlink{classServer}{00008} \textcolor{keyword}{class }\hyperlink{classServer}{Server} \{
+00009 \textcolor{keyword}{public}:
+00014     \hyperlink{classServer_af11aa19a47fed238c575c432bd7f1ce9}{Server}(\textcolor{keywordtype}{int} porta);
+00015     \textcolor{keywordtype}{void} SetactiveThread(\textcolor{keywordtype}{bool} status); \textcolor{comment}{//Attiva o disattiva il server.}
+00016     \textcolor{keywordtype}{bool} \hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{getActived}(); 
+00017     \textcolor{keywordtype}{bool} \hyperlink{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{isConn}(); 
+00018     \textcolor{keywordtype}{void} sendData(std::string \hyperlink{classServer_a0493d162448907be150f830457808e51}{message},std::string type);
+00027     \textcolor{keywordtype}{void} \hyperlink{classServer_a212514d665699ff74c168b81303be815}{getData}();
+00028     \textcolor{keywordtype}{int} \hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{getApp}(); 
+00029     std::string \hyperlink{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{getMessage}(); 
+00030     \hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{~Server}(); 
+00031 \textcolor{keyword}{private}:
+\hypertarget{Server_8h_source_l00032}{}\hyperlink{classServer_af6c0542f9031f20f71bb4a276dfbac64}{00032}     \textcolor{keywordtype}{bool} \hyperlink{classServer_af6c0542f9031f20f71bb4a276dfbac64}{conn}; 
+\hypertarget{Server_8h_source_l00033}{}\hyperlink{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}{00033}     \textcolor{keywordtype}{bool} \hyperlink{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}{kill}; 
+00034     \textcolor{keywordtype}{bool} thrActive; \textcolor{comment}{//If false the main thread is paused (if with skip)}
+\hypertarget{Server_8h_source_l00035}{}\hyperlink{classServer_af0575ea98923ea4c2ec76bb91e3a7701}{00035}     \textcolor{keywordtype}{int} \hyperlink{classServer_af0575ea98923ea4c2ec76bb91e3a7701}{currentApp}; 
+00036     \textcolor{keywordtype}{int} msgLen;
+\hypertarget{Server_8h_source_l00037}{}\hyperlink{classServer_a0493d162448907be150f830457808e51}{00037}     std::string \hyperlink{classServer_a0493d162448907be150f830457808e51}{message}; 
+00038     \textcolor{keywordtype}{void} \hyperlink{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{ServerThread}(); 
+00039 \};
+00040 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

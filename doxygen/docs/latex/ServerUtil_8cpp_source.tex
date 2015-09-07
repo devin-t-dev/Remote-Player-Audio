@@ -1,0 +1,126 @@
+\hypertarget{ServerUtil_8cpp_source}{\section{\-Input/\-Socket/\-Server\-Util.cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 
+00004 \textcolor{preprocessor}{#ifndef SRVUTIL}
+00005 \textcolor{preprocessor}{}\textcolor{preprocessor}{#define SVRUTIL}
+00006 \textcolor{preprocessor}{}\textcolor{preprocessor}{#include <iostream>}
+00007 \textcolor{preprocessor}{#include <stdio.h>}
+00008 \textcolor{preprocessor}{#include <sys/types.h>}
+00009 \textcolor{preprocessor}{#include <sys/socket.h>}
+00010 \textcolor{preprocessor}{#include <netinet/in.h>}
+00011 \textcolor{preprocessor}{#include <netdb.h>}
+00012 \textcolor{preprocessor}{#include <string.h>}
+00013 \textcolor{preprocessor}{#include <stdlib.h>}
+00014 \textcolor{preprocessor}{#include <unistd.h>}
+00015 \textcolor{preprocessor}{#include <errno.h>}
+00016 
+00017 \textcolor{keyword}{static} \textcolor{keywordtype}{int} sockfd, newsockfd, portno, clilen;
+00018 \textcolor{keyword}{static} \textcolor{keyword}{struct }sockaddr\_in serv\_addr, cli\_addr;
+00019 
+00020 \textcolor{keyword}{static} \textcolor{keywordtype}{void} error( \textcolor{keywordtype}{char} *msg ) \{
+00021   perror(  msg );
+00022   exit(1);
+00023 \}
+00028 \textcolor{keyword}{static} \textcolor{keywordtype}{int} initServer(\textcolor{keywordtype}{int} port) \{
+00029      portno = port;
+00030      \textcolor{comment}{//char buffer[1024]; //To resize to right size every time as 'contenuto'}
+00031      printf( \textcolor{stringliteral}{"\(\backslash\)n [I] Inizializzazione del Server (usando la porta #%d) \(\backslash\)n"}, 
+      portno );
+00032 
+00033      sockfd = socket(AF\_INET, SOCK\_STREAM, 0);
+00034      \textcolor{keywordflow}{if} (sockfd < 0)
+00035          error( const\_cast<char *>(\textcolor{stringliteral}{"ERROR opening socket"}) );
+00036      bzero((\textcolor{keywordtype}{char} *) &serv\_addr, \textcolor{keyword}{sizeof}(serv\_addr));
+00037 
+00038      serv\_addr.sin\_family = AF\_INET;
+00039      serv\_addr.sin\_addr.s\_addr = INADDR\_ANY;
+00040      serv\_addr.sin\_port = htons( portno );
+00041      \textcolor{keywordflow}{if} (bind(sockfd, (\textcolor{keyword}{struct} sockaddr *) &serv\_addr, \textcolor{keyword}{sizeof}(serv\_addr)) < 0) \{
+00042        \textcolor{comment}{/*error( const\_cast<char *>( "[E] ERROR on binding" ) );*/}
+00043                  printf(\textcolor{stringliteral}{"\(\backslash\)n [E] Porta Attualmente in uso... Ritento"});
+00044                  sleep(2);
+00045                  initServer(portno);
+00046                  \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00047      \}
+00048      listen(sockfd,5);
+00049      clilen = \textcolor{keyword}{sizeof}(cli\_addr);
+00050      \textcolor{keywordflow}{return} 0;
+00051 \}
+\hypertarget{ServerUtil_8cpp_source_l00055}{}\hyperlink{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}{00055} \textcolor{keywordtype}{void} \hyperlink{ServerUtil_8cpp_a7329f619144deb41baf72e83a7073701}{mandaData}(\textcolor{keywordtype}{char} * data,\textcolor{keywordtype}{int} len)  \{
+00056   \textcolor{keywordtype}{int} n;
+00057   \textcolor{keywordtype}{char} buffer[len];
+00058   sprintf( buffer, \textcolor{stringliteral}{"%s\(\backslash\)n"}, data );
+00059   \textcolor{keywordflow}{if} ( (n = write(newsockfd, buffer, strlen(buffer) ) ) < 0 )
+00060     error( const\_cast<char *>( \textcolor{stringliteral}{"ERROR writing to socket"}) );
+00061   buffer[n] = \textcolor{charliteral}{'\(\backslash\)0'};
+00062 \}
+00063 
+00065 \textcolor{comment}{/*}
+00066 \textcolor{comment}{     Ottiene dal client un messaggio}
+00067 \textcolor{comment}{ */}
+\hypertarget{ServerUtil_8cpp_source_l00069}{}\hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{00069} \textcolor{comment}{/*static*/} \textcolor{keywordtype}{char} * \hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{ottieniData}() \{
+00070   \textcolor{keywordtype}{char} buffer[1024];
+00071   \textcolor{keywordtype}{int} n;
+00072 
+00073   \textcolor{keywordflow}{if} ( (n = read(newsockfd,buffer,31) ) < 0 )
+00074     error( const\_cast<char *>( \textcolor{stringliteral}{"ERROR reading from socket"}) );
+00075   buffer[n] = \textcolor{charliteral}{'\(\backslash\)0'};
+00076   \textcolor{keywordflow}{return} buffer;
+00077 \}
+00078 \textcolor{comment}{/*}
+00079 \textcolor{comment}{ * Rimane in attesa di un client}
+00080 \textcolor{comment}{ */}
+00081 \textcolor{keywordtype}{void} acceptClient() \{
+00082 \textcolor{comment}{//--- wait on a connection ---}
+00083     \textcolor{keywordflow}{if} ( ( newsockfd = accept( sockfd, (\textcolor{keyword}{struct} sockaddr *) &cli\_addr, (
+      socklen\_t*) &clilen) ) < 0 )
+00084         error( const\_cast<char *>(\textcolor{stringliteral}{"ERROR on accept"}) );
+00085 \}
+00086 \textcolor{comment}{/*}
+00087 \textcolor{comment}{ * Funzione di chiusura della Socket}
+00088 \textcolor{comment}{ */}
+00089 \textcolor{keywordtype}{void} closeServer() \{
+00090    close(newsockfd);
+00091 \}
+00092 \textcolor{comment}{/*}
+00093 \textcolor{comment}{ * Funzione per chiudere pulire la ServerSocket}
+00094 \textcolor{comment}{ */}
+00095 \textcolor{keywordtype}{void} killServer() \{
+00096     close(newsockfd);
+00097     close(sockfd);
+00098 \}
+00099 \textcolor{comment}{/*}
+00100 \textcolor{comment}{ * @name JSON Codifica}
+00101 \textcolor{comment}{ * Questa funzione restituisce il messaggio correttamente formattato per
+       l'invio del file JSON}
+00102 \textcolor{comment}{ * @param message Messaggio da includere come valore. Questa \(\backslash\)b stringa verrà
+       usata dal Client}
+00103 \textcolor{comment}{ * @param type \(\backslash\)b Stringa che indica il tipo del messaggio. Usato dal client
+       prevalentemente per motivi di \(\backslash\)b debug}
+00104 \textcolor{comment}{ */}
+00105 std::string JSONEncode(std::string message, std::string type) \{
+00106     \textcolor{comment}{/* Example of a JSON file}
+00107 \textcolor{comment}{     * \{}
+00108 \textcolor{comment}{    "type": "menu",}
+00109 \textcolor{comment}{    "value": "File",}
+00110 \textcolor{comment}{    "items": [}
+00111 \textcolor{comment}{        \{"value": "New", "action": "CreateNewDoc"\},}
+00112 \textcolor{comment}{        \{"value": "Open", "action": "OpenDoc"\},}
+00113 \textcolor{comment}{        \{"value": "Close", "action": "CloseDoc"\}}
+00114 \textcolor{comment}{    ]}
+00115 \textcolor{comment}{\}}
+00116 \textcolor{comment}{     */}
+00117     std::string partialEncode;
+00118     partialEncode+=\textcolor{stringliteral}{"\{"};
+00119     partialEncode+=\textcolor{stringliteral}{"\(\backslash\)"app\(\backslash\)": 4,"};
+00120     partialEncode+=\textcolor{stringliteral}{"\(\backslash\)"type\(\backslash\)": \(\backslash\)""}+type+\textcolor{stringliteral}{"\(\backslash\)","};
+00121     partialEncode+=\textcolor{stringliteral}{"\(\backslash\)"value\(\backslash\)": "}+message;
+00122     partialEncode+=\textcolor{stringliteral}{"\}"};
+00123     \textcolor{keywordflow}{return} partialEncode;
+00124 \}
+00125 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

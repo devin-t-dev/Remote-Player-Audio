@@ -1,0 +1,149 @@
+\hypertarget{Riproduttore_8cpp_source}{\section{\-Process/\-Riproduttore.cpp}
+}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{comment}{// Riproduttore.cpp - Sceglie la libreria da usare per riprodurre correttamente
+       le canzoni.}
+00003 
+00004 \textcolor{preprocessor}{#include <vector>}                   \textcolor{comment}{//Lista canzoni in memoria}
+00005 \textcolor{comment}{//Static Linked}
+00006 \textcolor{preprocessor}{#include "\hyperlink{Riproduttore_8h}{Riproduttore.h}"}           \textcolor{comment}{//Header di riproduttore.cpp}
+00007 \textcolor{preprocessor}{#include "../Input/usbData.h"}       \textcolor{comment}{//Contiene la lista delle
+       canzoni,isAudio(percorso,bool onlymp3)}
+00008 \textcolor{preprocessor}{#include "util.h"}                   \textcolor{comment}{//Casting particolari (Es. conversione
+       stringa a char*)}
+00009 \textcolor{preprocessor}{#include "\hyperlink{ffmpeg_8h}{ffmpeg.h}"}             \textcolor{comment}{//Riproduzione file Audio tranne MP3}
+00010 \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{
+00011 \textcolor{preprocessor}{#include "\hyperlink{mpg123_8h}{mpg123.h}"}             \textcolor{comment}{//Riproduzione File MP3}
+00012 \}
+00013 
+00014 \textcolor{comment}{//Multitheathering}
+00015 \textcolor{comment}{//Used For Multithetering (-std=c++0x) -lphtreah}
+00016 \textcolor{preprocessor}{#include <thread>}                                   \textcolor{comment}{//Libreria per il
+       multithetering}
+00017 \textcolor{preprocessor}{#include <mutex>}                                    \textcolor{comment}{//Blocco sezioni critiche
+       !check or implement in the right way}
+00018 \textcolor{preprocessor}{#include <condition\_variable>}                       \textcolor{comment}{//Eventuali condizioni
+       variabili}
+00019 
+\hypertarget{Riproduttore_8cpp_source_l00020}{}\hyperlink{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{00020} \hyperlink{classRiproduttore_ab01a4e52bcc2735e94f547b32906f3a2}{Riproduttore::Riproduttore}(std::string percorso, \textcolor{keywordtype}{bool} recursive,\textcolor{keywordtype}{bool} autoskip)
+00021 \{
+00022     \textcolor{comment}{//freeMp3(); //++ 23 giu}
+00023     \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal}=\textcolor{keyword}{false}; \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack}=\textcolor{keyword}{false}; \hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs}=autoskip;
+00024     \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica} = \textcolor{keyword}{new} \hyperlink{classusbData}{usbData}(percorso,recursive);
+00025     \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(0);
+00026     std::thread thr\_audio(&Riproduttore::riproduttore\_thr,\textcolor{keyword}{this}); \textcolor{comment}{//Passato per
+       riferimento}
+00027     thr\_audio.detach();
+00028 \}
+00029 \textcolor{keywordtype}{void} Riproduttore::riproduttore\_thr() \{
+00030     \textcolor{keywordflow}{while}(!\hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal})
+00031     \{
+00032     \textcolor{keywordflow}{if} (!\hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked})
+00033         \{
+00034         \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_abf360eff47ce41b498b6d66672225929}{Riproduttore::getTrackEnded}()==\textcolor{keyword}{false})
+00035             \{
+00036                 \{
+00037                     std::unique\_lock<std::mutex> locker(\hyperlink{classRiproduttore_a514d48c11b89c737c8e266e1ca3415f1}{lockaudio});
+00038                     \hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{Riproduttore::playPause}();
+00039                 \}
+00040             \}
+00041             \textcolor{keywordflow}{else}
+00042             \{
+00043                 \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a25a08a505bbd71239fa4c20e0a4ddfff}{loopSongs})
+00044                     \hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{Riproduttore::nextSong}();
+00045                 \hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{Riproduttore::playPause}(0);
+00046             \}
+00047         \}
+00048     \}
+00049 \}
+\hypertarget{Riproduttore_8cpp_source_l00050}{}\hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{00050} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{Riproduttore::setTrackEnded}(\textcolor{keywordtype}{bool} value) \{\hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack}=value;\} \textcolor{keywordtype}{bool} 
+      \hyperlink{classRiproduttore_abf360eff47ce41b498b6d66672225929}{Riproduttore::getTrackEnded}() \{\textcolor{keywordflow}{return} \hyperlink{classRiproduttore_a865f72d47671c15cbc5bdcae6818e264}{endtrack};\}
+\hypertarget{Riproduttore_8cpp_source_l00051}{}\hyperlink{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{00051} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a87c1d5e97b54d0d4abbd5465adeb7c10}{Riproduttore::lock}() \{\hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}=\textcolor{keyword}{true};\} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a58878af288d0625f8971a4b3dab8ccf6}{Riproduttore::unlock}() \{\hyperlink{classRiproduttore_a8903771ab92a6f33dd24b0c143758c0c}{locked}=\textcolor{keyword}{
+      false};\}
+\hypertarget{Riproduttore_8cpp_source_l00052}{}\hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{00052} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{Riproduttore::update}(std::string percorso)
+00053 \{
+00054     \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{Riproduttore::setTrackEnded}(\textcolor{keyword}{true});
+00055     \textcolor{keywordflow}{if} (percorso==\textcolor{stringliteral}{""})
+00056     \{
+00057         \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{isAudio}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}[\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()],\textcolor{keyword}{true}))\{
+00058             \hyperlink{mpg123_8c_a644a4493a8aeafe0544786ffb8b2a96a}{resetMp3}((toChar(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}[\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()])));
+00059         \}\textcolor{keywordflow}{else}\{
+00060             \textcolor{comment}{//resetAudio((toChar(Musica->elementi[Musica->getPuntatore()])));}
+00061         \}
+00062      \}
+00063     \textcolor{keywordflow}{else}
+00064     \{
+00065         \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{isAudio}(percorso,\textcolor{keyword}{true}))\{
+00066             \hyperlink{mpg123_8c_a644a4493a8aeafe0544786ffb8b2a96a}{resetMp3}(toChar(percorso));
+00067         \}\textcolor{keywordflow}{else}\{
+00068             \textcolor{comment}{//resetAudio(toChar(percorso));}
+00069         \}
+00070     \}
+00071     \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{Riproduttore::setTrackEnded}(\textcolor{keyword}{false});
+00072 \}
+00073 
+\hypertarget{Riproduttore_8cpp_source_l00074}{}\hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{00074} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{Riproduttore::prevSong}()
+00075 \{
+00076     \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()>0)
+00077     \{
+00078         \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()-1);
+00079         \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{Riproduttore::update}();
+00081     \} \textcolor{keywordflow}{else} \{ \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}.size());
+      \hyperlink{classRiproduttore_a6bb45ff25c5a3b9ffcf9203214f13340}{Riproduttore::prevSong}();\}
+00082 \}
+00083 
+\hypertarget{Riproduttore_8cpp_source_l00084}{}\hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{00084} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_ab8a211727d84256bc62ab841881ee9c3}{Riproduttore::nextSong}()
+00085 \{
+00086     \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()>=(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}.size()-1))
+00087         \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(-1);
+00088     \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()+1);
+00089     \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{Riproduttore::update}();
+00090 \}
+00091 
+\hypertarget{Riproduttore_8cpp_source_l00092}{}\hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{00092} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a0e1a448f370d517dbe2ed75f1f097abf}{Riproduttore::playPause}(\textcolor{keywordtype}{int} status)
+00093 \{
+00094     \textcolor{keywordtype}{bool} Mp3=\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{isAudio}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}[\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()],\textcolor{keyword}{true});
+00095     \textcolor{keywordflow}{if} (status!=9) \{ \textcolor{comment}{//Imposta manualmente il valore che gli arriva
+       0=Play,1=pause, Altri:flip/flop !ToDO: Da invertire i valori}
+00096         \textcolor{keywordflow}{if} (Mp3) \hyperlink{mpg123_8c_a852896f3beba9503ee018f0a1bdf28ea}{setMp3Status}(status); \textcolor{comment}{//else setAudioStatus(status);}
+00097     \} \textcolor{keywordflow}{else} \{         \textcolor{comment}{//Se entra nell'else, riproduce la canzone normalmente,
+       questo valore è di default e sis ottiene con la chiamata senza argomenti}
+00098         \textcolor{keywordflow}{if} (Mp3)\{
+00099             \textcolor{keywordflow}{if} (\hyperlink{mpg123_8c_a548762aaed08753cbed2cfabe0a5202b}{playMp3}()==2)
+00100                 \hyperlink{classRiproduttore_aafc3cf55f8a95cfc5e3779294184db8b}{Riproduttore::setTrackEnded}(\textcolor{keyword}{true});
+00101         \}\textcolor{keywordflow}{else}\{
+00102             \textcolor{comment}{//if(playAudio()==2)}
+00103             \textcolor{comment}{//  Riproduttore::endtrack=true;}
+00104         \}
+00105     \}
+00106 \}
+00107 \textcolor{keywordtype}{void} Riproduttore::scegliCanzone(\textcolor{keywordtype}{int} posizione) \{
+00108     \textcolor{keywordflow}{if} (posizione>=0&&posizione<=(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}.size()))
+00109     \{
+00110         \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{setPuntatore}(posizione);
+00111         \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{Riproduttore::update}();
+00112     \} \textcolor{keywordflow}{else} \{std::cout<<\textcolor{stringliteral}{"Il puntatore ricevuto:"}<<posizione<<\textcolor{stringliteral}{" non e valido!"};\}
+00113 \}
+\hypertarget{Riproduttore_8cpp_source_l00114}{}\hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{00114} \textcolor{keywordtype}{void} \hyperlink{classRiproduttore_a837bea01fa68487694b661ec94781f5d}{Riproduttore::stop}()
+00115 \{
+00116     \textcolor{keywordflow}{if} (\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{isAudio}(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}[\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}->\hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{getPuntatore}()],\textcolor{keyword}{true}))
+00117         \hyperlink{mpg123_8c_a852896f3beba9503ee018f0a1bdf28ea}{setMp3Status}(1);
+00118     \textcolor{comment}{//else}
+00119         \textcolor{comment}{//setAudioStatus(1);}
+00120     \hyperlink{classRiproduttore_ae264ca70ff75d625fb9d41e8117cd800}{Riproduttore::update}();
+00121 \}
+00122 
+\hypertarget{Riproduttore_8cpp_source_l00123}{}\hyperlink{classRiproduttore_af125f230183970d506e616bf444e3771}{00123} \hyperlink{classRiproduttore_af125f230183970d506e616bf444e3771}{Riproduttore::~Riproduttore}() \{
+00124     \textcolor{keywordflow}{try} \{
+00125         \hyperlink{mpg123_8c_ad8bff7d817bc1b5f8c1ab8388158bc29}{freeMp3}();
+00126         free(\hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica});
+00127         \hyperlink{classRiproduttore_a373b2d6675abc22dbe61abf2223cacab}{Musica}=NULL;
+00128         \hyperlink{classRiproduttore_a7430cced443dd19e50d266470bf3bba6}{RiproduttoreQuitSignal}=\textcolor{keyword}{true};
+00129     \}\textcolor{keywordflow}{catch} (\textcolor{keywordtype}{int} e)\{
+00130         std::cout<<\textcolor{stringliteral}{"Ops. Ci sono stati dei problemi nel pulire la memoria del
+       Riproduttore"};
+00131     \}
+00132 \}
+\end{DoxyCode}

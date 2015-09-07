@@ -1,0 +1,172 @@
+\hypertarget{classusbData}{\section{\-Riferimenti per la classe usb\-Data}
+\label{classusbData}\index{usb\-Data@{usb\-Data}}
+}
+
+
+\hyperlink{classusbData}{usb\-Data} \-Class\-: \-Analizza cartelle in cerca di file e li carica in un vettore. \-Mantiene inoltre il puntatore che ci indica a quale canzone ci troviamo  
+
+
+
+
+{\ttfamily \#include $<$usb\-Data.\-h$>$}
+
+\subsection*{\-Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classusbData_afd7ef352616d15a05bca0e56f46e52a0}{usb\-Data} (std\-::string base\-Dir, bool recursive)
+\begin{DoxyCompactList}\small\item\em \-Costruttore. \-Analizza la cartella e setta il puntatore. \end{DoxyCompactList}\item 
+void \hyperlink{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{set\-Puntatore} (int posizione)
+\begin{DoxyCompactList}\small\item\em \-Imposta la posizione al puntatore. \end{DoxyCompactList}\item 
+int \hyperlink{classusbData_a3d872ce11202a145b83f0791d7eefebb}{get\-Puntatore} ()
+\begin{DoxyCompactList}\small\item\em \-Ottieni la posizione del puntatore. \end{DoxyCompactList}\item 
+bool \hyperlink{classusbData_a7405fda9e90402594fe24dc091bad0ec}{is\-Audio} (std\-::string percorso, bool onlymp3)
+\begin{DoxyCompactList}\small\item\em \-Controlla l'estensione per capire se ci si trova di fronte ad un file audio. \end{DoxyCompactList}\item 
+\hypertarget{classusbData_a25ecbfcbc9001a3626b8ad55199bc667}{\hyperlink{classusbData}{usb\-Data} \& {\bfseries operator=} (const \hyperlink{classusbData}{usb\-Data} \&other)}\label{classusbData_a25ecbfcbc9001a3626b8ad55199bc667}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Attributi pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{std\-::vector$<$ std\-::string $>$ \hyperlink{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}{elementi}}\label{classusbData_ab0a9963ce896605e7e988e01e6efe1ba}
+
+\begin{DoxyCompactList}\small\item\em \-Tutte le canzoni trovate. \-Vengono inserite dentro questo vettore accessibile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Membri privati}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classusbData_a2b695019bdabc6eed11dafaa7c959029}{is\-Dir} (std\-::string dir)
+\begin{DoxyCompactList}\small\item\em \-Controlla se è una cartella. \end{DoxyCompactList}\item 
+\hypertarget{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{void \hyperlink{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}{riempi\-Archivio} (std\-::string base\-Dir, bool recursive, \hyperlink{classusbData}{usb\-Data} \&arc)}\label{classusbData_ad2e65d4a17a15b8885ae7d78e12aa2db}
+
+\begin{DoxyCompactList}\small\item\em \-Funzione interna per riempire l'archivio(in realtà il vettore) delle canzoni. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Attributi privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classusbData_a90134062cfcc6a97e717342f0ac7d4be}{int {\bfseries puntatore}}\label{classusbData_a90134062cfcc6a97e717342f0ac7d4be}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+\hyperlink{classusbData}{usb\-Data} \-Class\-: \-Analizza cartelle in cerca di file e li carica in un vettore. \-Mantiene inoltre il puntatore che ci indica a quale canzone ci troviamo 
+
+\-Definizione alla linea \hyperlink{usbData_8h_source_l00012}{12} del file \hyperlink{usbData_8h_source}{usb\-Data.\-h}.
+
+
+
+\subsection{\-Documentazione dei costruttori e dei distruttori}
+\hypertarget{classusbData_afd7ef352616d15a05bca0e56f46e52a0}{\index{usb\-Data@{usb\-Data}!usb\-Data@{usb\-Data}}
+\index{usb\-Data@{usb\-Data}!usbData@{usb\-Data}}
+\subsubsection[{usb\-Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf usb\-Data\-::usb\-Data} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{base\-Dir, }
+\item[{bool}]{recursive}
+\end{DoxyParamCaption}
+)}}\label{classusbData_afd7ef352616d15a05bca0e56f46e52a0}
+
+
+\-Costruttore. \-Analizza la cartella e setta il puntatore. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em base\-Dir} & \-Directory iniziale \\
+\hline
+{\em recursive} & \-Impostare a vero se si vogliono analizzare anche le sottocartelle \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{usbData_8cpp_source_l00018}{18} del file \hyperlink{usbData_8cpp_source}{usb\-Data.\-cpp}.
+
+
+
+\subsection{\-Documentazione delle funzioni membro}
+\hypertarget{classusbData_a3d872ce11202a145b83f0791d7eefebb}{\index{usb\-Data@{usb\-Data}!get\-Puntatore@{get\-Puntatore}}
+\index{get\-Puntatore@{get\-Puntatore}!usbData@{usb\-Data}}
+\subsubsection[{get\-Puntatore}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf usb\-Data\-::get\-Puntatore} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classusbData_a3d872ce11202a145b83f0791d7eefebb}
+
+
+\-Ottieni la posizione del puntatore. 
+
+\begin{DoxyReturn}{\-Restituisce}
+puntatore \-Tipo \-Intero. \-Il \-Puntatore serve per sapere a quale canzone del vettore ci troviamo. {\bfseries \-Non} è inteso come puntatore di programmazione ma nel senso comune di \char`\"{}\-Indicatore\char`\"{} 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{usbData_8cpp_source_l00035}{35} del file \hyperlink{usbData_8cpp_source}{usb\-Data.\-cpp}.
+
+\hypertarget{classusbData_a7405fda9e90402594fe24dc091bad0ec}{\index{usb\-Data@{usb\-Data}!is\-Audio@{is\-Audio}}
+\index{is\-Audio@{is\-Audio}!usbData@{usb\-Data}}
+\subsubsection[{is\-Audio}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf usb\-Data\-::is\-Audio} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{percorso, }
+\item[{bool}]{onlymp3}
+\end{DoxyParamCaption}
+)}}\label{classusbData_a7405fda9e90402594fe24dc091bad0ec}
+
+
+\-Controlla l'estensione per capire se ci si trova di fronte ad un file audio. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em percorso} & \\
+\hline
+{\em onlymp3} & se impostato a true limita la funzione al solo controllo dell'estensione degli mp3. \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{usbData_8cpp_source_l00051}{51} del file \hyperlink{usbData_8cpp_source}{usb\-Data.\-cpp}.
+
+\hypertarget{classusbData_a2b695019bdabc6eed11dafaa7c959029}{\index{usb\-Data@{usb\-Data}!is\-Dir@{is\-Dir}}
+\index{is\-Dir@{is\-Dir}!usbData@{usb\-Data}}
+\subsubsection[{is\-Dir}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf usb\-Data\-::is\-Dir} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{dir}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classusbData_a2b695019bdabc6eed11dafaa7c959029}
+
+
+\-Controlla se è una cartella. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em dir} & \-La cartella da analizzare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Restituisce}
+bool vero se è una cartella o viceversa 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{usbData_8cpp_source_l00072}{72} del file \hyperlink{usbData_8cpp_source}{usb\-Data.\-cpp}.
+
+\hypertarget{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}{\index{usb\-Data@{usb\-Data}!set\-Puntatore@{set\-Puntatore}}
+\index{set\-Puntatore@{set\-Puntatore}!usbData@{usb\-Data}}
+\subsubsection[{set\-Puntatore}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf usb\-Data\-::set\-Puntatore} (
+\begin{DoxyParamCaption}
+\item[{int}]{posizione}
+\end{DoxyParamCaption}
+)}}\label{classusbData_a7fc551ced09d43cb53c94ca9f154c6a9}
+
+
+\-Imposta la posizione al puntatore. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em posizione} & \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{usbData_8cpp_source_l00034}{34} del file \hyperlink{usbData_8cpp_source}{usb\-Data.\-cpp}.
+
+
+
+\-La documentazione per questa classe è stata generata a partire dai seguenti file\-:\begin{DoxyCompactItemize}
+\item 
+\-Input/\hyperlink{usbData_8h}{usb\-Data.\-h}\item 
+\-Input/\hyperlink{usbData_8cpp}{usb\-Data.\-cpp}\end{DoxyCompactItemize}

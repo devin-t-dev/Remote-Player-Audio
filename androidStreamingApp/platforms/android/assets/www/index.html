@@ -1,0 +1,106 @@
+<html>
+<head>
+	<!--for Cordova Access
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.4.js"></script>
+	-->
+	<title>Streaming Audio - Interfaccia APP</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src: 'self' 'unsafe-inline' 'unsafe-eval'">-->
+	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="vendor/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".navbar-nav").hide();
+		$(".navbar-toggle").hide();
+		$("#container").hide();
+		app.initialize();
+	});
+	</script>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				<span class="sr-only">Navigazione</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+		       	<span class="icon-bar"></span>
+		        </button>
+				<a class="navbar-brand" href="#">Streaming</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="#" onclick="window.open(indirizzo,'_blank','location=no');" class="contentLink">Riproduttore</a></li>
+					<li><a href="#" onclick="window.open(indirizzo+'doxygeninfo/','_blank','location=no');">Informazioni</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+				<!--<li><input type="text" placeholder="Cerca canzone..." id="ricerca" class="form-control"></li>-->
+				<!--<li><button type="button" class="btn btn-default" id="userButton"><span class="glyphicon glyphicon-user"></span></button></li>-->
+				<!--<li><button type="button" class="btn btn-default" id="shutdownButton"><span class="glyphicon glyphicon-off"></span></button></li> In a next moment, with GPIO -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+</head>
+<body>
+	<div class="hidden" style="height: 0px; width: 0px; position: absolute;"> <!-- A trick for obtain rigth variable in multiple call of a function-->
+		<input type="hidden" id="find" value="0">
+		<input type="hidden" id="pauseWorker" value="0">
+	</div>
+	<div id="coverContainer">
+		<p>Connessione alle API di sistema ...</p>
+	</div>
+	<div id="container" class="container"> <!-- The div that contains all elements draggable -->
+		<div class="row">
+			<div class="table-responsive" style="margin-bottom:100px;">
+				<table class="table table-hover" id="tabSongs">
+					<thead>
+						<tr>
+							<td>Lista file <p id="labelTheadDir"> (Connessione) </p></td>
+							<td>Azioni</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div> <!-- row -- >
+	</div> <!-- container -->
+	<footer class="footer">
+	<div class="container">
+		<div class="row">
+				<div class="col-md-8 col-xs-12" id="canzoneAttuale"></div>
+				<div class="col-md-4 col-xs-12">
+				<button type="button" class="btn btn-default btn-lg" id="prevButton" onclick="prevSong()"><span class="glyphicon glyphicon-backward"></span></button>
+				<button type="button" class="btn btn-default btn-lg" id="playButton" onclick="playPause()"><span class="glyphicon glyphicon-play"></span></button>
+				<button type="button" class="btn btn-default btn-lg" id="nextButton" onclick="nextSong()"><span class="glyphicon glyphicon-forward"></span></button>
+				</div>
+		</div>
+		<div class="row">
+			<center><p>(C) - Devin Taietta</p></center>
+		</div>
+	</div>
+</footer>
+</body>
+
+<!-- <footer class="footer">
+	<div class="container">
+		<div class="row">
+				<div class="col-md-8 col-xs-12" id="canzoneAttuale"></div>
+				<div class="col-md-4 col-xs-12">
+				<button type="button" class="btn btn-default btn-lg" id="prevButton" onclick="prevSong()"><span class="glyphicon glyphicon-backward"></span></button>
+				<button type="button" class="btn btn-default btn-lg" id="playButton" onclick="playPause()"><span class="glyphicon glyphicon-play"></span></button>
+				<button type="button" class="btn btn-default btn-lg" id="nextButton" onclick="nextSong()"><span class="glyphicon glyphicon-forward"></span></button>
+				</div>
+		</div>
+		<div class="row">
+			<center><p>(C) - Devin Taietta</p></center>
+		</div>
+	</div>
+</footer> -->
+</html>

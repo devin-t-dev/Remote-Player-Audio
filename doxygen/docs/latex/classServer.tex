@@ -1,0 +1,191 @@
+\hypertarget{classServer}{\section{\-Riferimenti per la classe \-Server}
+\label{classServer}\index{\-Server@{\-Server}}
+}
+
+
+\-Questa classe gestisce la \-Socket\-Server e le socket di comunicazione tra dispositivi e questo programma.  
+
+
+
+
+{\ttfamily \#include $<$\-Server.\-h$>$}
+
+\subsection*{\-Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classServer_af11aa19a47fed238c575c432bd7f1ce9}{\-Server} (int porta)
+\item 
+\hypertarget{classServer_a85e0c80096c05bec02dfb8f40d1c5f11}{void {\bfseries \-Setactive\-Thread} (bool status)}\label{classServer_a85e0c80096c05bec02dfb8f40d1c5f11}
+
+\item 
+bool \hyperlink{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{get\-Actived} ()
+\begin{DoxyCompactList}\small\item\em \-Indica se il \hyperlink{classServer}{\-Server} è attivo. \end{DoxyCompactList}\item 
+bool \hyperlink{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{is\-Conn} ()
+\begin{DoxyCompactList}\small\item\em \-Test della connessione al client. \end{DoxyCompactList}\item 
+\hypertarget{classServer_a3759ce50a4c6d4e88852bc299c079e11}{void {\bfseries send\-Data} (std\-::string \hyperlink{classServer_a0493d162448907be150f830457808e51}{message}, std\-::string type)}\label{classServer_a3759ce50a4c6d4e88852bc299c079e11}
+
+\item 
+void \hyperlink{classServer_a212514d665699ff74c168b81303be815}{get\-Data} ()
+\item 
+int \hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{get\-App} ()
+\item 
+std\-::string \hyperlink{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{get\-Message} ()
+\item 
+\hypertarget{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{$\sim$\-Server} ()}\label{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}
+
+\begin{DoxyCompactList}\small\item\em \-Distruttore della classe \hyperlink{classServer}{\-Server}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Membri privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{void \hyperlink{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}{\-Server\-Thread} ()}\label{classServer_a4b2f368d2da82dcdfa1523e27840cd3e}
+
+\begin{DoxyCompactList}\small\item\em \-Processo che gira in continuazione in attesa di nuove connessioni. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Attributi privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classServer_af6c0542f9031f20f71bb4a276dfbac64}{bool \hyperlink{classServer_af6c0542f9031f20f71bb4a276dfbac64}{conn}}\label{classServer_af6c0542f9031f20f71bb4a276dfbac64}
+
+\begin{DoxyCompactList}\small\item\em \-Variabile privata che indica se attualmente il client è connesso. \end{DoxyCompactList}\item 
+\hypertarget{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}{bool \hyperlink{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}{kill}}\label{classServer_a693131a2a6c6a5df3461fbdefa73b0b2}
+
+\begin{DoxyCompactList}\small\item\em \-Variabile privata che indica se il processo deve essere killato. \end{DoxyCompactList}\item 
+\hypertarget{classServer_a22159b3d42d81b9b3cbbdcc5795f547e}{bool {\bfseries thr\-Active}}\label{classServer_a22159b3d42d81b9b3cbbdcc5795f547e}
+
+\item 
+\hypertarget{classServer_af0575ea98923ea4c2ec76bb91e3a7701}{int \hyperlink{classServer_af0575ea98923ea4c2ec76bb91e3a7701}{current\-App}}\label{classServer_af0575ea98923ea4c2ec76bb91e3a7701}
+
+\begin{DoxyCompactList}\small\item\em \-Mantiene in memoria fino a che non viene richiesta l'app corrente. \end{DoxyCompactList}\item 
+\hypertarget{classServer_a17dd4df1c60d9cb28393faa091bc29b4}{int {\bfseries msg\-Len}}\label{classServer_a17dd4df1c60d9cb28393faa091bc29b4}
+
+\item 
+\hypertarget{classServer_a0493d162448907be150f830457808e51}{std\-::string \hyperlink{classServer_a0493d162448907be150f830457808e51}{message}}\label{classServer_a0493d162448907be150f830457808e51}
+
+\begin{DoxyCompactList}\small\item\em \-Mantiene il messaggio fino a che non è richiesto. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+\-Questa classe gestisce la \-Socket\-Server e le socket di comunicazione tra dispositivi e questo programma. 
+
+\-Definizione alla linea \hyperlink{Server_8h_source_l00008}{8} del file \hyperlink{Server_8h_source}{\-Server.\-h}.
+
+
+
+\subsection{\-Documentazione dei costruttori e dei distruttori}
+\hypertarget{classServer_af11aa19a47fed238c575c432bd7f1ce9}{\index{\-Server@{\-Server}!\-Server@{\-Server}}
+\index{\-Server@{\-Server}!Server@{\-Server}}
+\subsubsection[{\-Server}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Server\-::\-Server} (
+\begin{DoxyParamCaption}
+\item[{int}]{porta}
+\end{DoxyParamCaption}
+)}}\label{classServer_af11aa19a47fed238c575c432bd7f1ce9}
+\-Costruttore della classe \hyperlink{classServer}{\-Server}, si occupa quindi di inizializzare il server, lanciare il thread di accettazione della connessione e impostare le variabili. 
+\begin{DoxyParams}{\-Parametri}
+{\em porta} & dove far partire il server. \-Valori accettabili sono {\bfseries 1024-\/49151}. \-Sotto è sconsigliato l'uso di qualche porta e può richiedere diritti di amministrazione. \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00020}{20} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+
+
+\subsection{\-Documentazione delle funzioni membro}
+\hypertarget{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}{\index{\-Server@{\-Server}!get\-Actived@{get\-Actived}}
+\index{get\-Actived@{get\-Actived}!Server@{\-Server}}
+\subsubsection[{get\-Actived}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Server\-::get\-Actived} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classServer_a23b2a4e9819bd2ad2dbb6a0ccc63adc2}
+
+
+\-Indica se il \hyperlink{classServer}{\-Server} è attivo. 
+
+\begin{DoxyReturn}{\-Restituisce}
+{\bfseries bool} value. \par
+ \-Se \-True il thread del server è attivo e viceversa 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00059}{59} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+\hypertarget{classServer_abf528e3dd8190943593c4094b20201f2}{\index{\-Server@{\-Server}!get\-App@{get\-App}}
+\index{get\-App@{get\-App}!Server@{\-Server}}
+\subsubsection[{get\-App}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Server\-::get\-App} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classServer_abf528e3dd8190943593c4094b20201f2}
+\begin{DoxyReturn}{\-Restituisce}
+{\bfseries current\-App\-:} \-Valore intero che rappresenta il tipo di applicazione client o locale che ha mandato il \-Messaggio 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{\-Si veda anche}
+data\-\_\-thr() 
+\end{DoxySeeAlso}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00057}{57} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+\hypertarget{classServer_a212514d665699ff74c168b81303be815}{\index{\-Server@{\-Server}!get\-Data@{get\-Data}}
+\index{get\-Data@{get\-Data}!Server@{\-Server}}
+\subsubsection[{get\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Server\-::get\-Data} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classServer_a212514d665699ff74c168b81303be815}
+\-Fà una prima analisi riempendo le oppurtune variabili private. \par
+ \-Funzionamento dettagliato\-: \par
+ \-Codice \mbox{[}0\mbox{]}\-: \-Indica l'applicazione che ha mandato il codice \par
+ \-Questo codice verrà inserito nella variabile \char`\"{}\-App\char`\"{}. \-Per ulteriori informazioni vedi la classe \hyperlink{classdataManager}{data\-Manager} \par
+ \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classServer_abf528e3dd8190943593c4094b20201f2}{get\-App()} \-Restituisce un valore intero che raprresenta il tipo di applicazione client o locale che ha mandato il \-Messsaggio \par
+ 
+
+\hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{ottieni\-Data()} \-Il messaggio viene recuperato tramite la funzione \hyperlink{ServerUtil_8cpp_af4ec6cff50fa0e44047464b9b8c912d4}{ottieni\-Data()} in \hyperlink{ServerUtil_8cpp}{\-Server\-Util.\-cpp}\par
+ 
+
+\hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{data\-Manager\-::data\-\_\-thr()} \-Analisi dei codici \par
+ 
+\end{DoxySeeAlso}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00034}{34} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+\hypertarget{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}{\index{\-Server@{\-Server}!get\-Message@{get\-Message}}
+\index{get\-Message@{get\-Message}!Server@{\-Server}}
+\subsubsection[{get\-Message}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf \-Server\-::get\-Message} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classServer_a968480d1fc8a455f708fdc5ec9f1e7d2}
+\begin{DoxyReturn}{\-Restituisce}
+{\bfseries message\-:} \-Il testo che si ottiene togliendo le altre parti del codice. \-Questo verrà successivamente analizzato e usato nello scopo più adatto 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00062}{62} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+\hypertarget{classServer_a343411b66598c4a18a85ff8ed3bc70d3}{\index{\-Server@{\-Server}!is\-Conn@{is\-Conn}}
+\index{is\-Conn@{is\-Conn}!Server@{\-Server}}
+\subsubsection[{is\-Conn}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Server\-::is\-Conn} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classServer_a343411b66598c4a18a85ff8ed3bc70d3}
+
+
+\-Test della connessione al client. 
+
+\begin{DoxyReturn}{\-Restituisce}
+conn\-: \-Valore booleano che indica se si è connessi 
+\end{DoxyReturn}
+
+
+\-Definizione alla linea \hyperlink{Server_8cpp_source_l00058}{58} del file \hyperlink{Server_8cpp_source}{\-Server.\-cpp}.
+
+
+
+\-La documentazione per questa classe è stata generata a partire dai seguenti file\-:\begin{DoxyCompactItemize}
+\item 
+\-Input/\-Socket/\hyperlink{Server_8h}{\-Server.\-h}\item 
+\-Input/\-Socket/\-Server.\-cpp\end{DoxyCompactItemize}

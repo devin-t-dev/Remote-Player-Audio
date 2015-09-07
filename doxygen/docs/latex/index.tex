@@ -1,0 +1,72 @@
+\-This \-Software project is developed by \-Devin \-Taietta \par
+ \begin{DoxyAuthor}{\-Autore}
+\-Devin \-Taietta \-Last \-Edit mer 24 giu 2015 18\-:24\-:02 \-C\-E\-S\-T \par
+ \-All rights reserved to rispective authors. \-This \char`\"{}\-Player\char`\"{} \-Project contains some open source library for all info see legal notes.
+\end{DoxyAuthor}
+\hypertarget{index_intro_sec}{}\section{\-Introduzione}\label{index_intro_sec}
+\-Questo progetto riguarda la realizzazione di un player \-Audio. \-L'obbiettivo iniziale è stato quello di realizzare i semplici comandi di pausa, successivo, precedente e lo studio base di come funziona l'audio contenuto nelle tracce (\-D\-S\-P). \-Una volta realizzato, si è deciso di sperimentare l'uso delle \-Socket studiate durante il quinto anno. \-E' stato quindi creato il sito client di interfacciamento e il \hyperlink{classServer}{\-Server} per la gestione dei dati in arrivo. \-L'ultima implementazione è stata quella della trasmissione delle canzoni attraverso dispositivi \-Mobili come \-Smartphone e/o tablet attraverso lo strumento di sviluppo \char`\"{}\-Cordova\char`\"{} che permette di realizzare le applicazioni mobili per tutte le piattaforme. \par
+ \hypertarget{index_install_sec}{}\section{\-Installazione}\label{index_install_sec}
+\-Per eseguire il file una volta eseguita la compilazione e' necessario avere installate le seguenti librerie\-:
+\begin{DoxyItemize}
+\item \-Lib\-Ao -\/$>$ \-Necessaria per scrivere sull'interfaccia audio
+\item \-Lib\-Mpg123 -\/$>$ \-Decoding (\-Ottenimento dai frammenti audio interlacciati e compressi di frammenti non compressi in formato \-P\-C\-M) dei file mp3
+\item ff\-Mpeg (avcodec,avformat) -\/$>$ \-Decoding file audio in altri formati \par
+ \-Per la compilazione del progetto si usano gli strumenti gcc e g++. \-Se si vuole effettuare il debug dell'app allora si deve aggiungere l'opzione -\/g. \-E' inoltre necessaria l'opzione -\/std=c++0x che indica al compilatore che il progetto è stato realizzato con la nuova versione del \-C++ introdotta nel 2011 (\-Necessario per la libreria pthread del multithreading) \-Esempio di compilazione 
+\begin{DoxyCode}
+ \{.sh\}
+ gcc -c -g \textcolor{stringliteral}{"Process/mpg123.c"} \textcolor{stringliteral}{"Output/aosender.c"}
+ g++ -g \textcolor{stringliteral}{"aosender.o"} \textcolor{stringliteral}{"Input/usbData.cpp"} \textcolor{stringliteral}{"Input/Socket/Server.cpp"} \textcolor{stringliteral}{"
+      Process/dataManagerHub.cpp"} \textcolor{stringliteral}{"Process/util.cpp"} \textcolor{stringliteral}{"mpg123.o"} \textcolor{stringliteral}{"Process/Riproduttore.cpp"} \textcolor{stringliteral}{"
+      main\_cli.cpp"} -lao -lmpg123  -lavcodec -lavformat -std=c++0x -o AudioPlayer
+\end{DoxyCode}
+ \par
+ \-Il sistema di versioning è gestito tramite \-Git. \-Si può vedere la lista dei commit digitando git log sul branch di sviluppo. \par
+ \-Successivamente è possibile eseguirlo digitando il nome dell'applicazione e il media esterno da tenere d'occhio. 
+\begin{DoxyCode}
+ \{.sh\} AudioPlayer \textcolor{stringliteral}{"/home/utente/musica/"} 
+\end{DoxyCode}
+ 
+\end{DoxyItemize}\hypertarget{index_hardware}{}\section{\-Hardware e Infrastrutture}\label{index_hardware}
+{\bfseries \-Raspberry} è una piattaforma embeded con processore \-A\-R\-M, da un costo contenuto con gli schemi \-Open\-Source. \-Viene impiegata per l'uso \-Le comunicazioni invece avvengono tramite connessione \-Wi\-Fi (\-I\-E\-E\-E 802.\-11) \hypertarget{index_serverStruct}{}\section{\-Struttura e codice del Server}\label{index_serverStruct}
+\-Il \hyperlink{classServer}{\-Server} viene sviluppato con il codice \-C (strutturato, linguaggio di medio livello) e \-C++ orientato agli oggetti. \-E' stato preferito questo linguaggio per il largo numero di librerie e per la sua velocità di esecuzione.
+\begin{DoxyItemize}
+\item \-Le funzioni del server possono essere trovate sulla classe \hyperlink{classServer}{\-Server} \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classServer}{\-Server}
+\end{DoxySeeAlso}
+
+\item \-La gestione dell'archivio su supporto di memorizzazione esterna viene affidata alla classe \hyperlink{classusbData}{usb\-Data} \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classusbData}{usb\-Data}
+\end{DoxySeeAlso}
+
+\item \-La gestione invece dell'audio è affidata alla classe \hyperlink{classRiproduttore}{\-Riproduttore} \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classRiproduttore}{\-Riproduttore}
+\end{DoxySeeAlso}
+
+\item \-Il cordinamento di tutte le attività avviene tramite il data\-Manager\-Hub \begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classdataManager}{data\-Manager}
+\end{DoxySeeAlso}
+\-L'uso di tutte le classi e gli oggetti all'interno del programma è stato suddiviso secondo dove vanno ad operare. \-Abbiamo gli oggetti che si occupano di gestire l'input, quello che gestiscono il processamento dei dati e quelli che si occupano dei dati.  \par
+ 
+\end{DoxyItemize}\hypertarget{index_webStruct}{}\section{\-Struttura e codice della parte Web}\label{index_webStruct}
+\-La parte web è realizzata usando
+\begin{DoxyItemize}
+\item {\bfseries \-H\-T\-M\-L5\-:} lingaggio di formattazione attraverso marcatori
+\item {\bfseries \-Jquery(con Ajax)}\-: \-Linguaggio derivato dal \-Java\-Script che usa selettori sugli elementi \-D\-O\-M per effettuare le operazioni. \-A\-J\-A\-X è l'acronimo di \-Asynchronus \-Javascript and \-X\-M\-L e viene usato per interagire con il server senza richiedere al client di ricaricare la pagina.
+\item {\bfseries \-P\-H\-P\-:} \-E' un linguaggio lato server viene usato nel progetto per interrogare il database e per gestire socket \hyperlink{classServer}{\-Server} $<$-\/-\/$>$ \-Client
+\item {\bfseries \-C\-S\-S} (\-Bootstrap)\-: \-Il framework per il \-C\-S\-S che viene usato è \-Bootstrap. il \-C\-S\-S rappresenta delle regole di formattazione di documenti \-H\-T\-M\-L. 
+\end{DoxyItemize}\hypertarget{index_appMobileStruct}{}\section{\-Struttura dell'app mobile}\label{index_appMobileStruct}
+\-L'applicazione mobile è scritta in \-Java per \-Android o \-Objective \-C per \-I\-O\-S. \-La struttura viene creata grazie al framework {\bfseries \-Apache} {\bfseries \-Cordova}. \-Grazie alle capacità della piattaforma è possibile integrare nello spazio web, in compatibilità con tutti i sistemi operativi più famosi, funzionalità d'interfacciamento al dispositivo come ad esempio l'accesso alla memoria di massa o l'upload di un file locale senza immissione manuale da parte dell'utente. \-Il codice delle pagine viene mostrato a parte e si basa principalmente sullo scambio di file \-J\-S\-O\-N tra app e server \-W\-E\-B. \-Vengono sfruttate quindi le webview per mostrare un sito con cui interfacciarsi al server. \hypertarget{index_usage_sec}{}\section{\char`\"{}\-Come si usa?\char`\"{}}\label{index_usage_sec}
+\hypertarget{index_fromConsole}{}\subsection{\-Da console}\label{index_fromConsole}
+\-All'avvio dell'applicazione viene mostrato su schermo un menu che rappresenta tutte le operazioni svolgibili. \-Basta inserire il numero dell'operazione da svolgere per ottenere l'effetto desiderato. \hypertarget{index_fromWeb}{}\subsection{\-Da sito web}\label{index_fromWeb}
+\-Bisogna conoscere l'indirizzo \-I\-P del server per poter ottenere l'acccesso da web. \-Un impletazione futura vede uno schermo \-L\-C\-D dove sarà possibile attraverso pulsanti conoscere l'\-I\-P del server e configurare la connessione \-Wi\-Fi in maniera più personalizzata.\-ù \-Una volta acceduto attraverso un normale browser all'indirizzo sarà possibile interagire con l'applicazione attraverso una socket. ù \hypertarget{index_fromApp}{}\subsection{\-Da applicazione mobile}\label{index_fromApp}
+\-Per semplificare l'accesso al server viene fornita un applicazione client. \-Automaticamente è in grado di effettuare la scansione sugli host della rete una volta conosciuto il dominio. \-L'applicazione inoltre fornisce la possibilita di fare l'upload delle proprie canzoni in maniera da riprodurla sul \hyperlink{classServer}{\-Server}. \hypertarget{index_praticalUse}{}\section{\-Applicazioni pratiche}\label{index_praticalUse}
+\-L'idea principale di impiego per cui si presta questo progetto è da applicarsi ad un locale dove si vede l'installazione di una cassa installata fissa da una parte (lontano da malintenzionati) con un hard\-Disk integrato. \-A chi viene fornita la password di accesso (solitamente il personale, ma può essere estesa questa possibilità anche ai clienti) può comodamente da remoto scegliere la canzone da riprodurre o la playlist.
+
+\-Altre applicazioni a cui si presta bene questo progetto o può essere facilmente adattato sono\-:
+\begin{DoxyItemize}
+\item \-Una radio per una macchina\-: \-Devono essere aggiunti uno schermo e una radio \-F\-M. \-Adattando la parte esterna allo slot della macchina può essere realizzata una radio.
+\item \-Player \-Audio grafico locale\-: \-Il progetto è stato realizzato in maniera da tenere \-C\-L\-I e \-Core dell'app separati, volendo sviluppare con \-Qt un applicazione grafica è possibile farlo. \par
+ 
+\end{DoxyItemize}\hypertarget{index_Funzionalità}{}\section{future}\label{index_Funzionalità}
+\-Il progetto e' in continua evoluzione e vede molte funzioni da aggiungere\-: \hypertarget{index_apiIntegration}{}\subsection{\-Integrazione di A\-P\-I}\label{index_apiIntegration}
+\hypertarget{index_automaticWakeUp}{}\subsection{\-Risveglio automatico}\label{index_automaticWakeUp}

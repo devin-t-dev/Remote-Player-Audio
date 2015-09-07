@@ -1,0 +1,30 @@
+\hypertarget{dataManagerHub_8h}{\section{\-Riferimenti per il file \-Process/data\-Manager\-Hub.h}
+\label{dataManagerHub_8h}\index{\-Process/data\-Manager\-Hub.\-h@{\-Process/data\-Manager\-Hub.\-h}}
+}
+{\ttfamily \#include $<$iostream$>$}\*
+\subsection*{\-Composti}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classdataManager}{data\-Manager}
+\begin{DoxyCompactList}\small\item\em \-This class manage all the inputs and select the correct jobs or output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+(\-E\-N) \-This file and his associated class manage all inputs and select the correct jobs or output (\-I\-T) \-Questo file gestisce tutti gli input e seleziona il giusto lavoro da eseguire.
+\begin{DoxyItemize}
+\item \-Nella fase di {\bfseries input} \-Analizza i dati che gli arrivano seguendo questo codice\-:
+\item \-Nella fase di {\bfseries risposta} {\bfseries da} {\bfseries server} a {\bfseries client}, risponde usando la codifica \-J\-S\-O\-N.  anche la lista delle canzoni viene mandata in formato \-J\-S\-O\-N per essere inserita poi nel database \-W\-E\-B.
+\item \-Manda inoltre i comandi alla classe/funzione \-Streaming che gestirà la scrittura su scheda \-Audio
+\item \-Manda comandi e informazioni al gestore delle informazioni che si occupa di scegliere il mezzo più appropriato per notificare quella particolare informazione all'utente. \-Teoria codici passati per la comunicazione -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ \-Si è voluto cercare un sistema per permettere una comunicazione efficace tra il client e il server. \-Il problema principale è nato dal fatto che il comportamento non è standard ma dipende dall'applicazione che ha generato i dati che vengono inviati attraverso la \-Socket. \par
+
+\item \-Il {\bfseries primo} numero in arrivo corrisponde all'applicativo che ha mandato il segnale
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item {\bfseries 0} \-Rappresenta l'interfaccia mostrata a riga di comando
+\item {\bfseries 1} \-Rappresenta i tasti comunicanti attraverso la \-G\-P\-I\-O (\-General \-Purpose \-Input/\-Output) di \-Raspberry \mbox{[}\-D\-A \-I\-M\-P\-L\-E\-M\-E\-N\-T\-A\-R\-E\mbox{]}
+\item {\bfseries 2} \-Rappresenta l'interfaccia \-W\-E\-B presente sul server \-Apache installato sulla macchina dove risiede il programma
+\item {\bfseries 3} \-Rappresenta l'applicazione \-J\-A\-V\-A installabile su dispositivi \-Android che invia direttamente il frame da riprodurre 
+\end{DoxyEnumerate}
+
+\-Definizione nel file \hyperlink{dataManagerHub_8h_source}{data\-Manager\-Hub.\-h}.
+

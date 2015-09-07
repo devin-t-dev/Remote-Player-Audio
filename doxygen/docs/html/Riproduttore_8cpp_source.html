@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Player Audio a distanza:  File sorgente Process/Riproduttore.cpp</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Player Audio a distanza
+   
+   </div>
+   <div id="projectbrief">Un applicativo in grado di riprodurre musica a distanza</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generato da Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Process/Riproduttore.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Riproduttore_8cpp.html">Vai alla documentazione di questo file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="comment">// Riproduttore.cpp - Sceglie la libreria da usare per riprodurre correttamente le canzoni.</span>
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;vector&gt;</span>                   <span class="comment">//Lista canzoni in memoria</span>
+<a name="l00005"></a>00005 <span class="comment">//Static Linked</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="Riproduttore_8h.html">Riproduttore.h</a>&quot;</span>           <span class="comment">//Header di riproduttore.cpp</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;../Input/usbData.h&quot;</span>       <span class="comment">//Contiene la lista delle canzoni,isAudio(percorso,bool onlymp3)</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;util.h&quot;</span>                   <span class="comment">//Casting particolari (Es. conversione stringa a char*)</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="ffmpeg_8h.html">ffmpeg.h</a>&quot;</span>             <span class="comment">//Riproduzione file Audio tranne MP3</span>
+<a name="l00010"></a>00010 <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="mpg123_8h.html">mpg123.h</a>&quot;</span>             <span class="comment">//Riproduzione File MP3</span>
+<a name="l00012"></a>00012 }
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="comment">//Multitheathering</span>
+<a name="l00015"></a>00015 <span class="comment">//Used For Multithetering (-std=c++0x) -lphtreah</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;thread&gt;</span>                                   <span class="comment">//Libreria per il multithetering</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;mutex&gt;</span>                                    <span class="comment">//Blocco sezioni critiche !check or implement in the right way</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;condition_variable&gt;</span>                       <span class="comment">//Eventuali condizioni variabili</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="classRiproduttore.html#ab01a4e52bcc2735e94f547b32906f3a2">00020</a> <a class="code" href="classRiproduttore.html#ab01a4e52bcc2735e94f547b32906f3a2">Riproduttore::Riproduttore</a>(std::string percorso, <span class="keywordtype">bool</span> recursive,<span class="keywordtype">bool</span> autoskip)
+<a name="l00021"></a>00021 {
+<a name="l00022"></a>00022     <span class="comment">//freeMp3(); //++ 23 giu</span>
+<a name="l00023"></a>00023     <a class="code" href="classRiproduttore.html#a7430cced443dd19e50d266470bf3bba6" title="Se impostata a Vero termina si termina il processo riproduttore_thr e si chiama il distruttore...">RiproduttoreQuitSignal</a>=<span class="keyword">false</span>; <a class="code" href="classRiproduttore.html#a865f72d47671c15cbc5bdcae6818e264" title="Indica se la traccia è attualmente finita.">endtrack</a>=<span class="keyword">false</span>; <a class="code" href="classRiproduttore.html#a25a08a505bbd71239fa4c20e0a4ddfff" title="Questa variabile ci indica se le canzoni dovranno essere riprodotte in successione o no...">loopSongs</a>=autoskip;
+<a name="l00024"></a>00024     <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a> = <span class="keyword">new</span> <a class="code" href="classusbData.html" title="usbData Class: Analizza cartelle in cerca di file e li carica in un vettore. Mantiene inoltre il punt...">usbData</a>(percorso,recursive);
+<a name="l00025"></a>00025     <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(0);
+<a name="l00026"></a>00026     std::thread thr_audio(&amp;Riproduttore::riproduttore_thr,<span class="keyword">this</span>); <span class="comment">//Passato per riferimento</span>
+<a name="l00027"></a>00027     thr_audio.detach();
+<a name="l00028"></a>00028 }
+<a name="l00029"></a>00029 <span class="keywordtype">void</span> Riproduttore::riproduttore_thr() {
+<a name="l00030"></a>00030     <span class="keywordflow">while</span>(!<a class="code" href="classRiproduttore.html#a7430cced443dd19e50d266470bf3bba6" title="Se impostata a Vero termina si termina il processo riproduttore_thr e si chiama il distruttore...">RiproduttoreQuitSignal</a>)
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032     <span class="keywordflow">if</span> (!<a class="code" href="classRiproduttore.html#a8903771ab92a6f33dd24b0c143758c0c" title="Variabile usata per mettere in pausa il processo.">locked</a>)
+<a name="l00033"></a>00033         {
+<a name="l00034"></a>00034         <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#abf360eff47ce41b498b6d66672225929" title="Ottiene se l&#39;attuale traccia è terminata o no.">Riproduttore::getTrackEnded</a>()==<span class="keyword">false</span>)
+<a name="l00035"></a>00035             {
+<a name="l00036"></a>00036                 {
+<a name="l00037"></a>00037                     std::unique_lock&lt;std::mutex&gt; locker(<a class="code" href="classRiproduttore.html#a514d48c11b89c737c8e266e1ca3415f1">lockaudio</a>);
+<a name="l00038"></a>00038                     <a class="code" href="classRiproduttore.html#a0e1a448f370d517dbe2ed75f1f097abf">Riproduttore::playPause</a>();
+<a name="l00039"></a>00039                 }
+<a name="l00040"></a>00040             }
+<a name="l00041"></a>00041             <span class="keywordflow">else</span>
+<a name="l00042"></a>00042             {
+<a name="l00043"></a>00043                 <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a25a08a505bbd71239fa4c20e0a4ddfff" title="Questa variabile ci indica se le canzoni dovranno essere riprodotte in successione o no...">loopSongs</a>)
+<a name="l00044"></a>00044                     <a class="code" href="classRiproduttore.html#ab8a211727d84256bc62ab841881ee9c3" title="La funzione next nextSong() viene usata per scegliere la canzone successiva e riprodurla.">Riproduttore::nextSong</a>();
+<a name="l00045"></a>00045                 <a class="code" href="classRiproduttore.html#a0e1a448f370d517dbe2ed75f1f097abf">Riproduttore::playPause</a>(0);
+<a name="l00046"></a>00046             }
+<a name="l00047"></a>00047         }
+<a name="l00048"></a>00048     }
+<a name="l00049"></a>00049 }
+<a name="l00050"></a><a class="code" href="classRiproduttore.html#aafc3cf55f8a95cfc5e3779294184db8b">00050</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#aafc3cf55f8a95cfc5e3779294184db8b" title="Imposta l&#39;attuale stato della traccia.">Riproduttore::setTrackEnded</a>(<span class="keywordtype">bool</span> value) {<a class="code" href="classRiproduttore.html#a865f72d47671c15cbc5bdcae6818e264" title="Indica se la traccia è attualmente finita.">endtrack</a>=value;} <span class="keywordtype">bool</span> <a class="code" href="classRiproduttore.html#abf360eff47ce41b498b6d66672225929" title="Ottiene se l&#39;attuale traccia è terminata o no.">Riproduttore::getTrackEnded</a>() {<span class="keywordflow">return</span> <a class="code" href="classRiproduttore.html#a865f72d47671c15cbc5bdcae6818e264" title="Indica se la traccia è attualmente finita.">endtrack</a>;}
+<a name="l00051"></a><a class="code" href="classRiproduttore.html#a58878af288d0625f8971a4b3dab8ccf6">00051</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#a87c1d5e97b54d0d4abbd5465adeb7c10" title="Set the thread in wait.">Riproduttore::lock</a>() {<a class="code" href="classRiproduttore.html#a8903771ab92a6f33dd24b0c143758c0c" title="Variabile usata per mettere in pausa il processo.">locked</a>=<span class="keyword">true</span>;} <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#a58878af288d0625f8971a4b3dab8ccf6" title="Set the thread in resume.">Riproduttore::unlock</a>() {<a class="code" href="classRiproduttore.html#a8903771ab92a6f33dd24b0c143758c0c" title="Variabile usata per mettere in pausa il processo.">locked</a>=<span class="keyword">false</span>;}
+<a name="l00052"></a><a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">00052</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">Riproduttore::update</a>(std::string percorso)
+<a name="l00053"></a>00053 {
+<a name="l00054"></a>00054     <a class="code" href="classRiproduttore.html#aafc3cf55f8a95cfc5e3779294184db8b" title="Imposta l&#39;attuale stato della traccia.">Riproduttore::setTrackEnded</a>(<span class="keyword">true</span>);
+<a name="l00055"></a>00055     <span class="keywordflow">if</span> (percorso==<span class="stringliteral">&quot;&quot;</span>)
+<a name="l00056"></a>00056     {
+<a name="l00057"></a>00057         <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">isAudio</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>[<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()],<span class="keyword">true</span>)){
+<a name="l00058"></a>00058             <a class="code" href="mpg123_8c.html#a644a4493a8aeafe0544786ffb8b2a96a" title="Inizializza il decoder  .">resetMp3</a>((toChar(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>[<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()])));
+<a name="l00059"></a>00059         }<span class="keywordflow">else</span>{
+<a name="l00060"></a>00060             <span class="comment">//resetAudio((toChar(Musica-&gt;elementi[Musica-&gt;getPuntatore()])));</span>
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062      }
+<a name="l00063"></a>00063     <span class="keywordflow">else</span>
+<a name="l00064"></a>00064     {
+<a name="l00065"></a>00065         <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">isAudio</a>(percorso,<span class="keyword">true</span>)){
+<a name="l00066"></a>00066             <a class="code" href="mpg123_8c.html#a644a4493a8aeafe0544786ffb8b2a96a" title="Inizializza il decoder  .">resetMp3</a>(toChar(percorso));
+<a name="l00067"></a>00067         }<span class="keywordflow">else</span>{
+<a name="l00068"></a>00068             <span class="comment">//resetAudio(toChar(percorso));</span>
+<a name="l00069"></a>00069         }
+<a name="l00070"></a>00070     }
+<a name="l00071"></a>00071     <a class="code" href="classRiproduttore.html#aafc3cf55f8a95cfc5e3779294184db8b" title="Imposta l&#39;attuale stato della traccia.">Riproduttore::setTrackEnded</a>(<span class="keyword">false</span>);
+<a name="l00072"></a>00072 }
+<a name="l00073"></a>00073 
+<a name="l00074"></a><a class="code" href="classRiproduttore.html#a6bb45ff25c5a3b9ffcf9203214f13340">00074</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#a6bb45ff25c5a3b9ffcf9203214f13340" title="La funzione prevSong() viene usata per scegliere la canzone precedente e riprodurla.">Riproduttore::prevSong</a>()
+<a name="l00075"></a>00075 {
+<a name="l00076"></a>00076     <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()&gt;0)
+<a name="l00077"></a>00077     {
+<a name="l00078"></a>00078         <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()-1);
+<a name="l00079"></a>00079         <a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">Riproduttore::update</a>();
+<a name="l00081"></a>00081     } <span class="keywordflow">else</span> { <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>.size());<a class="code" href="classRiproduttore.html#a6bb45ff25c5a3b9ffcf9203214f13340" title="La funzione prevSong() viene usata per scegliere la canzone precedente e riprodurla.">Riproduttore::prevSong</a>();}
+<a name="l00082"></a>00082 }
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="classRiproduttore.html#ab8a211727d84256bc62ab841881ee9c3">00084</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#ab8a211727d84256bc62ab841881ee9c3" title="La funzione next nextSong() viene usata per scegliere la canzone successiva e riprodurla.">Riproduttore::nextSong</a>()
+<a name="l00085"></a>00085 {
+<a name="l00086"></a>00086     <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()&gt;=(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>.size()-1))
+<a name="l00087"></a>00087         <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(-1);
+<a name="l00088"></a>00088     <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()+1);
+<a name="l00089"></a>00089     <a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">Riproduttore::update</a>();
+<a name="l00090"></a>00090 }
+<a name="l00091"></a>00091 
+<a name="l00092"></a><a class="code" href="classRiproduttore.html#a0e1a448f370d517dbe2ed75f1f097abf">00092</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#a0e1a448f370d517dbe2ed75f1f097abf">Riproduttore::playPause</a>(<span class="keywordtype">int</span> status)
+<a name="l00093"></a>00093 {
+<a name="l00094"></a>00094     <span class="keywordtype">bool</span> Mp3=<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">isAudio</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>[<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()],<span class="keyword">true</span>);
+<a name="l00095"></a>00095     <span class="keywordflow">if</span> (status!=9) { <span class="comment">//Imposta manualmente il valore che gli arriva 0=Play,1=pause, Altri:flip/flop !ToDO: Da invertire i valori</span>
+<a name="l00096"></a>00096         <span class="keywordflow">if</span> (Mp3) <a class="code" href="mpg123_8c.html#a852896f3beba9503ee018f0a1bdf28ea" title="Imposta la variabile status. 0=Pausa, 1=Play /n.">setMp3Status</a>(status); <span class="comment">//else setAudioStatus(status);</span>
+<a name="l00097"></a>00097     } <span class="keywordflow">else</span> {         <span class="comment">//Se entra nell&#39;else, riproduce la canzone normalmente, questo valore è di default e sis ottiene con la chiamata senza argomenti</span>
+<a name="l00098"></a>00098         <span class="keywordflow">if</span> (Mp3){
+<a name="l00099"></a>00099             <span class="keywordflow">if</span> (<a class="code" href="mpg123_8c.html#a548762aaed08753cbed2cfabe0a5202b" title="Riproduce un frammento d&#39;Audio.">playMp3</a>()==2)
+<a name="l00100"></a>00100                 <a class="code" href="classRiproduttore.html#aafc3cf55f8a95cfc5e3779294184db8b" title="Imposta l&#39;attuale stato della traccia.">Riproduttore::setTrackEnded</a>(<span class="keyword">true</span>);
+<a name="l00101"></a>00101         }<span class="keywordflow">else</span>{
+<a name="l00102"></a>00102             <span class="comment">//if(playAudio()==2)</span>
+<a name="l00103"></a>00103             <span class="comment">//  Riproduttore::endtrack=true;</span>
+<a name="l00104"></a>00104         }
+<a name="l00105"></a>00105     }
+<a name="l00106"></a>00106 }
+<a name="l00107"></a>00107 <span class="keywordtype">void</span> Riproduttore::scegliCanzone(<span class="keywordtype">int</span> posizione) {
+<a name="l00108"></a>00108     <span class="keywordflow">if</span> (posizione&gt;=0&amp;&amp;posizione&lt;=(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>.size()))
+<a name="l00109"></a>00109     {
+<a name="l00110"></a>00110         <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7fc551ced09d43cb53c94ca9f154c6a9" title="Imposta la posizione al puntatore.">setPuntatore</a>(posizione);
+<a name="l00111"></a>00111         <a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">Riproduttore::update</a>();
+<a name="l00112"></a>00112     } <span class="keywordflow">else</span> {std::cout&lt;&lt;<span class="stringliteral">&quot;Il puntatore ricevuto:&quot;</span>&lt;&lt;posizione&lt;&lt;<span class="stringliteral">&quot; non e valido!&quot;</span>;}
+<a name="l00113"></a>00113 }
+<a name="l00114"></a><a class="code" href="classRiproduttore.html#a837bea01fa68487694b661ec94781f5d">00114</a> <span class="keywordtype">void</span> <a class="code" href="classRiproduttore.html#a837bea01fa68487694b661ec94781f5d" title="Stoppa la riproduzione dell&#39;audio.">Riproduttore::stop</a>()
+<a name="l00115"></a>00115 {
+<a name="l00116"></a>00116     <span class="keywordflow">if</span> (<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a7405fda9e90402594fe24dc091bad0ec" title="Controlla l&#39;estensione per capire se ci si trova di fronte ad un file audio.">isAudio</a>(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#ab0a9963ce896605e7e988e01e6efe1ba" title="Tutte le canzoni trovate. Vengono inserite dentro questo vettore accessibile.">elementi</a>[<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>-&gt;<a class="code" href="classusbData.html#a3d872ce11202a145b83f0791d7eefebb" title="Ottieni la posizione del puntatore.">getPuntatore</a>()],<span class="keyword">true</span>))
+<a name="l00117"></a>00117         <a class="code" href="mpg123_8c.html#a852896f3beba9503ee018f0a1bdf28ea" title="Imposta la variabile status. 0=Pausa, 1=Play /n.">setMp3Status</a>(1);
+<a name="l00118"></a>00118     <span class="comment">//else</span>
+<a name="l00119"></a>00119         <span class="comment">//setAudioStatus(1);</span>
+<a name="l00120"></a>00120     <a class="code" href="classRiproduttore.html#ae264ca70ff75d625fb9d41e8117cd800">Riproduttore::update</a>();
+<a name="l00121"></a>00121 }
+<a name="l00122"></a>00122 
+<a name="l00123"></a><a class="code" href="classRiproduttore.html#af125f230183970d506e616bf444e3771">00123</a> <a class="code" href="classRiproduttore.html#af125f230183970d506e616bf444e3771">Riproduttore::~Riproduttore</a>() {
+<a name="l00124"></a>00124     <span class="keywordflow">try</span> {
+<a name="l00125"></a>00125         <a class="code" href="mpg123_8c.html#ad8bff7d817bc1b5f8c1ab8388158bc29" title="Pulisce l&#39;heap dai puntatori creati e resetta le variabili.">freeMp3</a>();
+<a name="l00126"></a>00126         free(<a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>);
+<a name="l00127"></a>00127         <a class="code" href="classRiproduttore.html#a373b2d6675abc22dbe61abf2223cacab" title="Puntatore &quot;Musica&quot; per un oggetto di tipo usbData.">Musica</a>=NULL;
+<a name="l00128"></a>00128         <a class="code" href="classRiproduttore.html#a7430cced443dd19e50d266470bf3bba6" title="Se impostata a Vero termina si termina il processo riproduttore_thr e si chiama il distruttore...">RiproduttoreQuitSignal</a>=<span class="keyword">true</span>;
+<a name="l00129"></a>00129     }<span class="keywordflow">catch</span> (<span class="keywordtype">int</span> e){
+<a name="l00130"></a>00130         std::cout&lt;&lt;<span class="stringliteral">&quot;Ops. Ci sono stati dei problemi nel pulire la memoria del Riproduttore&quot;</span>;
+<a name="l00131"></a>00131     }
+<a name="l00132"></a>00132 }
+</pre></div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generato Mer 24 Giu 2015 23:20:51 per Player Audio a distanza da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

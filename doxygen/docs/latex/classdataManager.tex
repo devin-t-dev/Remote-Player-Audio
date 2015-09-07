@@ -1,0 +1,205 @@
+\hypertarget{classdataManager}{\section{\-Riferimenti per la classe data\-Manager}
+\label{classdataManager}\index{data\-Manager@{data\-Manager}}
+}
+
+
+\-This class manage all the inputs and select the correct jobs or output.  
+
+
+
+
+{\ttfamily \#include $<$data\-Manager\-Hub.\-h$>$}
+
+\subsection*{\-Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}{data\-Manager} (std\-::string dir)
+\begin{DoxyCompactList}\small\item\em \-Costruttore della classe \hyperlink{classdataManager}{data\-Manager}\-: \end{DoxyCompactList}\item 
+\hypertarget{classdataManager_a98a9361df1cb36f98f6322c78451ef22}{void {\bfseries set\-Menu} (bool status)}\label{classdataManager_a98a9361df1cb36f98f6322c78451ef22}
+
+\item 
+void \hyperlink{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}{set\-Stream} (bool status)
+\begin{DoxyCompactList}\small\item\em \-Attiva o disattiva il \-Menu da terminale. \end{DoxyCompactList}\item 
+\hypertarget{classdataManager_a72a7547b38a4683dd762853190d6c442}{bool {\bfseries kill\-Signal} ()}\label{classdataManager_a72a7547b38a4683dd762853190d6c442}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Membri privati}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{void \hyperlink{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}{send\-Songs\-To\-Web} ()}\label{classdataManager_a69df5746c83be0abbb051ba4bd4d96d6}
+
+\begin{DoxyCompactList}\small\item\em \-Funzione che invia in formato \-J\-S\-O\-N le canzoni presenti in \-Archivio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Attributi privati}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{menu\-Active}
+\begin{DoxyCompactList}\small\item\em \-Variabile booleana che mostra il menù del terminale o no. \-Và impostata tramite la funzione. \end{DoxyCompactList}\item 
+bool \hyperlink{classdataManager_a73070a3be96596028b91542367e1ebdd}{stream\-Active}
+\begin{DoxyCompactList}\small\item\em \-Variabile booleana che memorizza se il servizio di streaming delle canzoni da dispositivi è attivo o no. \-Viene impostata a false nel costruttore. \-Per modificarla vedi set\-Stream. \end{DoxyCompactList}\item 
+\hypertarget{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{bool \hyperlink{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}{data\-Manager\-Quit\-Signal}}\label{classdataManager_a76b9dba2dde86540f5f37f3b5840653e}
+
+\begin{DoxyCompactList}\small\item\em \-Variabile controllata nei loop sempre attivi fino alla fine del programma. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Thread riguardante la gestione dei dati}
+\label{_amgrp53528b101885da6ed1a282e86901c1bc}%
+ \-Nel dettaglio, questo metodo si occupa di gestire gli input e cordinare il lavoro nel seguente modo\-: \par
+ \-Per prima cosa resetta tutte le variabili presenti che usera nel corso del programma. \-Tra queste le più importanti sono \par
+
+\begin{DoxyItemize}
+\item input\-: \-Contiene il messaggio che arriva dal server \par
+
+\item output\-: \-Mantine man mano la lista di messaggi che deve arrivare al server \par
+
+\item azione\-: chiama se necessario qualche azione. invece \-Action è la variabile globale che utilizza l'applicazione n°0(la C\-L\-I) per memorizzare i dati. \par
+ \-Viene a questo punto controllato se un client è connesso e vengono prese le relative informazioni. \-Il server utilizza la porta 7777 per accettare le connessioni. \par
+ \-Il passo seguente è quello di valutare quale tipo di applicazione sta interagendo con il server e in base al comando ricevuto la giusta operazione da effetuare \par
+
+\item 0\-: \-Comando da riga di comando \par
+
+\item 1\-: (to\-Do) comando da \-General \-Purpose \-Input \-Output di \-Raspberry \par
+
+\item 2\-: \-Portale \-Web\-: \-In questa sezione sono presenti inoltre i comandi di skip/pausa/precedente. \par
+ -\/-\/ \-I seguenti comandi fanno quindi parte delle \-A\-P\-I di questo programma\-: {\bfseries \char`\"{}songs\char`\"{}} per richiedere i titoli delle canzoni, {\bfseries \char`\"{}prev\char`\"{}} manda in riproduzione la precedente, {\bfseries \char`\"{}play\-Pause\char`\"{}}, {\bfseries \char`\"{}skip\char`\"{}}, {\bfseries \char`\"{}get\-Puntatore\char`\"{}} che restituisce la posizione attuale del riproduttore. \-Infine {\bfseries kill\-Streaming} è in grado di terminare l'esecuzione dei dispositivi mobili. \par
+
+\item 3\-: \-Applicazione per dispositivi mobili \par
+ \-Infine viene effettuata l'analisi sulla variabile azione per capire quale istruzioni è più opportuno eseguire. 
+\end{DoxyItemize}\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}{$\sim$data\-Manager} ()
+\begin{DoxyCompactList}\small\item\em \-Controlla se è arrivato il segnare di uscita. \end{DoxyCompactList}\item 
+\hypertarget{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{void \hyperlink{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}{menu\-\_\-thr} ()}\label{classdataManager_a7ba580547b0d0dbe516b8e694e9f51b2}
+
+\begin{DoxyCompactList}\small\item\em \-Thread del \-Menu. \end{DoxyCompactList}\item 
+void \hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{data\-\_\-thr} ()
+\begin{DoxyCompactList}\small\item\em \-Thread che analizza ciò che arriva da \hyperlink{classServer}{\-Server},\-Raspberry e \-C\-L\-I ed esegue l'azione più opportuna. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Descrizione dettagliata}
+\-This class manage all the inputs and select the correct jobs or output. 
+
+
+\begin{DoxyItemize}
+\item \-La parte restante del buffer è il nostro messaggio che verrà interpretato dal thread \hyperlink{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{data\-\_\-thr()}. \-In generale\-:
+\begin{DoxyEnumerate}
+\item \-Se viene dall'interfaccia \-W\-E\-B, da \-Raspberry o dalla \-C\-L\-I, verrà interpretato come comando per il \hyperlink{classRiproduttore}{\-Riproduttore}
+\item \-Se viene dall'applicazione per \-Android la canzone verrà caricata in un nuovo riproduttore. \-Alla disconnessione verrà ripristinato il puntatore al vecchio riproduttore. \-Ulteriori informazioni le trovatre nella documentazione della funzione. \begin{DoxyAuthor}{\-Autore}
+\-Devin \-Taietta 
+\end{DoxyAuthor}
+
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8h_source_l00031}{31} del file \hyperlink{dataManagerHub_8h_source}{data\-Manager\-Hub.\-h}.
+
+
+
+\subsection{\-Documentazione dei costruttori e dei distruttori}
+\hypertarget{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}{\index{data\-Manager@{data\-Manager}!data\-Manager@{data\-Manager}}
+\index{data\-Manager@{data\-Manager}!dataManager@{data\-Manager}}
+\subsubsection[{data\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\-Manager\-::data\-Manager} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{dir}
+\end{DoxyParamCaption}
+)}}\label{classdataManager_a53882fb8b2d08f1b73f6c8e9202c5ae4}
+
+
+\-Costruttore della classe \hyperlink{classdataManager}{data\-Manager}\-: 
+
+\-Viene richiamato al momento della creazione di un istanza della classe. std\-::string 
+\begin{DoxyParams}{\-Parametri}
+{\em dir,\-:} & \-E' un parametro obbligatorio dove deve essere indicato il percorso iniziale o della pennetta o di una cartella contenente la musica. \-Verrà usato per la creazione di un oggetto di classe \hyperlink{classusbData}{usb\-Data} \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8cpp_source_l00024}{24} del file \hyperlink{dataManagerHub_8cpp_source}{data\-Manager\-Hub.\-cpp}.
+
+\hypertarget{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}{\index{data\-Manager@{data\-Manager}!$\sim$data\-Manager@{$\sim$data\-Manager}}
+\index{$\sim$data\-Manager@{$\sim$data\-Manager}!dataManager@{data\-Manager}}
+\subsubsection[{$\sim$data\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\-Manager\-::$\sim$data\-Manager} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classdataManager_ac9e28e6a50c6ad489ca7376b89cc20cb}
+
+
+\-Controlla se è arrivato il segnare di uscita. 
+
+\-Pulisce la memoria occupata nell'heap e restituisce un messaggio di arrivederci. 
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8cpp_source_l00244}{244} del file \hyperlink{dataManagerHub_8cpp_source}{data\-Manager\-Hub.\-cpp}.
+
+
+
+\subsection{\-Documentazione delle funzioni membro}
+\hypertarget{classdataManager_a509a1915ab57d91969f4d7075a138c2e}{\index{data\-Manager@{data\-Manager}!data\-\_\-thr@{data\-\_\-thr}}
+\index{data\-\_\-thr@{data\-\_\-thr}!dataManager@{data\-Manager}}
+\subsubsection[{data\-\_\-thr}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf data\-Manager\-::data\-\_\-thr} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classdataManager_a509a1915ab57d91969f4d7075a138c2e}
+
+
+\-Thread che analizza ciò che arriva da \hyperlink{classServer}{\-Server},\-Raspberry e \-C\-L\-I ed esegue l'azione più opportuna. 
+
+\-Controllare che ci sia almeno un processo attivo! 
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8cpp_source_l00075}{75} del file \hyperlink{dataManagerHub_8cpp_source}{data\-Manager\-Hub.\-cpp}.
+
+\hypertarget{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}{\index{data\-Manager@{data\-Manager}!set\-Stream@{set\-Stream}}
+\index{set\-Stream@{set\-Stream}!dataManager@{data\-Manager}}
+\subsubsection[{set\-Stream}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf data\-Manager\-::set\-Stream} (
+\begin{DoxyParamCaption}
+\item[{bool}]{status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}
+
+
+\-Attiva o disattiva il \-Menu da terminale. 
+
+
+\begin{DoxyParams}{\-Parametri}
+{\em status,\-:} & \-T\-R\-U\-E=attivo \-F\-A\-L\-S\-E=disattivo(default). \-Imposta la variabile che ci indica se il servizio di streaming da tablet è attivo o no. \\
+\hline
+\end{DoxyParams}
+
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8h_source_l00042}{42} del file \hyperlink{dataManagerHub_8h_source}{data\-Manager\-Hub.\-h}.
+
+
+
+\subsection{\-Documentazione dei membri dato}
+\hypertarget{classdataManager_a7126a92f131b786ecf68b7a27d58d814}{\index{data\-Manager@{data\-Manager}!menu\-Active@{menu\-Active}}
+\index{menu\-Active@{menu\-Active}!dataManager@{data\-Manager}}
+\subsubsection[{menu\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf data\-Manager\-::menu\-Active}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classdataManager_a7126a92f131b786ecf68b7a27d58d814}
+
+
+\-Variabile booleana che mostra il menù del terminale o no. \-Và impostata tramite la funzione. 
+
+\begin{DoxySeeAlso}{\-Si veda anche}
+set\-Menu() 
+\end{DoxySeeAlso}
+
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8h_source_l00052}{52} del file \hyperlink{dataManagerHub_8h_source}{data\-Manager\-Hub.\-h}.
+
+\hypertarget{classdataManager_a73070a3be96596028b91542367e1ebdd}{\index{data\-Manager@{data\-Manager}!stream\-Active@{stream\-Active}}
+\index{stream\-Active@{stream\-Active}!dataManager@{data\-Manager}}
+\subsubsection[{stream\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf data\-Manager\-::stream\-Active}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classdataManager_a73070a3be96596028b91542367e1ebdd}
+
+
+\-Variabile booleana che memorizza se il servizio di streaming delle canzoni da dispositivi è attivo o no. \-Viene impostata a false nel costruttore. \-Per modificarla vedi set\-Stream. 
+
+\begin{DoxySeeAlso}{\-Si veda anche}
+\hyperlink{classdataManager_a454263e6cf2ca50cc53afc8bae0e0e58}{set\-Stream()} 
+\end{DoxySeeAlso}
+
+
+\-Definizione alla linea \hyperlink{dataManagerHub_8h_source_l00053}{53} del file \hyperlink{dataManagerHub_8h_source}{data\-Manager\-Hub.\-h}.
+
+
+
+\-La documentazione per questa classe è stata generata a partire dai seguenti file\-:\begin{DoxyCompactItemize}
+\item 
+\-Process/\hyperlink{dataManagerHub_8h}{data\-Manager\-Hub.\-h}\item 
+\-Process/\hyperlink{dataManagerHub_8cpp}{data\-Manager\-Hub.\-cpp}\end{DoxyCompactItemize}
